@@ -57,7 +57,7 @@ form fieldset label{
 }
 
 form fieldset button{
-    margin-left: 130px;
+    margin-left: 5%;
 }
 
 form fieldset input{
@@ -67,4 +67,8 @@ form fieldset input{
 form fieldset textarea{
     height: 100px;
     width: 200px;
+}
+
+.error{
+    color: red;
 }
