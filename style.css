@@ -11,7 +11,7 @@ div#header nav{
     margin: 0 auto;
 }
 
-ul{
+div#header ul{
     width: 100%;
     background-color: rgb(246, 246, 209);
     list-style: none;
@@ -20,19 +20,19 @@ ul{
     justify-content:space-around;
 }
 
-ul li{
+div#header ul li{
     flex-basis: 20%;
     text-align: center;
 }
 
-ul li a{
+div#header ul li a{
     text-decoration: none;
     color: green;
     font-weight: 700;
     font-size: 1.2em;
 }
 
-ul li a:hover{
+div#header ul li a:hover{
     text-shadow: 1px 1px 1px red;
 }
 
@@ -50,9 +50,9 @@ form fieldset{
 }
 
 form fieldset label{
-    float: left;
+    display: block;
     margin-right: 20px;
-    text-align: right;
+    text-align: left;
     width: 60px;
 }
 
@@ -61,7 +61,7 @@ form fieldset button{
 }
 
 form fieldset input{
-    width: 200px;
+    width: 100%;
 }
 
 form fieldset textarea{
@@ -71,4 +71,8 @@ form fieldset textarea{
 
 .error{
     color: red;
+}
+
+div#formSeparator{
+    width: 400px;
 }

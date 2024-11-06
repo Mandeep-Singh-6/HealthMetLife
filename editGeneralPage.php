@@ -8,7 +8,8 @@ if($_POST){
 
     // Sanitizing user input from the form.
     $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $content = $_POST['content'];
     $page_id = filter_input(INPUT_POST,"page_id", FILTER_VALIDATE_INT);
 
     // Validating if all inputs are correct, else redirect user to index.php.
@@ -98,6 +99,14 @@ else if (isset($_GET['page_id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
     <link rel="stylesheet" href="style.css">
+        <!-- include libraries(jQuery, bootstrap) -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
     <?php require('header.php') ?>
@@ -110,23 +119,28 @@ else if (isset($_GET['page_id'])){
         <form method = "post">
             <fieldset>
             <input type="hidden" name = "page_id" value = "<?= $result['page_id'] ?>">
-                <p>
+                <div id="formSeparator">
                     <label for="title">Title</label>
                     <input type="text" id = "title" name = "title" value = "<?= $result['title'] ?>">
-                </p>
-                <p>
-                    <label for="content">Content</label>
-                    <textarea id = "content" name = "content"><?= $result['content'] ?></textarea>
-                </p>
-                <p>
-                    <button type = "submit" name = "action" value = "Update" onclick = "return confirm('Do you want to update this post?')">Update</button>
+                </div>
+                <div id="formSeparator">
+                    <label for="summernote">Content</label>
+                    <textarea id = "summernote" name = "content"><?= $result['content'] ?></textarea>
+                </div>
+                <div id="formSeparator">
+                    <button type = "submit" name = "action" value = "Update" >Update</button>
                     <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
-                </p>
+                </div>
             </fieldset>
         </form>
         <?php else: ?>
             <p class = "error">We couldn't find any record with the specified id.</p>
         <?php endif ?>
     <?php endif ?>
+    <script>
+        $(document).ready(function() {
+        $('#summernote').summernote();
+        });
+    </script>
 </body>
 </html>
