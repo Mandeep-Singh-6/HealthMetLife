@@ -6,14 +6,15 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
 
     // Sanitizing user input from the form.
     $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = $_POST['description'];
 
     // Validating if all input is correct, else redirect user to index.php.
-    if($title && $description && $price){
+    if($title && $description && $price && $colour){
         // Creating an insert query to insert data into the table.
-        $query = "INSERT INTO plans (title, description, created_at, price) VALUES (:title, :description, :created_at, :price)";
+        $query = "INSERT INTO plans (title, description, created_at, price, colour) VALUES (:title, :description, :created_at, :price, :colour)";
 
         // Loads the query into the SQL server's cache and returns a PDOStatement object.
         $statement = $db->prepare($query);
@@ -24,6 +25,7 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
 
         // Binding values to the loaded query.
         $statement->bindValue(":title", $title, PDO::PARAM_STR);
+        $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
         $statement->bindValue(":description", $description, PDO::PARAM_STR);
         $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
         $statement->bindValue(":price", $price);
@@ -64,6 +66,10 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
             <div id="formSeparator">
                 <label for="price">Price</label>
                 <input type="number" id = "price" name = "price">
+            </div>
+            <div id="formSeparator">
+                <label for="colour">Colour</label>
+                <input type="text" id = "colour" name = "colour">
             </div>
             <div id="formSeparator">
                 <label for="summernote">Description</label>

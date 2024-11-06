@@ -8,20 +8,21 @@ if($_POST){
 
     // Sanitizing user input from the form.
     $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = $_POST['description'];
     $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
     $plan_id = filter_input(INPUT_POST,"plan_id", FILTER_VALIDATE_INT);
 
     // Validating if all inputs are correct, else redirect user to index.php.
-    if(($title !== false) && ($description !== false) && ($plan_id !== false) && ($price !== false)){
+    if(($title !== false) && ($description !== false) && ($plan_id !== false) && ($price !== false) && ($colour !== false)){
         // Checking if edit button is clicked.
         if($_POST['action'] == "Update"){
             // Updating the specified record.
             if(!empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["plan_id"]) && !empty($_POST["price"])){
             
                     // Creating a query to update the data.
-                    $query = "UPDATE plans SET title = :title, description = :description, price = :price WHERE plan_id = :plan_id LIMIT 1";
+                    $query = "UPDATE plans SET title = :title, description = :description, price = :price, colour = :colour WHERE plan_id = :plan_id LIMIT 1";
                 
                     // Preparing the query.
                     $statement = $db->prepare( $query );
@@ -29,6 +30,7 @@ if($_POST){
                     // Binding values to the query.
                     $statement->bindValue(":title", $title, PDO::PARAM_STR);
                     $statement->bindValue(":description", $description, PDO::PARAM_STR);
+                    $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
                     $statement->bindValue(":price", $price);
                     $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                 
@@ -125,6 +127,10 @@ else if (isset($_GET['plan_id'])){
             <div id="formSeparator">
                 <label for="price">Price</label>
                 <input type="number" id = "price" name = "price" value = "<?= $result['price'] ?>">
+            </div>
+            <div id="formSeparator">
+                <label for="colour">Colour</label>
+                <input type="text" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
             </div>
             <div id="formSeparator">
                 <label for="summernote">Description</label>

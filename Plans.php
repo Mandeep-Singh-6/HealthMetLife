@@ -2,7 +2,7 @@
 require('connect.php');
 
 // Creating a query to select the specified record from the plans table based on plan_id.
-$query = "SELECT * FROM plans ORDER BY created_at DESC";
+$query = "SELECT * FROM plans ORDER BY price DESC";
     
 // Preparing the query.
 $statement = $db->prepare($query);
@@ -23,12 +23,12 @@ $results = $statement->fetchAll();
 </head>
 <body>
     <?php require('header.php') ?>
-    <h1 class = "centerText">Here is the list of Fitness Packages that we offer:</h1>
+    <h1 class = "centerText">Our Offerings:</h1>
     <?php foreach($results as $result): ?>
-        <div class = "planDiv" style="background-color:<?= $result['title']; ?>; color: <?php if($result['title'] === "Black") echo "white"  ?>">
+        <div class = "planDiv" style="background-color:<?= $result['colour']; ?>; color: <?php if($result['colour'] === "black" || $result['colour'] === "grey") echo "white"  ?>">
             <h1><?= $result['title'] ?></h1>
-            <h2><?= "Price - $" . $result['price'] ?></h2>
-            <h3><a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+            <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
+            <h3><a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Click to Learn More...</a></h3>
         </div>
     <?php endforeach ?>
     

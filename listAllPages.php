@@ -59,7 +59,7 @@ $planResults = $statement->fetchAll();
     </select>
     <button type="submit">Sort</button>
     </form>
-    <h1>Generic Pages:</h1>
+    <h1>General Pages:</h1>
     <ul>
         <?php foreach($genericResults as $genericResult): ?>
         <li><a href = "<?= "editGeneralPage.php?page_id=" . $genericResult['page_id'] ?>"><?= $genericResult['title'] ?></a></li>
