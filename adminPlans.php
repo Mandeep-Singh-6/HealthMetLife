@@ -28,7 +28,7 @@ $results = $statement->fetchAll();
         <div class = "planDiv" style="background-color:<?= $result['title']; ?>; color: <?php if($result['title'] === "Black") echo "white"  ?>">
             <h1><?= $result['title'] ?></h1>
             <h2><?= "Price - $" . $result['price'] ?></h2>
-            <h3><a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+            <h3><?= $result['description'] ?></h3>
         </div>
     <?php endforeach ?>
     

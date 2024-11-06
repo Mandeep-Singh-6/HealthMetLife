@@ -128,7 +128,7 @@ else if (isset($_GET['plan_id'])){
             </div>
             <div id="formSeparator">
                 <label for="summernote">Description</label>
-                <textarea id = "summernote" name = "description">value = "<?= $result['description'] ?>"</textarea>
+                <textarea id = "summernote" name = "description"><?= $result['description'] ?></textarea>
             </div>
             <div id="formSeparator">
             <button type = "submit" name = "action" value = "Update" >Update</button>
