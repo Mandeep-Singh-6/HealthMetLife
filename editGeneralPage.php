@@ -32,7 +32,7 @@ if($_POST){
                 
                     // Executing the statement. Redirecting to index.php if succeeded.
                     if($statement->execute()){
-                        header("Location: index1.php?page_id={$page_id}");
+                        header("Location: adminIndex.php?page_id={$page_id}");
                     }
             }
             else{
@@ -53,7 +53,7 @@ if($_POST){
 
             //Executing the query and redirecting to index.php if succeeded.
             if($statement->execute()){
-                header("Location: index1.php");
+                header("Location: adminIndex.php");
             }
         }
         exit;
@@ -87,7 +87,7 @@ else if (isset($_GET['page_id'])){
     }
     // If page_id is non-numeric, redirecting user to index.php.
     else{
-        header("Location: index1.php");
+        header("Location: adminIndex.php");
     }
 
 }

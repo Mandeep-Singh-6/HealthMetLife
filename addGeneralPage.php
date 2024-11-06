@@ -28,7 +28,7 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: index1.php");
+            header("Location: AdminIndex.php");
         }
     }
 }
