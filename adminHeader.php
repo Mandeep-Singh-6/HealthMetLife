@@ -18,9 +18,10 @@
     <nav>
         <ul>
             <?php foreach($headeResults as $headeResult): ?>
-                <li><a href = "<?="index1.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
+                <li><a href = "<?="adminIndex.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
             <li><a href = "addGeneralPage.php">Add Generic Page</a></li>
+            <li><a href = "listAllPages.php">List Pages</a></li>
         </ul>
     </nav>
 </div>

@@ -109,7 +109,7 @@ else if (isset($_GET['page_id'])){
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
-    <?php require('header.php') ?>
+    <?php require('adminHeader.php') ?>
     <?php if($error): ?>
         <p class = "error"><?= $error ?></p>
     <?php else: ?>

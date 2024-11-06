@@ -50,7 +50,7 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
-    <?php require('header.php') ?>
+    <?php require('adminHeader.php') ?>
     <h1 class = "centerText">Create a General Page</h1>
 
     <form method = "post">
