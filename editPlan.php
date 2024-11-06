@@ -9,20 +9,21 @@ if($_POST){
     // Sanitizing user input from the form.
     $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $bgcolour = filter_input(INPUT_POST,"bgcolour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = $_POST['description'];
     $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
     $plan_id = filter_input(INPUT_POST,"plan_id", FILTER_VALIDATE_INT);
 
     // Validating if all inputs are correct, else redirect user to index.php.
-    if(($title !== false) && ($description !== false) && ($plan_id !== false) && ($price !== false) && ($colour !== false)){
+    if(($title !== false) && ($description !== false) && ($plan_id !== false) && ($price !== false) && ($colour !== false) && ($bgcolour !== false) ){
         // Checking if edit button is clicked.
         if($_POST['action'] == "Update"){
             // Updating the specified record.
             if(!empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["plan_id"]) && !empty($_POST["price"])){
             
                     // Creating a query to update the data.
-                    $query = "UPDATE plans SET title = :title, description = :description, price = :price, colour = :colour WHERE plan_id = :plan_id LIMIT 1";
+                    $query = "UPDATE plans SET title = :title, description = :description, price = :price, colour = :colour, bgcolour = :bgcolour WHERE plan_id = :plan_id LIMIT 1";
                 
                     // Preparing the query.
                     $statement = $db->prepare( $query );
@@ -31,6 +32,7 @@ if($_POST){
                     $statement->bindValue(":title", $title, PDO::PARAM_STR);
                     $statement->bindValue(":description", $description, PDO::PARAM_STR);
                     $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
+                    $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
                     $statement->bindValue(":price", $price);
                     $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                 
@@ -129,9 +131,12 @@ else if (isset($_GET['plan_id'])){
                 <input type="number" id = "price" name = "price" value = "<?= $result['price'] ?>">
             </div>
             <div id="formSeparator">
-                <label for="colour">Colour</label>
-                <input type="text" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
+                <label for="bgcolour">Background</label>
+                <input type="text" id = "bgcolour" name = "bgcolour" value = "<?= $result['bgcolour'] ?>">
             </div>
+            <div id="formSeparator">
+                <label for="colour">Text Colour</label>
+                <input type="text" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
             <div id="formSeparator">
                 <label for="summernote">Description</label>
                 <textarea id = "summernote" name = "description"><?= $result['description'] ?></textarea>

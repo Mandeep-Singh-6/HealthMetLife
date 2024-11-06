@@ -25,7 +25,8 @@ $results = $statement->fetchAll();
     <?php require('adminHeader.php') ?>
     <h1 class = "centerText">Here is the list of Fitness Packages that we offer:</h1>
     <?php foreach($results as $result): ?>
-        <div class = "planDiv" style="background-color:<?= $result['colour']; ?>; color: <?php if($result['colour'] === "black" || $result['colour'] === "grey") echo "white"  ?>">            <h1><?= $result['title'] ?></h1>
+        <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
+            <h1><?= $result['title'] ?></h1>
             <h2><?= "Price - $" . $result['price'] . " Annually"?></h2>
             <h3><?= $result['description'] ?></h3>
         </div>
