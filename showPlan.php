@@ -38,7 +38,7 @@ else{
 <body>
     <?php require('header.php') ?>
     <?php if($result !==  FALSE): ?>
-        <div class = "planDiv" style="background-color:<?= $result['colour']; ?>; color: <?php if($result['colour'] === "black" || $result['colour'] === "grey") echo "white"  ?>">
+        <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
             <h1><?= $result['title'] ?></h1>
             <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
             <h3><?= $result['description'] ?></h3>
