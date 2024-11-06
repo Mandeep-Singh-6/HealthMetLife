@@ -35,6 +35,7 @@ div#header ul li a{
 
 div#header ul li a:hover{
     text-shadow: 1px 1px 1px red;
+    transition: 200ms;
 }
 
 .centerText{

@@ -22,7 +22,7 @@
             <?php endforeach ?>
             <li><a href="adminPlans.php">Plans</a></li>
             <li><a href="addPlan.php">Add a Plan</a></li>
-            <li><a href = "addGeneralPage.php">Add Generic Page</a></li>
+            <li><a href = "addGeneralPage.php">Add General Page</a></li>
             <li><a href = "listAllPages.php">List Pages</a></li>
         </ul>
     </nav>
