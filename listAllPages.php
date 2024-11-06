@@ -22,6 +22,19 @@ $statement = $db->prepare($query);
 $statement->execute();
 
 $genericResults = $statement->fetchAll();
+
+// Getting all the plans.
+// Creating a query to select the specified record from the plans table based on plan_id.
+$query = "SELECT * FROM plans ORDER BY $criteria $direction";
+    
+// Preparing the query.
+$statement = $db->prepare($query);
+    
+// Executing the query.
+$statement->execute();
+    
+// Fetching the returned row.
+$planResults = $statement->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +59,20 @@ $genericResults = $statement->fetchAll();
     </select>
     <button type="submit">Sort</button>
     </form>
-    <h1>Generic Pages</h1>
+    <h1>Generic Pages:</h1>
     <ul>
         <?php foreach($genericResults as $genericResult): ?>
         <li><a href = "<?= "editGeneralPage.php?page_id=" . $genericResult['page_id'] ?>"><?= $genericResult['title'] ?></a></li>
         <?php endforeach ?>
     </ul>
+
+    <h1>Plans:</h1>
+    <ul>
+        <?php foreach($planResults as $planResult): ?>
+            <li><a href = "<?= "editPlan.php?plan_id=" . $planResult['plan_id'] ?>"><?= $planResult['title'] ?></a></li>
+        <?php endforeach ?>
+    </ul>
+
+    
 </body>
 </html>
