@@ -1,5 +1,6 @@
 div#header{
     background-color: rgb(250, 214, 218);
+    margin-bottom: 20px;
 }
 
 div#header h1{
@@ -88,4 +89,9 @@ div.planDiv{
     margin: 0 auto;
     border-radius: 15px;
     margin-bottom: 20px;
+}
+
+div.planDiv a{
+    text-decoration: none;
+    color: rgb(0, 123, 255);
 }
