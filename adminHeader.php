@@ -20,7 +20,7 @@
             <?php foreach($headeResults as $headeResult): ?>
                 <li><a href = "<?="adminIndex.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
-            <li><a href="Plans.php">Plans</a></li>
+            <li><a href="adminPlans.php">Plans</a></li>
             <li><a href = "addGeneralPage.php">Add Generic Page</a></li>
             <li><a href = "listAllPages.php">List Pages</a></li>
         </ul>
