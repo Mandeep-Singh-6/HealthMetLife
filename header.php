@@ -1,7 +1,7 @@
 <?php 
 // Creating a query to get all the pages.
 
-    $query = "SELECT title FROM genericpages ORDER BY title DESC";
+    $query = "SELECT * FROM genericpages ORDER BY created_at ASC";
 
     // Loading the query into the MySql server cache.
     $statement = $db->prepare($query);
@@ -14,7 +14,7 @@
 
 ?>
 <div id = "header">
-    <h1>HealthMetLife</h1>
+    <h1 class = "centerText"><a href="index1.php">HealthMetLife</a></h1>
     <nav>
         <ul>
             <?php foreach($results as $result): ?>

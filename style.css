@@ -1,10 +1,10 @@
 div#header{
-    background-color: rgb(241, 186, 192);
+    background-color: rgb(250, 214, 218);
 }
 
-div#header h1{
+div#header h1 a{
+    text-decoration: none;
     color: red;
-    text-align: center;
 }
 
 div#header nav{
@@ -14,7 +14,7 @@ div#header nav{
 
 ul{
     width: 100%;
-    background-color: beige;
+    background-color: rgb(246, 246, 209);
     list-style: none;
     display: flex;
     margin: 0 auto;
@@ -35,4 +35,37 @@ ul li a{
 
 ul li a:hover{
     text-shadow: 1px 1px 1px red;
+}
+
+.centerText{
+    text-align: center;
+}
+
+form{
+    border: none;
+    margin-left: 36%;
+}
+
+form fieldset{
+    border: none;
+}
+
+form fieldset label{
+    float: left;
+    margin-right: 20px;
+    text-align: right;
+    width: 60px;
+}
+
+form fieldset button{
+    margin-left: 130px;
+}
+
+form fieldset input{
+    width: 200px;
+}
+
+form fieldset textarea{
+    height: 100px;
+    width: 200px;
 }
