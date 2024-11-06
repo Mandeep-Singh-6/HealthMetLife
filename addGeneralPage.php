@@ -53,7 +53,7 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     <?php require('adminHeader.php') ?>
     <h1 class = "centerText">Create a General Page</h1>
 
-    <form method = "post">
+    <form method = "post" class = "pageForm">
         <fieldset>
             <div id="formSeparator">
                 <label for="title">Title</label>

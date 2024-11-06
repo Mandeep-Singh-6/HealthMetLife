@@ -116,7 +116,7 @@ else if (isset($_GET['page_id'])){
         <?php if(isset($result)):?> 
         <h1 class = "centerText">Edit a General Page</h1>
 
-        <form method = "post">
+        <form method = "post" class = "pageForm">
             <fieldset>
             <input type="hidden" name = "page_id" value = "<?= $result['page_id'] ?>">
                 <div id="formSeparator">

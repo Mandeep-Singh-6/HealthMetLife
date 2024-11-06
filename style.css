@@ -40,31 +40,31 @@ div#header ul li a:hover{
     text-align: center;
 }
 
-form{
+form.pageForm{
     border: none;
     margin-left: 36%;
 }
 
-form fieldset{
+form.pageForm fieldset{
     border: none;
 }
 
-form fieldset label{
+form.pageForm fieldset label{
     display: block;
     margin-right: 20px;
     text-align: left;
     width: 60px;
 }
 
-form fieldset button{
+form.pageForm fieldset button{
     margin-left: 5%;
 }
 
-form fieldset input{
+form.pageForm fieldset input{
     width: 100%;
 }
 
-form fieldset textarea{
+form.pageForm fieldset textarea{
     height: 100px;
     width: 200px;
 }
@@ -75,4 +75,8 @@ form fieldset textarea{
 
 div#formSeparator{
     width: 400px;
+}
+
+.sortForm{
+    margin-top: 20px;
 }
