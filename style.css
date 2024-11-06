@@ -1,0 +1,38 @@
+div#header{
+    background-color: rgb(241, 186, 192);
+}
+
+div#header h1{
+    color: red;
+    text-align: center;
+}
+
+div#header nav{
+    display: flex;
+    margin: 0 auto;
+}
+
+ul{
+    width: 100%;
+    background-color: beige;
+    list-style: none;
+    display: flex;
+    margin: 0 auto;
+    justify-content:space-around;
+}
+
+ul li{
+    flex-basis: 20%;
+    text-align: center;
+}
+
+ul li a{
+    text-decoration: none;
+    color: green;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+ul li a:hover{
+    text-shadow: 1px 1px 1px red;
+}
