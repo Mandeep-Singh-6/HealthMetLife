@@ -20,6 +20,7 @@
             <?php foreach($headeResults as $headeResult): ?>
                 <li><a href = "<?="index1.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
+            <li><a href="showPlans.php">Plans</a></li>
         </ul>
     </nav>
 </div>

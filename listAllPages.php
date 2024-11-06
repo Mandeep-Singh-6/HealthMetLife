@@ -10,7 +10,8 @@ else{
     $criteria = 'title';
     $direction = 'ASC';
 }
-// Creating a query to get all the pages.
+
+// Creating a query to get all the generic pages.
 // Why couldn't we bind here.
 $query = "SELECT * FROM genericpages ORDER BY $criteria $direction";
 

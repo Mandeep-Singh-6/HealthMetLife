@@ -15,7 +15,7 @@ else{
 }
 
 if($page_id){
-    // Creating a query to select the specified record from the blogs table based on page_id.
+    // Creating a query to select the specified record from the genericpages table based on page_id.
     $query = "SELECT * FROM genericpages WHERE page_id = :page_id LIMIT 1";
     
     // Preparing the query.
