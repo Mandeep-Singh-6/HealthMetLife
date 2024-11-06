@@ -10,15 +10,15 @@
     $statement->execute();
 
 
-    $results = $statement->fetchAll();
+    $headeResults = $statement->fetchAll();
 
 ?>
 <div id = "header">
-    <h1 class = "centerText"><a href="index1.php">HealthMetLife</a></h1>
+    <h1 class = "centerText">HealthMetLife</h1>
     <nav>
         <ul>
-            <?php foreach($results as $result): ?>
-                <li><a href = "?" ><?= $result['title'] ?></a></li>
+            <?php foreach($headeResults as $headeResult): ?>
+                <li><a href = "<?="index1.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
         </ul>
     </nav>

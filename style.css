@@ -2,8 +2,7 @@ div#header{
     background-color: rgb(250, 214, 218);
 }
 
-div#header h1 a{
-    text-decoration: none;
+div#header h1{
     color: red;
 }
 
