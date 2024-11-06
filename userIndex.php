@@ -31,7 +31,7 @@ if($page_id){
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: index1.php");
+    header("Location: userIndex.php");
 }
 ?>
 <!DOCTYPE html>
