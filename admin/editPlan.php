@@ -128,7 +128,7 @@ else if (isset($_GET['plan_id'])){
             </div>
             <div id="formSeparator">
                 <label for="price">Price</label>
-                <input type="number" id = "price" name = "price" value = "<?= $result['price'] ?>">
+                <input type="number" id = "price" name = "price" value = "<?= $result['price'] ?>" step = ".01">
             </div>
             <div id="formSeparator">
                 <label for="bgcolour">Background</label>
