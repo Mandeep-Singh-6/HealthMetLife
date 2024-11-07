@@ -1,7 +1,6 @@
 <?php
-require('connect.php');
-require('authenticate.php');
-
+require('../connect.php');
+require('../authenticate.php');
 $error="";
 
 if($_POST){
@@ -32,7 +31,7 @@ if($_POST){
                 
                     // Executing the statement. Redirecting to index.php if succeeded.
                     if($statement->execute()){
-                        header("Location: adminIndex.php?page_id={$page_id}");
+                        header("Location: Index.php?page_id={$page_id}");
                     }
             }
             else{
@@ -53,7 +52,7 @@ if($_POST){
 
             //Executing the query and redirecting to index.php if succeeded.
             if($statement->execute()){
-                header("Location: adminIndex.php");
+                header("Location: Index.php");
             }
         }
         exit;
@@ -87,7 +86,7 @@ else if (isset($_GET['page_id'])){
     }
     // If page_id is non-numeric, redirecting user to index.php.
     else{
-        header("Location: adminIndex.php");
+        header("Location: Index.php");
     }
 
 }
@@ -98,7 +97,7 @@ else if (isset($_GET['page_id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
         <!-- include libraries(jQuery, bootstrap) -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -109,7 +108,7 @@ else if (isset($_GET['page_id'])){
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
-    <?php require('adminHeader.php') ?>
+    <?php require('header.php') ?>
     <?php if($error): ?>
         <p class = "error"><?= $error ?></p>
     <?php else: ?>

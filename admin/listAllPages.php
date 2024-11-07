@@ -1,5 +1,6 @@
 <?php
-require('connect.php');
+require('../connect.php');
+require('../authenticate.php');
 
 // Checking for sort criteria.
 if($_POST){
@@ -42,10 +43,10 @@ $planResults = $statement->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List All Pages</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php require('adminHeader.php') ?>
+    <?php require('header.php') ?>
     <form method="post" class = "sortForm">
     <label for="criteria">Sort By:</label> 
     <select id="criteria" name="criteria"> 

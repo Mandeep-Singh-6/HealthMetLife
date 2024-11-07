@@ -1,6 +1,7 @@
 <?php 
-require('connect.php');
-require('authenticate.php');
+require('../connect.php');
+require('../authenticate.php');
+
 $page_id = 0;
 if($_GET){
     //Sanitizing input from the get superglobal.
@@ -32,7 +33,7 @@ if($page_id){
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: adminIndex.php");
+    header("Location: Index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -41,10 +42,10 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php require('adminHeader.php') ?>
+    <?php require('header.php') ?>
         <h1><?= $result['title'] ?></h1>
         <p><?= $result['content'] ?></p>
 </body>

@@ -1,6 +1,6 @@
 <?php
-require('connect.php');
-require('authenticate.php');
+require('../connect.php');
+require('../authenticate.php');
 
 if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["price"])){
 
@@ -34,7 +34,7 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: adminPlans.php");
+            header("Location: Plans.php");
         }
     }
 }
@@ -45,7 +45,7 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -56,7 +56,7 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
-    <?php require('adminHeader.php') ?>
+    <?php require('header.php') ?>
     <h1 class = "centerText">Create a New Plan</h1>
 
     <form method = "post" class = "pageForm">

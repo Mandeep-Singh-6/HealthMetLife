@@ -18,9 +18,9 @@
     <nav>
         <ul>
             <?php foreach($headeResults as $headeResult): ?>
-                <li><a href = "<?="adminIndex.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
+                <li><a href = "<?="Index.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
-            <li><a href="adminPlans.php">Plans</a></li>
+            <li><a href="Plans.php">Plans</a></li>
             <li><a href="addPlan.php">Add a Plan</a></li>
             <li><a href = "addGeneralPage.php">Add General Page</a></li>
             <li><a href = "listAllPages.php">List Pages</a></li>
