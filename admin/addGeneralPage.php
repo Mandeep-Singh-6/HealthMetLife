@@ -1,6 +1,6 @@
 <?php
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 
 if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
 

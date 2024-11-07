@@ -62,8 +62,13 @@ form.pageForm fieldset button{
     margin-left: 5%;
 }
 
-form.pageForm fieldset input{
+form.pageForm fieldset input:not([type = 'color']){
     width: 100%;
+}
+
+form.pageForm fieldset input[type = 'color']{
+    width: 40px;
+    height: 40px;
 }
 
 form.pageForm fieldset textarea{

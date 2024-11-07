@@ -1,6 +1,6 @@
 <?php
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 
 $error="";
 
@@ -132,11 +132,11 @@ else if (isset($_GET['plan_id'])){
             </div>
             <div id="formSeparator">
                 <label for="bgcolour">Background</label>
-                <input type="text" id = "bgcolour" name = "bgcolour" value = "<?= $result['bgcolour'] ?>">
+                <input type="color" id = "bgcolour" name = "bgcolour" value = "<?= $result['bgcolour'] ?>">
             </div>
             <div id="formSeparator">
                 <label for="colour">Text Colour</label>
-                <input type="text" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
+                <input type="color" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
             <div id="formSeparator">
                 <label for="summernote">Description</label>
                 <textarea id = "summernote" name = "description"><?= $result['description'] ?></textarea>

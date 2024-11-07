@@ -1,6 +1,6 @@
 <?php 
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 
 $page_id = 0;
 if($_GET){

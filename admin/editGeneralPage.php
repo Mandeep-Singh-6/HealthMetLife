@@ -1,6 +1,6 @@
 <?php
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 $error="";
 
 if($_POST){

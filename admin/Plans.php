@@ -1,6 +1,6 @@
 <?php 
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 
 // Creating a query to select the specified record from the plans table based on plan_id.
 $query = "SELECT * FROM plans ORDER BY price DESC";

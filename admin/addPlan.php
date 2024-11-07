@@ -1,6 +1,6 @@
 <?php
 require('../connect.php');
-require('../authenticate.php');
+require('authenticate.php');
 
 if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["price"])){
 
@@ -71,11 +71,11 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
             </div>
             <div id="formSeparator">
                 <label for="bgcolour">Background</label>
-                <input type="text" id = "bgcolour" name = "bgcolour">
+                <input type="color" id = "bgcolour" name = "bgcolour" value = "#000000">
             </div>
             <div id="formSeparator">
                 <label for="colour">Text Colour</label>
-                <input type="text" id = "colour" name = "colour">
+                <input type="color" id = "colour" name = "colour" value = "#FFFFFF">
             </div>
             <div id="formSeparator">
                 <label for="summernote">Description</label>
