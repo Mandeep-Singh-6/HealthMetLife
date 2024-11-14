@@ -30,7 +30,7 @@ if($_POST && !empty($_POST["name"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add General Page</title>
+    <title>Add Plan Category</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -41,7 +41,7 @@ if($_POST && !empty($_POST["name"])){
         <fieldset>
             <div id="formSeparator">
                 <label for="name">Name</label>
-                <input type="text" id = "name" name = "name">
+                <input type="text" id = "name" name = "name" autofocus>
             </div>
             <div id="formSeparator">
                 <button type = "submit">Create</button>

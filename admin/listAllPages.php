@@ -2,12 +2,11 @@
 require('../connect.php');
 require('authenticate.php');
 
-print_r($_POST);
-
 // Checking for sort criteria.
 if(isset($_POST['criteria'])){
     $criteria = filter_input(INPUT_POST,"criteria", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
+// Trying to retian values when a different form is submitted.
 else if (isset($criteria)){
     // Want to implement this. But variables don't retain values. Do
     // I need to use cookies?
@@ -111,6 +110,7 @@ $planCategoryResults = $statement->fetchAll();
         <?php endforeach ?>
     </ul>
 
+    <!-- A separate sort form for plan categories. -->
     <form method="post" class = "sortForm">
     <label for="direction2">Sort By:</label> 
     <select name="direction2" id="direction2">
@@ -123,7 +123,7 @@ $planCategoryResults = $statement->fetchAll();
     <h1>Plan Categories:</h1>
     <ul>
         <?php foreach($planCategoryResults as $planCategoryResult): ?>
-            <li><a href = "#"><?= $planCategoryResult['plan_category_name'] ?></a></li>
+            <li><a href = "<?= "editPlanCategory.php?plan_category_id=" . $planCategoryResult["plan_category_id"]?>"><?= $planCategoryResult['plan_category_name'] ?></a></li>
         <?php endforeach ?>
     </ul>
 </body>
