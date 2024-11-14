@@ -2,6 +2,20 @@
 require('../connect.php');
 require('authenticate.php');
 
+// Getting all the plan categories.
+// Creating a query to select the specified record from the plan categories table.
+$query = "SELECT * FROM plan_categories ORDER BY plan_category_name";
+    
+// Preparing the query.
+$statement = $db->prepare($query);
+    
+// Executing the query.
+$statement->execute();
+    
+// Fetching the returned row.
+$planCategoryResults = $statement->fetchAll();
+
+
 if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["price"])){
 
     // Sanitizing user input from the form.
@@ -12,10 +26,17 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = $_POST['description'];
 
+    // Checking for a null value.
+    if($_POST['plan_category_id'] === "NULL"){
+        $plan_category_id = NULL;
+    }
+    else{
+        $plan_category_id = filter_input(INPUT_POST,"plan_category_id", FILTER_VALIDATE_INT); 
+    }
     // Validating if all input is correct, else redirect user to index.php.
     if($title && $description && $price && $colour && $bgcolour){
-        // Creating an insert query to insert data into the table.
-        $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour)";
+        
+        $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
 
         // Loads the query into the SQL server's cache and returns a PDOStatement object.
         $statement = $db->prepare($query);
@@ -31,6 +52,7 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
         $statement->bindValue(":description", $description, PDO::PARAM_STR);
         $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
         $statement->bindValue(":price", $price);
+        $statement->bindValue(":plan_category_id", $plan_category_id);
 
         // Executing the query.
         if($statement->execute()){
@@ -76,6 +98,15 @@ if($_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty(
             <div id="formSeparator">
                 <label for="colour">Text Colour</label>
                 <input type="color" id = "colour" name = "colour" value = "#FFFFFF">
+            </div>
+            <div id="formSeparator">
+                <label for="plan_category_id">Category:</label>
+                <select name="plan_category_id" id="plan_category_id">
+                    <option value="NULL">None</option>
+                    <?php foreach($planCategoryResults as $planCategoryResult): ?>
+                    <option value="<?= $planCategoryResult['plan_category_id'] ?>"><?= $planCategoryResult['plan_category_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
             <div id="formSeparator">
                 <label for="summernote">Description</label>
