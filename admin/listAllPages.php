@@ -2,14 +2,38 @@
 require('../connect.php');
 require('authenticate.php');
 
+print_r($_POST);
+
 // Checking for sort criteria.
-if($_POST){
+if(isset($_POST['criteria'])){
     $criteria = filter_input(INPUT_POST,"criteria", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $direction = filter_input(INPUT_POST,"direction", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+else if (isset($criteria)){
+    // Want to implement this. But variables don't retain values. Do
+    // I need to use cookies?
 }
 else{
     $criteria = 'title';
+}
+
+if(isset($_POST['direction'])){
+    $direction = filter_input(INPUT_POST,"direction", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+else if (isset($direction)){
+    
+}
+else{
     $direction = 'ASC';
+}
+    
+if (isset($_POST['direction2'])){
+    $direction2 = filter_input(INPUT_POST,"direction2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+else if (isset($direction2)){
+    
+}
+else{
+    $direction2 = 'ASC';
 }
 
 // Creating a query to get all the generic pages.
@@ -36,6 +60,19 @@ $statement->execute();
     
 // Fetching the returned row.
 $planResults = $statement->fetchAll();
+
+// Getting all the plan categories.
+// Creating a query to select the specified record from the plan categories table.
+$query = "SELECT * FROM plan_categories ORDER BY plan_category_name $direction2";
+    
+// Preparing the query.
+$statement = $db->prepare($query);
+    
+// Executing the query.
+$statement->execute();
+    
+// Fetching the returned row.
+$planCategoryResults = $statement->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +111,20 @@ $planResults = $statement->fetchAll();
         <?php endforeach ?>
     </ul>
 
-    
+    <form method="post" class = "sortForm">
+    <label for="direction2">Sort By:</label> 
+    <select name="direction2" id="direction2">
+    <option value="ASC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'ASC') echo 'selected';?>>Ascending</option>
+    <option value="DESC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'DESC') echo 'selected';?>>Descending</option>
+    </select>
+    <button type="submit">Sort</button>
+    </form>
+
+    <h1>Plan Categories:</h1>
+    <ul>
+        <?php foreach($planCategoryResults as $planCategoryResult): ?>
+            <li><a href = "#"><?= $planCategoryResult['plan_category_name'] ?></a></li>
+        <?php endforeach ?>
+    </ul>
 </body>
 </html>
