@@ -60,6 +60,7 @@ form.pageForm fieldset label{
 
 form.pageForm fieldset button{
     margin-left: 5%;
+    margin-top: 3%;
 }
 
 form.pageForm fieldset input:not([type = 'color']){
