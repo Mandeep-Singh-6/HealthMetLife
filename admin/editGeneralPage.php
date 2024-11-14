@@ -40,7 +40,7 @@ if($_POST){
             }
         }
         // Checking if delete button is clicked.
-        else if($_POST['action'] == "Delete"){
+        elseif($_POST['action'] == "Delete"){
             // Creating a query to delete the specified field.
             $query = "DELETE FROM genericpages WHERE page_id = :page_id LIMIT 1";
 
@@ -62,7 +62,7 @@ if($_POST){
         $error = "There is a validation error in your data.";
     }
 }
-else if (isset($_GET['page_id'])){
+elseif (isset($_GET['page_id'])){
     // Validating the page_id entered by the user.
     $page_id = filter_input(INPUT_GET,'page_id', FILTER_VALIDATE_INT);
     if($page_id){

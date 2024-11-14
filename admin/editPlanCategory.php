@@ -38,7 +38,7 @@ if($_POST){
             }
         }
         // Checking if delete button is clicked.
-        else if($_POST['action'] == "Delete"){
+        elseif($_POST['action'] == "Delete"){
             // Creating a query to delete the specified field.
             $query = "DELETE FROM plan_categories WHERE plan_category_id = :plan_category_id LIMIT 1";
 
@@ -60,7 +60,7 @@ if($_POST){
         $error = "There is a validation error in your data.";
     }
 }
-else if (isset($_GET['plan_category_id'])){
+elseif (isset($_GET['plan_category_id'])){
     // Validating the plan_id entered by the user.
     $plan_category_id = filter_input(INPUT_GET,'plan_category_id', FILTER_VALIDATE_INT);
     if($plan_category_id){

@@ -7,7 +7,7 @@ if(isset($_POST['criteria'])){
     $criteria = filter_input(INPUT_POST,"criteria", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 // Trying to retian values when a different form is submitted.
-else if (isset($criteria)){
+elseif (isset($criteria)){
     // Want to implement this. But variables don't retain values. Do
     // I need to use cookies?
 }
@@ -18,7 +18,7 @@ else{
 if(isset($_POST['direction'])){
     $direction = filter_input(INPUT_POST,"direction", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
-else if (isset($direction)){
+elseif (isset($direction)){
     
 }
 else{
@@ -28,7 +28,7 @@ else{
 if (isset($_POST['direction2'])){
     $direction2 = filter_input(INPUT_POST,"direction2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
-else if (isset($direction2)){
+elseif (isset($direction2)){
     
 }
 else{
