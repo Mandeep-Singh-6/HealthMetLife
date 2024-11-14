@@ -106,7 +106,7 @@ else{
     </form>
     
     <!-- To amount for a scenario where no records are returned. -->
-    <?php if(isset($resultsArray) || isset($results)):?>
+    <?php if((isset($results) && count($results) > 0) || (isset($resultsArray) && count($resultsArray) > 0)):?>
         <!-- If no selected or 'all' is selected. Then show all categories. -->
         <?php if(!$_POST || $_POST['plan_category_id'] === "all"): ?>
             <?php for($i = 0; $i < count($planCategoryResults); $i++): ?>
@@ -140,6 +140,9 @@ else{
                 </div>
             <?php endforeach ?>
         <?php endif ?>
+    <!-- If no results are returned, show a message. -->
+     <?php else: ?>
+        <h1>There are no plans associated with this category.</h1>
     <?php endif ?>
 
 </body>
