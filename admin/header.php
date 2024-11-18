@@ -26,6 +26,7 @@
             <li><a href = "addPlanCategory.php">Add Plan Category</a></li>
             <li><a href = "showUsers.php">Users</a></li>
             <li><a href = "listAllPages.php">List Pages</a></li>
+            <li><a href = "../logout.php">Logout</a></li>
         </ul>
     </nav>
 </div>
