@@ -77,18 +77,20 @@ else{
     $results = $statement->fetchAll();
 
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plans</title>
+    <title>Admin- Plans</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <?php require('header.php') ?>
-    <h1 class = "centerText">Our Offerings:</h1>
+    <h1 class = "centerText">Here is the list of Fitness Packages that we offer:</h1>
 
     <!-- Form to sort plans by categories. -->
     <form method="post" class = "sortForm">
@@ -102,8 +104,8 @@ else{
         </select>
     <button type="submit">Sort</button>
     </form>
-
-   <!-- To amount for a scenario where no records are returned. -->
+    
+    <!-- To amount for a scenario where no records are returned. -->
     <?php if((isset($results) && count($results) > 0) || (isset($resultsArray) && count($resultsArray) > 0)):?>
         <!-- If no selected or 'all' is selected. Then show all categories. -->
         <?php if(!$_POST || $_POST['plan_category_id'] === "all"): ?>
@@ -111,20 +113,20 @@ else{
             <h2><?= $planCategoryResults[$i]['plan_category_name'] ?>:</h2>
                 <?php foreach ($resultsArray[$i] as $result):?>
                     <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                        <h1><?= $result['title'] ?></h1>
-                        <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                        <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                        <h2><?= $result['title'] ?></h2>
+                        <h3><?= "Price - $" . $result['price'] . " Annually"?></h3>
+                        <h4><?= $result['description'] ?></h4>
                     </div>
                 <?php endforeach ?>             
             <?php endfor ?>
-            <?php elseif ($_POST['plan_category_id'] === "NULL"):?>
+        <?php elseif ($_POST['plan_category_id'] === "NULL"):?>
             <h2>No Category:</h2>
             <?php foreach ($results as $result):?>
                 <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                        <h1><?= $result['title'] ?></h1>
-                        <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                        <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
-                    </div>
+                    <h2><?= $result['title'] ?></h2>
+                    <h3><?= "Price - $" . $result['price'] . " Annually"?></h3>
+                    <h4><?= $result['description'] ?></h4>
+                </div>
             <?php endforeach ?>
         <?php else: ?>
             <!-- Getting the plan name from the first record. Could take from any record but we know 
@@ -132,15 +134,16 @@ else{
             <h2><?= $results[0]['plan_category_name'] ?>:</h2>
             <?php foreach ($results as $result):?>
                 <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                        <h1><?= $result['title'] ?></h1>
-                        <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                        <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
-                    </div>
+                    <h2><?= $result['title'] ?></h2>
+                    <h3><?= "Price - $" . $result['price'] . " Annually"?></h3>
+                    <h4><?= $result['description'] ?></h4>
+                </div>
             <?php endforeach ?>
         <?php endif ?>
     <!-- If no results are returned, show a message. -->
      <?php else: ?>
         <h1>There are no plans associated with this category.</h1>
     <?php endif ?>
+
 </body>
 </html>
