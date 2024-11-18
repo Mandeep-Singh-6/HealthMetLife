@@ -1,8 +1,12 @@
 <?php
     require('../connect.php');
-    require('authenticate.php');
+    session_start();
+if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
+    header("Location: ../login.php");
+}
+
     // Writing a query that pulls all users from the users table.
-    $query = "SELECT * FROM users ORDER BY username ASC";
+    $query = "SELECT * FROM users WHERE username <> 'admin' ORDER BY username ASC";
 
     // Loading the query into the MySql server cache.
     $statement = $db->prepare($query);

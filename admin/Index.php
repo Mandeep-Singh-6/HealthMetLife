@@ -1,6 +1,10 @@
 <?php 
 require('../connect.php');
-require('authenticate.php');
+session_start();
+if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
+    header("Location: ../login.php");
+}
+
 
 $page_id = 0;
 if($_GET){

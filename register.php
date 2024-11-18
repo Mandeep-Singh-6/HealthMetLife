@@ -77,5 +77,8 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
             </div>
         </fieldset>
     </form>
+    <div class="centerText">
+            <a href="login.php" class="aButton">Login Instead</a>
+        </div>
 </body>
 </html>

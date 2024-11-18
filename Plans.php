@@ -1,5 +1,9 @@
 <?php 
 require('connect.php');
+session_start();
+if(!isset($_SESSION['login_role'])){
+    header("Location: login.php");
+}
 
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.

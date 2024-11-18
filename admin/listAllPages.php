@@ -1,6 +1,9 @@
 <?php
 require('../connect.php');
-require('authenticate.php');
+session_start();
+if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
+    header("Location: ../login.php");
+}
 
 // Checking for sort criteria.
 if(isset($_POST['criteria'])){

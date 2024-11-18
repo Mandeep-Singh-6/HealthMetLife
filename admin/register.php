@@ -1,5 +1,9 @@
 <?php 
-require('connect.php');
+require('../connect.php');
+session_start();
+if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
+    header("Location: ../login.php");
+}
 
 $error = "";
 // Inserting the user record into the users table.
@@ -46,7 +50,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register a new user</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <?php require('header.php') ?>

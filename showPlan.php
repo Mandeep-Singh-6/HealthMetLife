@@ -1,5 +1,11 @@
 <?php 
 require('connect.php');
+session_start();
+if(!isset($_SESSION['login_role'])){
+    header("Location: login.php");
+}
+
+
 $plan_id = 0;
 if($_GET){
     //Sanitizing input from the get superglobal.

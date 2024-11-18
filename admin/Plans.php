@@ -1,6 +1,9 @@
 <?php 
 require('../connect.php');
-require('authenticate.php');
+session_start();
+if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
+    header("Location: ../login.php");
+}
 
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.
