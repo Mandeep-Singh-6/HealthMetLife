@@ -110,3 +110,36 @@ div.planDiv a{
     text-decoration: none;
     color: rgb(0, 123, 255);
 }
+
+table#users{
+    width: 80%;
+    margin: 0px auto;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+table#users caption{
+    font-size: 1.3em;
+    font-weight: strong;
+}
+
+table#users td, table#users th{
+    border: 1px solid black;
+}
+
+table#users tbody tr:nth-child(even){
+    background-color: rgb(232, 232, 232);
+}
+
+table#users tbody tr:hover{
+    background-color: rgb(181, 179, 179);
+}
+
+.aButton{
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px;
+    background-color: rgb(189, 186, 186);
+    color: black;
+}
