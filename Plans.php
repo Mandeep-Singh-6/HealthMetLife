@@ -99,7 +99,7 @@ else{
         <h1 class = "centerText">Our Offerings:</h1>
 
         <!-- Form to sort plans by categories. -->
-        <form method="post" class = "sortForm">
+        <form method="post" class = "sortForm marginedForm">
         <label for="plan_category_id">Category:</label>
             <select name="plan_category_id" id="plan_category_id">
                 <option value="all" <?php if (isset($_POST['plan_category_id']) && $_POST['plan_category_id'] === "all") echo 'selected';?>>All</option>
@@ -116,7 +116,7 @@ else{
             <!-- If no selected or 'all' is selected. Then show all categories. -->
             <?php if(!$_POST || $_POST['plan_category_id'] === "all"): ?>
                 <?php for($i = 0; $i < count($planCategoryResults); $i++): ?>
-                <h2><?= $planCategoryResults[$i]['plan_category_name'] ?>:</h2>
+                <h2 class="planH2"><?= $planCategoryResults[$i]['plan_category_name'] ?>:</h2>
                     <?php foreach ($resultsArray[$i] as $result):?>
                         <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
                             <h1><?= $result['title'] ?></h1>

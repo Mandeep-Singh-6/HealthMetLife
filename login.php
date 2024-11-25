@@ -60,9 +60,7 @@ if($_POST){
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id = "header">
-    <h1 class = "centerText"><a href="Index.php?page_id=1">HealthMetLife</a></h1>
-    </div>
+    <?php require('header.php') ?>
     <?php if($error):?>
         <h1 class="error"><?= $error ?></h1>
     <?php endif ?>

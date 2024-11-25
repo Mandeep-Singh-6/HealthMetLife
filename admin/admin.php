@@ -20,7 +20,7 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
 <body>
 <?php include('adminNav.php') ?>
             <h1>This is the admin Page.</h1>
-            <p>The only place where you can feel like a god.</p>
+            <p>The only place where you can feel like a God.</p>
         </main>
     </div>
 </body>
