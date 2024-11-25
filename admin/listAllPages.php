@@ -83,9 +83,13 @@ $planCategoryResults = $statement->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List All Pages</title>
     <link rel="stylesheet" href="../style.css">
+    <!-- Importing google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php require('header.php') ?>
+    <?php include('adminNav.php') ?>
     <form method="post" class = "sortForm">
     <label for="criteria">Sort By:</label> 
     <select id="criteria" name="criteria"> 
@@ -129,5 +133,7 @@ $planCategoryResults = $statement->fetchAll();
             <li><a href = "<?= "editPlanCategory.php?plan_category_id=" . $planCategoryResult["plan_category_id"]?>"><?= $planCategoryResult['plan_category_name'] ?></a></li>
         <?php endforeach ?>
     </ul>
+    </main>
+    </div>
 </body>
 </html>

@@ -43,19 +43,24 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="../style.css">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+    <!-- Importing google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- Including own css at the end. -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php require('header.php') ?>
-    <h1 class = "centerText">Create a General Page</h1>
+    <?php include('adminNav.php') ?>
+    <h1>Create a General Page</h1>
 
     <form method = "post" class = "pageForm">
         <fieldset>
@@ -72,6 +77,8 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
             </div>
         </fieldset>
     </form>
+    </main>
+    </div>
     <script>
         $(document).ready(function() {
         $('#summernote').summernote();

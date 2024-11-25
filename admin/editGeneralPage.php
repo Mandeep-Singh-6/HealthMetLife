@@ -110,14 +110,18 @@ elseif (isset($_GET['page_id'])){
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+    <!-- Importing google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php require('header.php') ?>
+    <?php include('adminNav.php') ?>
     <?php if($error): ?>
         <p class = "error"><?= $error ?></p>
     <?php else: ?>
         <?php if(isset($result)):?> 
-        <h1 class = "centerText">Edit a General Page</h1>
+        <h1>Edit a General Page</h1>
 
         <form method = "post" class = "pageForm">
             <fieldset>
@@ -140,6 +144,8 @@ elseif (isset($_GET['page_id'])){
             <p class = "error">We couldn't find any record with the specified id.</p>
         <?php endif ?>
     <?php endif ?>
+    </main>
+    </div>
     <script>
         $(document).ready(function() {
         $('#summernote').summernote();

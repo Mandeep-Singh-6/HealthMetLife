@@ -47,6 +47,10 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register a new user</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Importing google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php require('header.php') ?>
@@ -54,7 +58,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
         <h1 class="error"><?= $error ?></h1>
     <?php endif ?>
     <h1 class = "centerText">Register a new user</h1>
-    <form method = "post" class = "pageForm">
+    <form method = "post" class = "pageForm centerForm">
         <fieldset>
             <div id="formSeparator">
                 <label for="username">Username</label>

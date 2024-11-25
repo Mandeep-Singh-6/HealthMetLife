@@ -45,10 +45,20 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Importing google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php if($page_id === 1): ?>
+        <h1>Welcome <?= (isset($_SESSION['username'])) ? "back, " . $_SESSION['username']: "Fitness Enthusiast" ?>!</h1>
+        <?php else: ?>
         <h1><?= $result['title'] ?></h1>
+        <?php endif ?>
         <p><?= $result['content'] ?></p>
+    </div>
 </body>
 </html>
