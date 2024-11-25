@@ -23,7 +23,8 @@ if(!isset($_POST['name']) || trim($_POST['name']) === ""){
     $name = "%";
 }
 else{
-    $name = filter_input(INPUT_POST,'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $name = trim($_POST['name']);
+    $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $name = "%" . $name . "%";
 }
 
