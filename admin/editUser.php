@@ -22,7 +22,9 @@ if($_POST){
         if($_POST['action'] == "Update"){
             // Updating the specified record.
             if(!empty($_POST["username"]) && !empty($_POST["user_id"]) && !empty($_POST["email"]) && !empty($_POST["password"])){
-            
+                // Hashing and salting the password.
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
                 // Creating a query to update the data.
                 $query = "UPDATE users SET username = :username, user_id = :user_id, email = :email, password = :password WHERE user_id = :user_id LIMIT 1";
                 
@@ -32,7 +34,7 @@ if($_POST){
                 // Binding values to the query.
                 $statement->bindValue(":username", $username, PDO::PARAM_STR);
                 $statement->bindValue(":email", $email, PDO::PARAM_STR);
-                $statement->bindValue(":password", $password, PDO::PARAM_STR);
+                $statement->bindValue(":password", $hashed_password, PDO::PARAM_STR);
                 $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
                 
                 // Executing the statement. Redirecting to index.php if succeeded.

@@ -25,7 +25,7 @@ if($_POST){
     $result = $statement->fetch();
     // 1 is admin and 2 is normal user.
     if($result !== false){
-        if($password === $result['password']){
+        if(password_verify($password, $result['password'])){
             $_SESSION['login_role'] = $result['role_id'];
             $_SESSION['username'] = $result['username'];
 

@@ -18,6 +18,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
     }
     // Validating if all input is correct, else redirect user to index.php.
     elseif($username && $password && $email && $confirmPassword){
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         // Creating an insert query to insert data into the table.
         $query = "INSERT INTO users (username, email, password, role_id) VALUES (:username, :email, :password, :role_id)";
 
@@ -26,7 +27,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
 
         // Binding values to the loaded query.
         $statement->bindValue(":username", $username, PDO::PARAM_STR);
-        $statement->bindValue(":password", $password, PDO::PARAM_STR);
+        $statement->bindValue(":password", $hashed_password, PDO::PARAM_STR);
         $statement->bindValue(":email", $email, PDO::PARAM_STR);
         $statement->bindValue(":role_id", $role_id, PDO::PARAM_INT);
 
