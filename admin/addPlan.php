@@ -53,117 +53,157 @@ if($upload_error){
 
 if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["title"]) && !empty($_POST["price"])){
 
-    // Sanitizing user input from the form.
-    $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $bgcolour = filter_input(INPUT_POST,"bgcolour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
-    // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $description = $_POST['description'];
-    
-    // Checking for a null value.
-    if($_POST['plan_category_id'] === "NULL"){
-        $plan_category_id = NULL;
+    if($image_upload_detected){
+        $temp_file_path = $_FILES['image']['tmp_name'];
+        $file_name      = $_FILES['image']['name'];
+
+        $file_name = basename($file_name);
+            
+        if (file_is_an_image($temp_file_path, $file_name)){
+            // Getting just the filename without the extension.
+            $onlyFilename   = pathinfo($file_name, PATHINFO_FILENAME);
+            $onlyExtension   = pathinfo($file_name, PATHINFO_EXTENSION);
+
+            // Saving a medium quality copy.(400px)
+            $image = new ImageResize($temp_file_path);
+            $image->resizeToWidth(400);
+            $new_path_medium = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
+            $image->save($new_path_medium);
+                
+            // Saving a small quality copy.(200px)
+            $image = new ImageResize($temp_file_path);
+            $image->resizeToWidth(200);
+            $new_path_small = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
+            $image->save($new_path_small);
+
+            // Inserting the plan record.
+
+            // Sanitizing user input from the form.
+            $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $bgcolour = filter_input(INPUT_POST,"bgcolour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
+            // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $description = $_POST['description'];
+            
+            // Checking for a null value.
+            if($_POST['plan_category_id'] === "NULL"){
+                $plan_category_id = NULL;
+            }
+            else{
+                $plan_category_id = filter_input(INPUT_POST,"plan_category_id", FILTER_VALIDATE_INT); 
+            }
+            // Validating if all input is correct, else redirect user to index.php.
+            if($title && $description && $price && $colour && $bgcolour){
+                
+                $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
+                
+                // Loads the query into the SQL server's cache and returns a PDOStatement object.
+                $statement = $db->prepare($query);
+                
+                // Getting the current datetime.
+                
+                $created_at = date("Y-m-d H:i:s");
+                
+                // Binding values to the loaded query.
+                $statement->bindValue(":title", $title, PDO::PARAM_STR);
+                $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
+                $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
+                $statement->bindValue(":description", $description, PDO::PARAM_STR);
+                $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+                $statement->bindValue(":price", $price);
+                $statement->bindValue(":plan_category_id", $plan_category_id);
+
+                // Executing the query.
+                $statement->execute();
+            }
+
+                // Adding the image record in the images table associated with the correct page.
+
+                // Getting the plan_id of newly executed plan.
+                // According to our business rules two plans in the same category cannot have the same name.
+                $query = "SELECT plan_id FROM plans WHERE title = :title AND plan_category_id = :plan_category_id";
+            
+                // Preparing the query.
+                $statement = $db->prepare($query);
+                    
+                // Binding values.
+                $statement->bindValue(":title", $title, PDO::PARAM_STR);
+                $statement->bindValue(":plan_category_id", $plan_category_id);
+            
+                // Executing the query.
+                $statement->execute();
+            
+                // Fetching the result.
+                $result = $statement->fetch();
+                $plan_id = $result['plan_id'];
+
+                $query = "INSERT INTO images(medium_path, small_path, plan_id) VALUES (:medium_path, :small_path, :plan_id)";
+                
+                // Preparing query.
+                $statement = $db->prepare($query);
+
+                // Getting the relative path of images.
+                $medium_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_medium);
+                $small_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_small);
+
+                // Binding values.
+                $statement->bindValue(":medium_path", $medium_path, PDO::PARAM_STR);
+                $statement->bindValue(":small_path", $small_path, PDO::PARAM_STR);
+                $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+
+                // Executing the query.
+                $statement->execute();    
+                header("Location: Plans.php");
+        }
+        else{
+            $error = "The uploaded file is not an image.";
+        }
     }
     else{
-        $plan_category_id = filter_input(INPUT_POST,"plan_category_id", FILTER_VALIDATE_INT); 
-    }
-    // Validating if all input is correct, else redirect user to index.php.
-    if($title && $description && $price && $colour && $bgcolour){
-        
-        $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
-        
-        // Loads the query into the SQL server's cache and returns a PDOStatement object.
-        $statement = $db->prepare($query);
-        
-        // Getting the current datetime.
-        
-        $created_at = date("Y-m-d H:i:s");
-        
-        // Binding values to the loaded query.
-        $statement->bindValue(":title", $title, PDO::PARAM_STR);
-        $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
-        $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
-        $statement->bindValue(":description", $description, PDO::PARAM_STR);
-        $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
-        $statement->bindValue(":price", $price);
-        $statement->bindValue(":plan_category_id", $plan_category_id);
+        // Inserting just the plan record if no image is uploaded.
 
-        // Executing the query.
-        if($statement->execute()){
-            if($image_upload_detected){
-                $temp_file_path = $_FILES['image']['tmp_name'];
-                $file_name      = $_FILES['image']['name'];
-
-                $file_name = basename($file_name);
-                    
-                // Getting just the filename without the extension.
-                $onlyFilename   = pathinfo($file_name, PATHINFO_FILENAME);
-                $onlyExtension   = pathinfo($file_name, PATHINFO_EXTENSION);
-
-                // Saving a medium quality copy.(400px)
-                $image = new ImageResize($temp_file_path);
-                $image->resizeToWidth(400);
-                $new_path_medium = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
-                if (file_is_an_image($temp_file_path, $new_path_medium)){
-                    $image->save($new_path_medium);
-                }
-                else{
-                    $error = "The uploaded file is not an image.";
-                }
-                    
-                // Saving a small quality copy.(200px)
-                $image = new ImageResize($temp_file_path);
-                $image->resizeToWidth(200);
-                $new_path_small = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
-                if (file_is_an_image($temp_file_path, $new_path_small)){
-                    $image->save($new_path_small);
-                }
-                else{
-                    $error = "The uploaded file is not an image.";
-                }
-
-                if(!$error){
-                    // Adding the image record in the images table associated with the correct page.
-    
-                    // Getting the plan_id of newly executed plan.
-                    // According to our business rules two plans in the same category cannot have the same name.
-                    $query = "SELECT plan_id FROM plans WHERE title = :title AND plan_category_id = :plan_category_id";
-                
-                    // Preparing the query.
-                    $statement = $db->prepare($query);
-                        
-                    // Binding values.
-                    $statement->bindValue(":title", $title, PDO::PARAM_STR);
-                    $statement->bindValue(":plan_category_id", $plan_category_id);
-                
-                    // Executing the query.
-                    $statement->execute();
-                
-                    // Fetching the result.
-                    $result = $statement->fetch();
-                    $plan_id = $result['plan_id'];
-    
-                    $query = "INSERT INTO images(medium_path, small_path, plan_id) VALUES (:medium_path, :small_path, :plan_id)";
-                    
-                    // Preparing query.
-                    $statement = $db->prepare($query);
-    
-                    // Getting the relative path of images.
-                    $medium_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_medium);
-                    $small_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_small);
-    
-                    // Binding values.
-                    $statement->bindValue(":medium_path", $medium_path, PDO::PARAM_STR);
-                    $statement->bindValue(":small_path", $small_path, PDO::PARAM_STR);
-                    $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
-
-                    // Executing the query.
-                    $statement->execute();
-                }
-            }
-        header("Location: Plans.php");
+        // Sanitizing user input from the form.
+        $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $colour = filter_input(INPUT_POST,"colour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $bgcolour = filter_input(INPUT_POST,"bgcolour", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $price = filter_input(INPUT_POST,"price", FILTER_VALIDATE_FLOAT);
+        // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $description = $_POST['description'];
+            
+        // Checking for a null value.
+        if($_POST['plan_category_id'] === "NULL"){
+            $plan_category_id = NULL;
+           }
+        else{
+            $plan_category_id = filter_input(INPUT_POST,"plan_category_id", FILTER_VALIDATE_INT); 
         }
+        // Validating if all input is correct, else redirect user to index.php.
+        if($title && $description && $price && $colour && $bgcolour){
+                
+            $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
+                
+            // Loads the query into the SQL server's cache and returns a PDOStatement object.
+            $statement = $db->prepare($query);
+                
+            // Getting the current datetime.
+                
+            $created_at = date("Y-m-d H:i:s");
+                
+            // Binding values to the loaded query.
+            $statement->bindValue(":title", $title, PDO::PARAM_STR);
+            $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
+            $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
+            $statement->bindValue(":description", $description, PDO::PARAM_STR);
+            $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+            $statement->bindValue(":price", $price);
+            $statement->bindValue(":plan_category_id", $plan_category_id);
+
+            // Executing the query.
+            $statement->execute();
+        }
+        header("Location: Plans.php");
+        
     }
 }
 ?>
@@ -190,6 +230,9 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
 </head>
 <body>
 <?php include('adminNav.php') ?>
+    <?php if($error):?>
+        <p class="error"><?= $error ?></p>
+    <?php endif ?>
     <h1>Create a New Plan</h1>
 
     <form method = "post" class = "pageForm" enctype="multipart/form-data">

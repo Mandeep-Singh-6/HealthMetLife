@@ -236,6 +236,11 @@ div.planDiv a{
     color: rgb(0, 123, 255);
 }
 
+form.pageForm fieldset input[type="checkbox"]{
+    display: inline;
+    width: 20px;
+}
+
 
 .marginedForm{
     margin-left: 50px;
@@ -331,4 +336,8 @@ div#wrapper aside.navAside nav li:nth-child(even){
 div#wrapper aside.navAside nav li a{
     text-decoration: none;
     color: black;
+}
+
+form.pageForm fieldset label.checkLabel{
+    display: inline;
 }
