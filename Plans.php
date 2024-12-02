@@ -1,5 +1,5 @@
 <?php 
-require('./connect.php');
+require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role'])){
     header("Location: login.php");
@@ -19,10 +19,7 @@ $statement->execute();
 $planCategoryResults = $statement->fetchAll();
 
 // Determining if user entered a name to search or not.
-if(!isset($_POST['name']) || trim($_POST['name']) === ""){
-    $name = "%";
-}
-else{
+if(isset($_POST['name']) && trim($_POST['name']) !== ""){
     $name = trim($_POST['name']);
     $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $name = "%" . $name . "%";
@@ -32,18 +29,29 @@ else{
 // Determining the user selection based on which to sort the categories.
 // and querying the database accordingly.
 if(!$_POST || $_POST['plan_category_id'] === "all"){
-    // Defining a global array to store all result sets.
-    $resultsHashArray = [];
 
-    foreach($planCategoryResults as $planCategoryResult){
+    if(!isset($name)){
+
+        // Creating a query to select all plans ordered by category and then price.
+        $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id ORDER BY plans.plan_category_id ASC, price DESC";
+
+        // Preparing the query.
+        $statement = $db->prepare($query);
+
+        // Executing the query.
+        $statement->execute();
+
+        // Fetching the results.
+        $results = $statement->fetchAll();
+        }
+    else{
         // Creating a query to select the specified records from the plans table based on plan_category_id.
-        $query = "SELECT * FROM plans WHERE plan_category_id = :plan_category_id AND title LIKE :name ORDER BY price DESC";
-        
+        $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE title LIKE :name ORDER BY plans.plan_category_id ASC, price DESC";
+            
         // Preparing the query.
         $statement = $db->prepare($query);
         
         //Binding values to the query.
-        $statement->bindValue(":plan_category_id", $planCategoryResult['plan_category_id'], PDO::PARAM_INT);
         $statement->bindValue(":name", $name, PDO::PARAM_STR);
     
         // Executing the query.
@@ -51,32 +59,47 @@ if(!$_POST || $_POST['plan_category_id'] === "all"){
         
         // Fetching the returned row.
         $results = $statement->fetchAll();
-        if(count($results) > 0){
-            $resultHash = [$planCategoryResult['plan_category_name'] => $results];
-            $resultsHashArray[] = $resultHash;
-        }
     }
 }
 else{
         // Getting the selected category.
         $plan_category_id = filter_input(INPUT_POST,'plan_category_id', FILTER_VALIDATE_INT);
-    
-        // Creating a query to select the specified records from the plans table based on plan_category_id.
-        // We needed a join just to get the category_name here. Is there a better way to do it?
-        $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE plans.plan_category_id = :plan_category_id AND title LIKE :name ORDER BY price DESC";
+        if(!isset($name)){
+            // Creating a query to select the specified records from the plans table based on plan_category_id.
+            
+            $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE plans.plan_category_id = :plan_category_id ORDER BY plans.plan_category_id ASC, price DESC";
+            
+            // Preparing the query.
+            $statement = $db->prepare($query);
         
-        // Preparing the query.
-        $statement = $db->prepare($query);
-    
-        //Binding values to the query.
-        $statement->bindValue(":plan_category_id", $plan_category_id, PDO::PARAM_INT);
-        $statement->bindValue(":name", $name, PDO::PARAM_STR);
-    
-        // Executing the query.
-        $statement->execute();
-    
-        // Fetching the returned row.
-        $results = $statement->fetchAll();
+            //Binding values to the query.
+            $statement->bindValue(":plan_category_id", $plan_category_id, PDO::PARAM_INT);
+        
+            // Executing the query.
+            $statement->execute();
+        
+            // Fetching the returned row.
+            $results = $statement->fetchAll();
+        }
+        else{
+
+            // Creating a query to select the specified records from the plans table based on plan_category_id.
+            // We needed a join just to get the category_name here. Is there a better way to do it?
+            $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE plans.plan_category_id = :plan_category_id AND title LIKE :name ORDER BY plans.plan_category_id ASC, price DESC";
+            
+            // Preparing the query.
+            $statement = $db->prepare($query);
+        
+            //Binding values to the query.
+            $statement->bindValue(":plan_category_id", $plan_category_id, PDO::PARAM_INT);
+            $statement->bindValue(":name", $name, PDO::PARAM_STR);
+        
+            // Executing the query.
+            $statement->execute();
+        
+            // Fetching the returned row.
+            $results = $statement->fetchAll();
+        }
 }
 ?>
 <!DOCTYPE html>
@@ -85,7 +108,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plans</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,32 +134,15 @@ else{
         </form>
 
     <!-- To amount for a scenario where no records are returned. -->
-        <?php if((isset($results) && count($results) > 0) || (isset($resultsHashArray) && count($resultsHashArray) > 0)):?>
-            <!-- If no selected or 'all' is selected. Then show all categories. -->
-            <?php if(!$_POST || $_POST['plan_category_id'] === "all"): ?>
-                <?php foreach($resultsHashArray as $resultHashEntry): ?>
-                <?php foreach($resultHashEntry as $category => $resultsArrayElement): ?>
-                    <h2 class="planH2"><?= $category ?>:</h2>
-                        <?php foreach ($resultsArrayElement as $result):?>
-                            <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                                <h1><?= $result['title'] ?></h1>
-                                <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                                <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
-                            </div>
-                        <?php endforeach ?>             
-                    <?php endforeach ?>             
-                <?php endforeach ?>
-            <?php else:?>
-                <!-- Remove this ternary operator for user. -->
-                <h2 class="planH2"><?= $results[0]['plan_category_name'] ?></h2>
-                <?php foreach ($results as $result):?>
+        <?php if(isset($results) && count($results) > 0):?>
+            <?php foreach ($results as $result):?>
                     <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                            <h1><?= $result['title'] ?></h1>
-                            <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
-                        </div>
-                <?php endforeach ?>
-            <?php endif ?>
+                        <h1><?= $result['title'] ?></h1>
+                        <h2><?= $result['plan_category_name']  ?></h2>
+                        <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
+                        <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                    </div>
+                <?php endforeach ?>          
         <!-- If no results are returned, show a message. -->
         <?php else: ?>
             <h1>There are no plans associated with this category.</h1>
