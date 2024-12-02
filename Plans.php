@@ -33,7 +33,15 @@ if(!$_POST || $_POST['plan_category_id'] === "all"){
     if(!isset($name)){
 
         // Creating a query to select all plans ordered by category and then price.
-        $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id ORDER BY plans.plan_category_id ASC, price DESC";
+        $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+                  p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
+                  pc.plan_category_name
+                  FROM plans p 
+                  JOIN plan_categories pc 
+                  ON pc.plan_category_id = p.plan_category_id 
+                  LEFT JOIN images i
+                  ON p.plan_id = i.plan_id
+                  ORDER BY p.plan_category_id ASC, p.price DESC";
 
         // Preparing the query.
         $statement = $db->prepare($query);
@@ -46,7 +54,16 @@ if(!$_POST || $_POST['plan_category_id'] === "all"){
         }
     else{
         // Creating a query to select the specified records from the plans table based on plan_category_id.
-        $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE title LIKE :name ORDER BY plans.plan_category_id ASC, price DESC";
+        $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+                  p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
+                  pc.plan_category_name 
+                  FROM plans p 
+                  JOIN plan_categories pc 
+                  ON pc.plan_category_id = p.plan_category_id 
+                  LEFT JOIN images i
+                  ON p.plan_id = i.plan_id
+                  WHERE p.title LIKE :name 
+                  ORDER BY p.plan_category_id ASC, p.price DESC";
             
         // Preparing the query.
         $statement = $db->prepare($query);
@@ -67,7 +84,16 @@ else{
         if(!isset($name)){
             // Creating a query to select the specified records from the plans table based on plan_category_id.
             
-            $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE plans.plan_category_id = :plan_category_id ORDER BY plans.plan_category_id ASC, price DESC";
+            $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+                      p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
+                      pc.plan_category_name 
+                      FROM plans p 
+                      JOIN plan_categories pc 
+                      ON pc.plan_category_id = p.plan_category_id
+                      LEFT JOIN images i
+                      ON p.plan_id = i.plan_id 
+                      WHERE p.plan_category_id = :plan_category_id 
+                      ORDER BY p.plan_category_id ASC, p.price DESC";
             
             // Preparing the query.
             $statement = $db->prepare($query);
@@ -85,7 +111,16 @@ else{
 
             // Creating a query to select the specified records from the plans table based on plan_category_id.
             // We needed a join just to get the category_name here. Is there a better way to do it?
-            $query = "SELECT * FROM plans JOIN plan_categories ON plan_categories.plan_category_id = plans.plan_category_id WHERE plans.plan_category_id = :plan_category_id AND title LIKE :name ORDER BY plans.plan_category_id ASC, price DESC";
+            $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+                      p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
+                      pc.plan_category_name 
+                      FROM plans p 
+                      JOIN plan_categories pc 
+                      ON pc.plan_category_id = p.plan_category_id
+                      LEFT JOIN images i
+                      ON p.plan_id = i.plan_id 
+                      WHERE p.plan_category_id = :plan_category_id 
+                        AND p.title LIKE :name ORDER BY p.plan_category_id ASC, p.price DESC";
             
             // Preparing the query.
             $statement = $db->prepare($query);
@@ -136,11 +171,18 @@ else{
     <!-- To amount for a scenario where no records are returned. -->
         <?php if(isset($results) && count($results) > 0):?>
             <?php foreach ($results as $result):?>
-                    <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                        <h1><?= $result['title'] ?></h1>
-                        <h2><?= $result['plan_category_name']  ?></h2>
-                        <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                        <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">
+                        <div class = "planTextWrapper">
+                            <h1><?= $result['title']?></h1>
+                            <h2><?= $result['plan_category_name']  ?></h2>
+                            <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
+                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                        </div>
+                        <?php if(isset($result['small_path'])):?>
+                        <div class = "planImageWrapper">
+                            <img src="<?="admin/" . $result['small_path'] ?>" alt="An image depicting a workout plan"> 
+                        </div>
+                        <?php endif ?>
                     </div>
                 <?php endforeach ?>          
         <!-- If no results are returned, show a message. -->

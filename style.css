@@ -194,6 +194,11 @@ form.pageForm fieldset input[type = 'color']{
     height: 40px;
 }
 
+form.pageForm fieldset input[type="checkbox"]{
+    display: inline;
+    width: 20px;
+}
+
 form.pageForm fieldset textarea{
     height: 100px;
     width: 200px;
@@ -212,13 +217,20 @@ div#formSeparator{
 }
 
 div.planDiv{
-    width: 40%;
+    display: flex;
+    width: 45%;
     text-align: left;
-    padding: 1% 5%;
+    padding: 1% 4%;
     margin: 0 auto;
     border-radius: 15px;
     margin-bottom: 25px;
     transition: 200ms;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.planImageWrapper img{
+    border-radius: 15px;
 }
 
 div.planDiv:hover{
@@ -226,7 +238,7 @@ div.planDiv:hover{
     box-shadow: 0px 0px 10px gray;
 }
 
-div.planDiv h2:nth-of-type(1){
+div.planDiv h2:nth-of-type(1), div.showPlanDiv h2:nth-of-type(1){
     font-size: 1em;
     font-style: italic;
 }
@@ -236,11 +248,21 @@ div.planDiv a{
     color: rgb(0, 123, 255);
 }
 
-form.pageForm fieldset input[type="checkbox"]{
-    display: inline;
-    width: 20px;
+div.showPlanDiv{
+    width: 45%;
+    min-height: 300px;
+    text-align: left;
+    padding: 1% 4%;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-bottom: 25px;
 }
 
+div.showPlanDiv img{
+    float: right;
+    border-radius: 15px;
+    margin: 10px 0px 10px 5px;
+}
 
 .marginedForm{
     margin-left: 50px;

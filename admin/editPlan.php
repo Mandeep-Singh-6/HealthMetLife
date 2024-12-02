@@ -81,22 +81,6 @@ if($_POST){
                     $file_name = basename($file_name);
                         
                     if(file_is_an_image($temp_file_path, $file_name)){
-                        // Getting just the filename without the extension.
-                        $onlyFilename   = pathinfo($file_name, PATHINFO_FILENAME);
-                        $onlyExtension   = pathinfo($file_name, PATHINFO_EXTENSION);
-
-                        // Saving a medium quality copy.(400px)
-                        $image = new ImageResize($temp_file_path);
-                        $image->resizeToWidth(400);
-                        $new_path_medium = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
-                        $image->save($new_path_medium);
-                            
-                        // Saving a small quality copy.(200px)
-                        $image = new ImageResize($temp_file_path);
-                        $image->resizeToWidth(200);
-                        $new_path_small = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
-                        $image->save($new_path_small);
-
                         // Removing the previous files from file system.
 
                         // Getting the filenames.
@@ -126,6 +110,23 @@ if($_POST){
                         else{
                             $error = "Couldn't remove the small sized image.";
                         }
+                        
+                        // Getting just the filename without the extension.
+                        $onlyFilename   = pathinfo($file_name, PATHINFO_FILENAME);
+                        $onlyExtension   = pathinfo($file_name, PATHINFO_EXTENSION);
+
+                        // Saving a medium quality copy.(400px)
+                        $image = new ImageResize($temp_file_path);
+                        $image->resizeToWidth(400);
+                        $new_path_medium = "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
+                        $image->save($new_path_medium);
+                            
+                        // Saving a small quality copy.(200px)
+                        $image = new ImageResize($temp_file_path);
+                        $image->resizeToWidth(300);
+                        $new_path_small = "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
+                        $image->save($new_path_small);
+
                         
                         // Tried using just update but that doesn't account for new image inserts.
                         // Removing the previous image record.

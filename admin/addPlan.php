@@ -67,13 +67,13 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             // Saving a medium quality copy.(400px)
             $image = new ImageResize($temp_file_path);
             $image->resizeToWidth(400);
-            $new_path_medium = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
+            $new_path_medium = "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_meduim" . '.'. $onlyExtension;
             $image->save($new_path_medium);
                 
             // Saving a small quality copy.(200px)
             $image = new ImageResize($temp_file_path);
-            $image->resizeToWidth(200);
-            $new_path_small = dirname(__FILE__) . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
+            $image->resizeToWidth(300);
+            $new_path_small = "uploads" . DIRECTORY_SEPARATOR . $onlyFilename ."_small" . '.'. $onlyExtension;
             $image->save($new_path_small);
 
             // Inserting the plan record.
@@ -93,7 +93,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             else{
                 $plan_category_id = filter_input(INPUT_POST,"plan_category_id", FILTER_VALIDATE_INT); 
             }
-            // Validating if all input is correct, else redirect user to index.php.
+            // Validating if all input is correct.
             if($title && $description && $price && $colour && $bgcolour){
                 
                 $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";

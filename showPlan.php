@@ -15,7 +15,15 @@ if($_GET){
 
 if($plan_id){
     // Creating a query to select the specified record from the plans table based on plan_id.
-    $query = "SELECT * FROM plans WHERE plan_id = :plan_id LIMIT 1";
+    $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+              p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
+              pc.plan_category_name
+              FROM plans p 
+              JOIN plan_categories pc 
+              ON pc.plan_category_id = p.plan_category_id
+              LEFT JOIN images i
+              ON p.plan_id = i.plan_id 
+              WHERE p.plan_id = :plan_id LIMIT 1";
     
     // Preparing the query.
     $statement = $db->prepare($query);
@@ -48,12 +56,16 @@ else{
 <body>
     <?php require('header.php') ?>
     <div id="wrapper">
-        <?php if($result !==  FALSE): ?>
-            <div class = "planDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
-                <h1><?= $result['title'] ?></h1>
-                <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                <h3><?= $result['description'] ?></h3>
-            </div>
+        <?php if($result !==  false): ?>
+            <div class = "showPlanDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
+                <?php if(isset($result['medium_path'])):?>
+                    <img src="<?= "admin/" . $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
+                <?php endif ?>
+                    <h1><?= $result['title']?></h1>
+                    <h2><?= $result['plan_category_name']  ?></h2>
+                    <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
+                    <h3><?= $result['description'] ?></h3>
+                </div>
         <?php else: ?>
             <p class = "error">Sorry, we couldn't find your plan.</p>
         <?php endif ?>
