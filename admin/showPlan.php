@@ -37,7 +37,7 @@ if($plan_id){
     // Fetching the returned row.
     $result = $statement->fetch();
 }
-// If plan_id is non-numeric, redirecting user to index.php.
+// If plan_id is non-numeric, redirecting user to Plans.php.
 else{
     header("Location: Plans.php");
 }
@@ -61,11 +61,20 @@ else{
                 <?php if(isset($result['medium_path'])):?>
                     <img src="<?= $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
                 <?php endif ?>
-                    <h1><?= $result['title']?></h1>
-                    <h2><?= $result['plan_category_name']  ?></h2>
-                    <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                    <h3><?= $result['description'] ?></h3>
-                </div>
+                <h1><?= $result['title']?></h1>
+                <h2><?= $result['plan_category_name']  ?></h2>
+                <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
+                <h3><?= $result['description'] ?></h3>
+            </div>
+            <form method = "post" class = "centerForm">
+                <fieldset>
+                    <div id="commentDiv">
+                        <label for="comment">Comment? Type here:</label>
+                        <textarea name="comment" id="comment"></textarea>
+                        <button type="submit" id="sendButton"><img id="sendImg" src="../send.png" alt="Send button"></button>
+                    </div>
+                </fieldset>
+            </form>
         <?php else: ?>
             <p class = "error">Sorry, we couldn't find your plan.</p>
         <?php endif ?>

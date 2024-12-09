@@ -169,6 +169,27 @@ form.centerForm{
     justify-content: center;
 }
 
+form.centerForm fieldset{
+    border: none;
+}
+
+form.centerForm fieldset label{
+    float: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form.centerForm textarea#comment{
+    height: 150px;
+    width: 400px;
+    border-radius: 20px;
+}
+
+form.centerForm div#commentDiv{
+    width: 73%;
+    position: relative;
+}
+
 form.pageForm fieldset{
     border: none;
 }
@@ -209,7 +230,7 @@ form.pageForm fieldset textarea{
 }
 
 div#formSeparator{
-    width: 400px;
+    width: 455px;
 }
 
 .sortForm{
@@ -255,7 +276,7 @@ div.showPlanDiv{
     padding: 1% 4%;
     margin: 0 auto;
     border-radius: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
 
 div.showPlanDiv img{
@@ -380,4 +401,32 @@ ul#paginationUl a:not(.currentPage){
 
 ul#paginationUl a.currentPage{
     color: red;
+}
+
+button#sendButton{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-color: green;
+    border: none;
+    position: absolute;
+    bottom: 10px;
+    right: -13%;
+}
+
+img#sendImg{
+    height: 60%;
+    width: 80%;
+    transition: transform 500ms ease;
+}
+
+button#sendButton:hover img#sendImg{
+    height: 30%;
+    transform: translate(3px, -3px);
+    cursor: pointer;
+}
+
+button#sendButton:active img#sendImg{
+    height: 30%;
+    transform: translate(15px, -15px);
 }
