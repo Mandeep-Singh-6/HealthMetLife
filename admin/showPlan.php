@@ -45,10 +45,11 @@ else{
 }
 
 // Checking for comments to display.
-$query = "SELECT u.username, c.content, c.updated_at
+$query = "SELECT u.username, u.user_id, c.content, c.updated_at, c.comment_id
           FROM users u
           JOIN comments c
-          ON u.user_id = c.user_id";
+          ON u.user_id = c.user_id
+          ORDER BY updated_at DESC";
 
 // Preparing the query.
 $statement = $db->prepare($query);
@@ -119,7 +120,18 @@ if($_POST){
                     <div class = "commentDiv">
                         <img class="replyImg" src="../reply.png" alt="reply symbol">
                         <h4><?= $commentResult['username'] ?></h4>
-                        <h5><?= "Updated at : " . $commentResult['updated_at'] ?></h5>
+                        <?php if($_SESSION['user_id'] == $commentResult['user_id']): ?>
+                            <h5>
+                                <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
+                                <a href=<?= "editComment.php?comment_id=" . $commentResult['comment_id']?>>Edit</a>
+                                <a href=<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?> onclick = "return confirm('Do you really want to delete?')">Delete</a>
+                            </h5>
+                        <?php else:?>
+                            <h5>
+                                <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
+                                <a href=<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?> onclick = "return confirm('Do you really want to delete?')">Delete</a>
+                            </h5>
+                        <?php endif ?>
                         <p>
                             <?= $commentResult['content'] ?>
                         </p>

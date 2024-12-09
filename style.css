@@ -179,14 +179,14 @@ form.centerForm fieldset label{
     margin-bottom: 5px;
 }
 
-form.centerForm textarea#comment{
+textarea#comment{
     height: 150px;
     width: 400px;
     border-radius: 20px;
     padding: 20px;
 }
 
-form.centerForm div#commentDiv{
+div#commentDiv{
     width: 73%;
     position: relative;
     margin: 0 auto;
@@ -458,6 +458,8 @@ div.commentDiv:hover{
 
 div.commentDiv h4{
     text-transform: capitalize;
+
+    margin-bottom: 0px;
 }
 
 img.replyImg{
