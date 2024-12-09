@@ -363,3 +363,21 @@ div#wrapper aside.navAside nav li a{
 form.pageForm fieldset label.checkLabel{
     display: inline;
 }
+
+ul#paginationUl{
+    display: flex;
+    list-style: none;
+    width: 20%;
+    justify-content: space-around;
+    margin: 0 auto;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+ul#paginationUl a:not(.currentPage){
+    text-decoration: none;
+}
+
+ul#paginationUl a.currentPage{
+    color: red;
+}
