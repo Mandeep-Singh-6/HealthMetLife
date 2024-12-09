@@ -48,11 +48,11 @@ if($_POST && !empty($_POST["name"])){
 
     <form method = "post" class = "pageForm">
         <fieldset>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="name">Name</label>
                 <input type="text" id = "name" name = "name" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <button type = "submit">Create</button>
             </div>
         </fieldset>

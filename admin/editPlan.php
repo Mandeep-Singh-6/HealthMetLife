@@ -371,33 +371,33 @@ elseif (isset($_GET['plan_id'])){
         <form method = "post" class = "pageForm" enctype="multipart/form-data">
             <fieldset>
             <input type="hidden" name = "plan_id" value = "<?= $result['plan_id'] ?>">
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="title">Title</label>
                 <input type="text" id = "title" name = "title" value = "<?= $result['title'] ?>">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="price">Price</label>
                 <input type="number" id = "price" name = "price" value = "<?= $result['price'] ?>" step = ".01">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="bgcolour">Background</label>
                 <input type="color" id = "bgcolour" name = "bgcolour" value = "<?= $result['bgcolour'] ?>">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="colour">Text Colour</label>
                 <input type="color" id = "colour" name = "colour" value = "<?= $result['colour'] ?>">
             </div>
             <?php if(isset($result['image_id'])):?>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label class="checkLabel" for="imageCheck">Delete the current image?</label>
                 <input type="checkbox" id="imageCheck" name="imageCheck">
             </div>
             <?php endif ?>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="image">Upload Image here:</label>
                 <input type="file" id="image" name="image">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="plan_category_id">Category:</label>
                 <select name="plan_category_id" id="plan_category_id">
                     <option value="NULL">None</option>
@@ -406,11 +406,11 @@ elseif (isset($_GET['plan_id'])){
                     <?php endforeach ?>
                 </select>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="summernote">Description</label>
                 <textarea id = "summernote" name = "description"><?= $result['description'] ?></textarea>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
             <button type = "submit" name = "action" value = "Update" >Update</button>
             <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
             </div>

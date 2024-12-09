@@ -5,6 +5,8 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+// Set the default timezone to Central Time (America/Winnipeg) 
+date_default_timezone_set('America/Winnipeg');
 
 $plan_id = 0;
 if($_GET){
@@ -41,6 +43,52 @@ if($plan_id){
 else{
     header("Location: Plans.php");
 }
+
+// Checking for comments to display.
+$query = "SELECT u.username, c.content, c.updated_at
+          FROM users u
+          JOIN comments c
+          ON u.user_id = c.user_id";
+
+// Preparing the query.
+$statement = $db->prepare($query);
+
+// Executing the query.
+$statement->execute();
+
+// Getting the comment results.
+$commentResults = $statement->fetchAll();
+
+if($_POST){
+    // Sanitizing the user input.
+    $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    if(trim($comment) != ""){
+        // Creating a query to insert the comment.
+        $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
+                  VALUES(:plan_id, :user_id, :content, :created_at)";
+        
+        // Preparing the statement.
+        $statement = $db->prepare($query);
+
+        // Gettig the user id.
+        $user_id = $_SESSION['user_id'];
+
+        // Getting the current datetime.
+        $created_at = date("Y-m-d H:i:s");
+
+        // Binding values.
+        $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+        $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $statement->bindValue(":content", $comment, PDO::PARAM_STR);
+        $statement->bindValue(":created_at", $created_at);
+
+        // Executing the query.
+        $statement->execute();
+
+        // Redirecting to break the PRG pattern.
+        header("Location: showPlan.php?plan_id=" . $plan_id);
+    }
+}
 ?>
 <html lang="en">
 <head>
@@ -65,6 +113,18 @@ else{
                 <h2><?= $result['plan_category_name']  ?></h2>
                 <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
                 <h3><?= $result['description'] ?></h3>
+            </div>
+            <div class = "commentContainer">
+                <?php foreach ($commentResults as $commentResult): ?>
+                    <div class = "commentDiv">
+                        <img class="replyImg" src="../reply.png" alt="reply symbol">
+                        <h4><?= $commentResult['username'] ?></h4>
+                        <h5><?= "Updated at : " . $commentResult['updated_at'] ?></h5>
+                        <p>
+                            <?= $commentResult['content'] ?>
+                        </p>
+                    </div>
+                <?php endforeach ?>
             </div>
             <form method = "post" class = "centerForm">
                 <fieldset>

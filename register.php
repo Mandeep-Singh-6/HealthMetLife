@@ -62,23 +62,23 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
     <h1 class = "centerText">Register a new user</h1>
     <form method = "post" class = "pageForm centerForm">
         <fieldset>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="username">Username</label>
                 <input type="text" id = "username" name = "username" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="email">Email</label>
                 <input type="email" id = "email" name = "email" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="password">Password</label>
                 <input type="password" id = "password" name = "password" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id = "confirmPassword" name = "confirmPassword" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <button type = "submit">Create</button>
             </div>
         </fieldset>

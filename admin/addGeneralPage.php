@@ -64,15 +64,15 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
 
     <form method = "post" class = "pageForm">
         <fieldset>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="title">Title</label>
                 <input type="text" id = "title" name = "title">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="summernote">Content</label>
                 <textarea id = "summernote" name = "content"></textarea>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <button type = "submit">Create</button>
             </div>
         </fieldset>

@@ -28,6 +28,7 @@ if($_POST){
         if(password_verify($password, $result['password'])){
             $_SESSION['login_role'] = $result['role_id'];
             $_SESSION['username'] = $result['username'];
+            $_SESSION['user_id'] = $result['user_id'];
 
             if($result['role_id'] === 1){
                 header("Location: admin/index.php");
@@ -67,15 +68,15 @@ if($_POST){
     <h1 class = "centerText">Login</h1>
         <form method = "post" class = "pageForm centerForm">
             <fieldset>
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <label for="email">Email</label>
                     <input type="email" id = "email" name = "email" autofocus>
                 </div>
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <label for="password">Password</label>
                     <input type="password" id = "password" name = "password" autofocus>
                 </div>
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <button type = "submit">Login</button>
                 </div>
             </fieldset>

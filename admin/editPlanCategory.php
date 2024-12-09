@@ -113,11 +113,11 @@ elseif (isset($_GET['plan_category_id'])){
         <form method = "post" class = "pageForm">
             <fieldset>
             <input type="hidden" name = "plan_category_id" value = "<?= $result['plan_category_id'] ?>">
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="name">Name</label>
                 <input type="text" id = "name" name = "name" value = "<?= $result['plan_category_name'] ?>" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
             <button type = "submit" name = "action" value = "Update" >Update</button>
             <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
             </div>

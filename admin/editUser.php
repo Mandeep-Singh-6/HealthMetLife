@@ -119,19 +119,19 @@ elseif (isset($_GET['user_id'])){
         <form method = "post" class = "pageForm">
             <fieldset>
             <input type="hidden" name = "user_id" value = "<?= $result['user_id'] ?>">
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="username">Username</label>
                 <input type="text" id = "username" name = "username" value = "<?= $result['username'] ?>" autofocus>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="email">Email</label>
                 <input type="email" id = "email" name = "email" value = "<?= $result['email'] ?>">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="password">Password</label>
                 <input type="password" id = "password" name = "password" value = "<?= $result['password'] ?>">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
             <button type = "submit" name = "action" value = "Update" >Update</button>
             <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
             </div>

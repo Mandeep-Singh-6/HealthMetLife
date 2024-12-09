@@ -126,15 +126,15 @@ elseif (isset($_GET['page_id'])){
         <form method = "post" class = "pageForm">
             <fieldset>
             <input type="hidden" name = "page_id" value = "<?= $result['page_id'] ?>">
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <label for="title">Title</label>
                     <input type="text" id = "title" name = "title" value = "<?= $result['title'] ?>">
                 </div>
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <label for="summernote">Content</label>
                     <textarea id = "summernote" name = "content"><?= $result['content'] ?></textarea>
                 </div>
-                <div id="formSeparator">
+                <div class="formSeparator">
                     <button type = "submit" name = "action" value = "Update" >Update</button>
                     <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
                 </div>

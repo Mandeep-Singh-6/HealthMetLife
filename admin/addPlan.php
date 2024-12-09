@@ -5,6 +5,8 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+// Set the default timezone to Central Time (America/Winnipeg) 
+date_default_timezone_set('America/Winnipeg');
 
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.
@@ -100,7 +102,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
                 
                 // Loads the query into the SQL server's cache and returns a PDOStatement object.
                 $statement = $db->prepare($query);
-                
+
                 // Getting the current datetime.
                 
                 $created_at = date("Y-m-d H:i:s");
@@ -237,27 +239,27 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
 
     <form method = "post" class = "pageForm" enctype="multipart/form-data">
         <fieldset>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="title">Title</label>
                 <input type="text" id = "title" name = "title">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="price">Price</label>
                 <input type="number" id = "price" name = "price" step = ".01" >
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="bgcolour">Background</label>
                 <input type="color" id = "bgcolour" name = "bgcolour" value = "#000000">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="colour">Text Colour</label>
                 <input type="color" id = "colour" name = "colour" value = "#FFFFFF">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="image">Upload Image here:</label>
                 <input type="file" id="image" name="image">
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="plan_category_id">Category:</label>
                 <select name="plan_category_id" id="plan_category_id">
                     <option value="NULL">None</option>
@@ -266,11 +268,11 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
                     <?php endforeach ?>
                 </select>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <label for="summernote">Description</label>
                 <textarea id = "summernote" name = "description"></textarea>
             </div>
-            <div id="formSeparator">
+            <div class="formSeparator">
                 <button type = "submit">Create</button>
             </div>
         </fieldset>
