@@ -289,18 +289,20 @@ if(!empty($results)){
                         </div>
                         <?php endif ?>
                     </div>
-            <?php endforeach ?>          
-            <ul id = "paginationUl">
-                <?php if($page_num != 1): ?>
-                    <li><a href=<?= "Plans.php?page_num=". ($page_num - 1)?>>Previous</a></li>
-                <?php endif?>
-                <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
-                    <li><a href=<?= "Plans.php?page_num=" . $subPage ?> <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
-                <?php endfor ?>
-                <?php if($page_num != $noOfSubPages): ?>
-                    <li><a href=<?= "Plans.php?page_num=" . ($page_num + 1)?>>Next</a></li>
-                <?php endif ?>
-            </ul>
+            <?php endforeach ?>
+            <?php if($noOfSubPages > 1): ?>    
+                <ul id = "paginationUl">
+                    <?php if($page_num != 1): ?>
+                        <li><a href=<?= "Plans.php?page_num=". ($page_num - 1)?>>Previous</a></li>
+                    <?php endif?>
+                    <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
+                        <li><a href=<?= "Plans.php?page_num=" . $subPage ?> <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
+                    <?php endfor ?>
+                    <?php if($page_num != $noOfSubPages): ?>
+                        <li><a href=<?= "Plans.php?page_num=" . ($page_num + 1)?>>Next</a></li>
+                    <?php endif ?>
+                </ul>
+            <?php endif ?>
         <!-- If no results are returned, show a message. -->
         <?php else: ?>
             <h1>There are no plans associated with this category.</h1>
