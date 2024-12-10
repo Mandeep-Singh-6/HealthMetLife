@@ -65,7 +65,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
             <h1 class="error"><?= $error ?></h1>
         <?php endif ?>
         <h1 class = "centerText">Register a new user</h1>
-        <form method = "post" class = "pageForm">
+        <form method = "post" class = "pageForm centerForm">
             <fieldset>
                 <div class="formSeparator">
                     <label for="username">Username</label>
