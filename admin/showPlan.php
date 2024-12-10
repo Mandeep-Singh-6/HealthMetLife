@@ -65,32 +65,43 @@ $statement->execute();
 $commentResults = $statement->fetchAll();
 
 if($_POST){
+    // Getting the entered captcha.
+    $captcha = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    
     // Sanitizing the user input.
     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    if(trim($comment) != ""){
-        // Creating a query to insert the comment.
-        $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
-                  VALUES(:plan_id, :user_id, :content, :created_at)";
-        
-        // Preparing the statement.
-        $statement = $db->prepare($query);
-
-        // Gettig the user id.
-        $user_id = $_SESSION['user_id'];
-
-        // Getting the current datetime.
-        $created_at = date("Y-m-d H:i:s");
-
-        // Binding values.
-        $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
-        $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
-        $statement->bindValue(":content", $comment, PDO::PARAM_STR);
-        $statement->bindValue(":created_at", $created_at);
-
-        // Executing the query.
-        $statement->execute();
-
-        // Redirecting to break the PRG pattern.
+    // Storing the user comment in a session to restore it if captcha is wrong.
+    $_SESSION['comment'] = $comment;
+    if($_SESSION['captcha'] == $captcha){
+        unset($_SESSION['comment']);
+        if(trim($comment) != ""){
+            // Creating a query to insert the comment.
+            $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
+                      VALUES(:plan_id, :user_id, :content, :created_at)";
+            
+            // Preparing the statement.
+            $statement = $db->prepare($query);
+    
+            // Gettig the user id.
+            $user_id = $_SESSION['user_id'];
+    
+            // Getting the current datetime.
+            $created_at = date("Y-m-d H:i:s");
+    
+            // Binding values.
+            $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+            $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+            $statement->bindValue(":content", $comment, PDO::PARAM_STR);
+            $statement->bindValue(":created_at", $created_at);
+    
+            // Executing the query.
+            $statement->execute();
+    
+            // Redirecting to break the PRG pattern.
+            header("Location: showPlan.php?plan_id=" . $plan_id);
+        }
+    }
+    else{
         header("Location: showPlan.php?plan_id=" . $plan_id);
     }
 }
@@ -143,12 +154,15 @@ if($_POST){
                 <?php endforeach ?>
             </div>
             <form method = "post" class = "centerForm">
-                <fieldset>
-                    <div id="commentDiv">
+                <fieldset class="commentSet">
                         <label for="comment">Comment? Type here:</label>
-                        <textarea name="comment" id="comment"></textarea>
+                        <textarea name="comment" id="comment"><?= (!empty($_SESSION['comment']) ? $_SESSION['comment'] : "") ?></textarea>
+                </fieldset>
+                <fieldset class="commentSet">
+                        <label for="captcha">Please fill this Captcha:</label>
+                        <img id="captchaImg" src="../captcha.php" alt="Captcha">
+                        <input type="text" name="captcha" id="captcha">
                         <button type="submit" id="sendButton"><img id="sendImg" src="../send.png" alt="Send button"></button>
-                    </div>
                 </fieldset>
             </form>
         <?php else: ?>
