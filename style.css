@@ -385,6 +385,14 @@ div#wrapper aside.navAside nav li a{
     color: black;
 }
 
+div#wrapper aside.navAside nav li:hover{
+    background-color: black;
+}
+
+div#wrapper aside.navAside nav li:hover a{
+    color: white;
+}
+
 form.pageForm fieldset label.checkLabel{
     display: inline;
 }

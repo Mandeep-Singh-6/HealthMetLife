@@ -106,6 +106,7 @@ if($_POST){
     }
 }
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -128,7 +129,7 @@ if($_POST){
                 <h1><?= $result['title']?></h1>
                 <h2><?= $result['plan_category_name']  ?></h2>
                 <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                <h3><?= $result['description'] ?></h3>
+                <div><?= $result['description'] ?></div>
             </div>
             <div class = "commentContainer">
                 <?php foreach ($commentResults as $commentResult): ?>
@@ -138,13 +139,13 @@ if($_POST){
                         <?php if($_SESSION['user_id'] == $commentResult['user_id']): ?>
                             <h5>
                                 <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
-                                <a href=<?= "editComment.php?comment_id=" . $commentResult['comment_id']?>>Edit</a>
-                                <a href=<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?> onclick = "return confirm('Do you really want to delete?')">Delete</a>
+                                <a href="<?= "editComment.php?comment_id=" . $commentResult['comment_id']?>">Edit</a>
+                                <a href="<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?>" onclick = "return confirm('Do you really want to delete?')">Delete</a>
                             </h5>
                         <?php else:?>
                             <h5>
                                 <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
-                                <a href=<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?> onclick = "return confirm('Do you really want to delete?')">Delete</a>
+                                <a href="<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?>" onclick = "return confirm('Do you really want to delete?')">Delete</a>
                             </h5>
                         <?php endif ?>
                         <p>

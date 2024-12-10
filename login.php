@@ -74,7 +74,7 @@ if($_POST){
                 </div>
                 <div class="formSeparator">
                     <label for="password">Password</label>
-                    <input type="password" id = "password" name = "password" autofocus>
+                    <input type="password" id = "password" name = "password">
                 </div>
                 <div class="formSeparator">
                     <button type = "submit">Login</button>

@@ -97,6 +97,10 @@ if($_POST){
                         $medium_path_old = $image_paths['medium_path'];
                         $small_path_old = $image_paths['small_path'];
 
+                        // Converting the paths to be file system friendly.
+                        $medium_path_old = str_replace('/', DIRECTORY_SEPARATOR, $medium_path_old);
+                        $small_path_old = str_replace('/', DIRECTORY_SEPARATOR, $small_path_old);
+
                         if(file_exists($medium_path_old)){
                             unlink($medium_path_old);
                         }
@@ -145,10 +149,14 @@ if($_POST){
                                       VALUES(:medium_path, :small_path, :plan_id)";
     
                             $statement = $db->prepare($query);
+
+                            // Getting the relative path of images and converting it to url friendly path.
+                            $medium_path = str_replace(DIRECTORY_SEPARATOR, '/', $new_path_medium);
+                            $small_path = str_replace(DIRECTORY_SEPARATOR, '/', $new_path_small);
     
                             $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
-                            $statement->bindValue(":medium_path", $new_path_medium, PDO::PARAM_STR);
-                            $statement->bindValue(":small_path", $new_path_small, PDO::PARAM_STR);
+                            $statement->bindValue(":medium_path", $medium_path, PDO::PARAM_STR);
+                            $statement->bindValue(":small_path", $small_path, PDO::PARAM_STR);
     
                             $statement->execute();
                         }
@@ -200,6 +208,10 @@ if($_POST){
 
                         $medium_path_old = $image_paths['medium_path'];
                         $small_path_old = $image_paths['small_path'];
+
+                        // Converting the paths to be file system friendly.
+                        $medium_path_old = str_replace('/', DIRECTORY_SEPARATOR, $medium_path_old);
+                        $small_path_old = str_replace('/', DIRECTORY_SEPARATOR, $small_path_old);
 
                         if(file_exists($medium_path_old)){
                             unlink($medium_path_old);
@@ -273,6 +285,10 @@ if($_POST){
             
             $medium_path_old = $image_paths['medium_path'];
             $small_path_old = $image_paths['small_path'];
+
+            // Converting the paths to be file system friendly.
+            $medium_path_old = str_replace('/', DIRECTORY_SEPARATOR, $medium_path_old);
+            $small_path_old = str_replace('/', DIRECTORY_SEPARATOR, $small_path_old);
             
             if(file_exists($medium_path_old)){
                 unlink($medium_path_old);

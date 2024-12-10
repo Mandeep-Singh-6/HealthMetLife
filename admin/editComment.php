@@ -76,19 +76,21 @@ if($_POST){
 </head>
 <body>
     <?php include('adminNav.php') ?>
-    <h1>Edit a comment</h1>
+            <h1>Edit a comment</h1>
 
-    <form method = "post" class = "pageForm">
-        <fieldset>
-            <input type="hidden" name = "comment_id" value = "<?= $result['comment_id'] ?>">
-            <div class="formSeparator">
-                <label for="comment">Comment:</label>
-                <textarea name="comment" id="comment"><?= $result['content'] ?></textarea>
-            </div>
-            <div class="formSeparator">
-                <button type = "submit">Update</button>
-            </div>
-        </fieldset>
-    </form>
+            <form method = "post" class = "pageForm">
+                <fieldset>
+                    <input type="hidden" name = "comment_id" value = "<?= $result['comment_id'] ?>">
+                    <div class="formSeparator">
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" id="comment"><?= $result['content'] ?></textarea>
+                    </div>
+                    <div class="formSeparator">
+                        <button type = "submit">Update</button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+    </div>
 </body>
 </html>

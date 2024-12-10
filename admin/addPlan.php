@@ -145,9 +145,9 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
                 // Preparing query.
                 $statement = $db->prepare($query);
 
-                // Getting the relative path of images.
-                $medium_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_medium);
-                $small_path = "uploads" . DIRECTORY_SEPARATOR . basename($new_path_small);
+                // Getting the relative path of images and converting it to url friendly path.
+                $medium_path = str_replace(DIRECTORY_SEPARATOR, '/', $new_path_medium);
+                $small_path = str_replace(DIRECTORY_SEPARATOR, '/', $new_path_small);
 
                 // Binding values.
                 $statement->bindValue(":medium_path", $medium_path, PDO::PARAM_STR);

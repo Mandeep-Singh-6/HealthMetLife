@@ -41,7 +41,6 @@ if($_POST && !empty($_POST["name"])){
     <!-- Importing css at the end. -->
     <link rel="stylesheet" href="../style.css">
 </head>
-</head>
 <body>
 <?php include('adminNav.php') ?>
     <h1>Create a New Plan Category</h1>

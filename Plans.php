@@ -293,13 +293,13 @@ if(!empty($results)){
             <?php if($noOfSubPages > 1): ?>    
                 <ul id = "paginationUl">
                     <?php if($page_num != 1): ?>
-                        <li><a href=<?= "Plans.php?page_num=". ($page_num - 1)?>>Previous</a></li>
+                        <li><a href="<?= "Plans.php?page_num=". ($page_num - 1)?>">Previous</a></li>
                     <?php endif?>
                     <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
-                        <li><a href=<?= "Plans.php?page_num=" . $subPage ?> <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
+                        <li><a href="<?= "Plans.php?page_num=" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
                     <?php endfor ?>
                     <?php if($page_num != $noOfSubPages): ?>
-                        <li><a href=<?= "Plans.php?page_num=" . ($page_num + 1)?>>Next</a></li>
+                        <li><a href="<?= "Plans.php?page_num=" . ($page_num + 1)?>">Next</a></li>
                     <?php endif ?>
                 </ul>
             <?php endif ?>

@@ -73,15 +73,15 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
                 </div>
                 <div class="formSeparator">
                     <label for="email">Email</label>
-                    <input type="email" id = "email" name = "email" autofocus>
+                    <input type="email" id = "email" name = "email">
                 </div>
                 <div class="formSeparator">
                     <label for="password">Password</label>
-                    <input type="password" id = "password" name = "password" autofocus>
+                    <input type="password" id = "password" name = "password">
                 </div>
                 <div class="formSeparator">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id = "confirmPassword" name = "confirmPassword" autofocus>
+                    <input type="password" id = "confirmPassword" name = "confirmPassword">
                 </div>
                 <div class="formSeparator">
                     <button type = "submit">Create</button>
