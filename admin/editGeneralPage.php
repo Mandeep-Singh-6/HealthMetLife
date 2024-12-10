@@ -14,6 +14,7 @@ if($_POST){
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $content = $_POST['content'];
     $page_id = filter_input(INPUT_POST,"page_id", FILTER_VALIDATE_INT);
+    $slug = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     // Validating if all inputs are correct, else redirect user to index.php.
     if(($title !== false) && ($content !== false) && ($page_id !== false)){
@@ -23,7 +24,11 @@ if($_POST){
             if(!empty($_POST["content"]) && !empty($_POST["title"] && !empty($_POST["page_id"]))){
             
                     // Creating a query to update the data.
-                    $query = "UPDATE genericpages SET title = :title, content = :content WHERE page_id = :page_id LIMIT 1";
+                    $query = "UPDATE genericpages 
+                              SET title = :title, 
+                              content = :content,
+                              slug = :slug
+                              WHERE page_id = :page_id LIMIT 1";
                 
                     // Preparing the query.
                     $statement = $db->prepare( $query );
@@ -32,6 +37,7 @@ if($_POST){
                     $statement->bindValue(":title", $title, PDO::PARAM_STR);
                     $statement->bindValue(":content", $content, PDO::PARAM_STR);
                     $statement->bindValue(":page_id", $page_id, PDO::PARAM_INT);
+                    $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
                 
                     // Executing the statement. Redirecting to index.php if succeeded.
                     if($statement->execute()){
@@ -133,6 +139,10 @@ elseif (isset($_GET['page_id'])){
                 <div class="formSeparator">
                     <label for="summernote">Content</label>
                     <textarea id = "summernote" name = "content"><?= $result['content'] ?></textarea>
+                </div>
+                <div class="formSeparator">
+                    <label for="slug">Slug</label>
+                    <input type="text" id="slug" name="slug" value = "<?= $result['slug'] ?>">
                 </div>
                 <div class="formSeparator">
                     <button type = "submit" name = "action" value = "Update" >Update</button>

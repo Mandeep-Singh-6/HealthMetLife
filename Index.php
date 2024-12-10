@@ -13,8 +13,8 @@ if($_GET){
 else{
     // Defaulting to the home page.
     // Still need to implement a functionality to prevent its deletion.
-    global $page_id;
-    $page_id = 1;
+    header("Location: index.php?page_id=1");
+    exit();
 }
 
 if($page_id){
@@ -32,10 +32,17 @@ if($page_id){
     
     // Fetching the returned row.
     $result = $statement->fetch();
+
+    
+    if(!isset($_GET['p']) && isset($result['slug'])){
+        header("Location: index.php?page_id=" . $page_id . "&p=" . $result['slug']);
+        exit();
+    }
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: Index.php");
+    header("Location: index.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>

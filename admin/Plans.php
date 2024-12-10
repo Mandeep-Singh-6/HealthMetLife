@@ -5,6 +5,15 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+// Creating a function to convert title into slug.
+function convert_to_slug($string) { 
+    // Convert all words to lowercase 
+    $string = strtolower($string);
+    // Replace all spaces with underscores 
+    $string = str_replace(' ', '-', $string); 
+    return $string; 
+}
+
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.
 $query = "SELECT * FROM plan_categories ORDER BY plan_category_name";
@@ -20,7 +29,7 @@ $planCategoryResults = $statement->fetchAll();
 
 // Getting the page number.
 if(!$_GET){
-    $page_num = 1;
+    header("Location: plans.php?page_num=1");
 }
 else{
     $page_num = filter_input(INPUT_GET, 'page_num', FILTER_VALIDATE_INT);
@@ -30,7 +39,7 @@ else{
         // Negative page_num.
     if(!$page_num || $page_num < 0 || $page_num > $_SESSION['subPages']){
         // Showing results as first page if invalid page number given.
-        $page_num = 1;
+        header("Location: plans.php?page_num=1");
     }
     // print_r("Page num:" . $page_num);
 }
@@ -358,7 +367,7 @@ if(!empty($results)){
                             <h1><?= $result['title']?></h1>
                             <h2><?= $result['plan_category_name']  ?></h2>
                             <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id'] . "&p=" . convert_to_slug($result['title'])?>">Learn More...</a></h3>
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">

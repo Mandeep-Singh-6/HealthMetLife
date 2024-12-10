@@ -12,11 +12,12 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     $title = filter_input(INPUT_POST,"title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     // $content = filter_input(INPUT_POST,"content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $content = $_POST['content'];
+    $slug = filter_input(INPUT_POST,'slug', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     // Validating if all input is correct, else redirect user to index.php.
     if($title && $content){
         // Creating an insert query to insert data into the table.
-        $query = "INSERT INTO genericpages (title, content, created_at) VALUES (:title, :content, :created_at)";
+        $query = "INSERT INTO genericpages (title, content, created_at, slug) VALUES (:title, :content, :created_at, :slug)";
 
         // Loads the query into the SQL server's cache and returns a PDOStatement object.
         $statement = $db->prepare($query);
@@ -29,10 +30,11 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
         $statement->bindValue(":title", $title, PDO::PARAM_STR);
         $statement->bindValue(":content", $content, PDO::PARAM_STR);
         $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+        $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: Index.php");
+            header("Location: index.php");
         }
     }
 }
@@ -71,6 +73,10 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
             <div class="formSeparator">
                 <label for="summernote">Content</label>
                 <textarea id = "summernote" name = "content"></textarea>
+            </div>
+            <div class="formSeparator">
+                <label for="slug">Slug</label>
+                <input type="text" id="slug" name="slug">
             </div>
             <div class="formSeparator">
                 <button type = "submit">Create</button>
