@@ -49,10 +49,14 @@ $query = "SELECT u.username, u.user_id, c.content, c.updated_at, c.comment_id
           FROM users u
           JOIN comments c
           ON u.user_id = c.user_id
+          WHERE c.plan_id = :plan_id
           ORDER BY updated_at DESC";
 
 // Preparing the query.
 $statement = $db->prepare($query);
+
+// Binding values.
+$statement->bindValue(":plan_id", $plan_id, PDO::PARAM_STR);
 
 // Executing the query.
 $statement->execute();
