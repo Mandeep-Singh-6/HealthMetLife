@@ -58,7 +58,7 @@ else{
         <?php else: ?>
         <h1><?= $result['title'] ?></h1>
         <?php endif ?>
-        <p><?= $result['content'] ?></p>
+        <div><?= $result['content'] ?></div>
     </div>
 </body>
 </html>
