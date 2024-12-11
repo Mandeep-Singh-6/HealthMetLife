@@ -99,11 +99,11 @@ if($_POST){
             $statement->execute();
     
             // Redirecting to break the PRG pattern.
-            header("Location: showPlan.php?plan_id=" . $plan_id);
+            header("Location: http://localhost:31337/wd2/Final%20Project/HealthMetLife/showPlan.php?plan_id=" . $plan_id);
         }
     }
     else{
-        header("Location: showPlan.php?plan_id=" . $plan_id);
+        header("Location: http://localhost:31337/wd2/Final%20Project/HealthMetLife/showPlan.php?plan_id=" . $plan_id);
     }
 }
 ?>

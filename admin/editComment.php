@@ -54,11 +54,11 @@ if($_POST){
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: showPlan.php?plan_id=" . $result['plan_id']);
+            header("Location: http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin/showPlan.php?plan_id=" . $result['plan_id']);
         }
     }
     else{
-        header("Location: editComment.php?comment_id=" . $comment_id);
+        header("Location: http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin/editComment.php?comment_id=" . $comment_id);
     }
 }
 ?>
