@@ -82,6 +82,7 @@ $planCategoryResults = $statement->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List All Pages</title>
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin">
     <link rel="stylesheet" href="../style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

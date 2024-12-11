@@ -47,6 +47,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register a new user</title>
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/">
     <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /wd2/Final%20Project/HealthMetLife/
+
+    # Exclude CSS, JS, and image directories from being rewritten 
+    RewriteCond %{REQUEST_URI} !^/css/ [NC] 
+    RewriteCond %{REQUEST_URI} !^/js/ [NC] 
+    RewriteCond %{REQUEST_URI} !^/images/ [NC]
+
+    RewriteRule ^home/?$ index.php?page_id=1&p=home 
+    RewriteRule ^about/?$ index.php?page_id=2&p=about 
+    RewriteRule ^trick-or-treat/?$ index.php?page_id=7&p=trick-or-treat 
+    RewriteRule ^break-dance/?$ index.php?page_id=19&p=break-dance 
+
+
+    RewriteRule ^test-page/?$ index.php?page_id=26&p=test-page 
+    
+    RewriteRule ^plans/([a-zA-Z0-9-]+)/?$ plans.php?page_num=$1
+
+</IfModule> 

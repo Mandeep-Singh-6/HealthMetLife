@@ -13,7 +13,7 @@ if($_GET){
 else{
     // Defaulting to the home page.
     // Still need to implement a functionality to prevent its deletion.
-    header("Location: index.php?page_id=1");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/home");
     exit();
 }
 
@@ -35,13 +35,13 @@ if($page_id){
 
     
     if(!isset($_GET['p']) && isset($result['slug'])){
-        header("Location: index.php?page_id=" . $page_id . "&p=" . $result['slug']);
+        header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/" . $result['slug']);
         exit();
     }
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: index.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/home");
     exit();
 }
 ?>
@@ -51,6 +51,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/">
     <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
