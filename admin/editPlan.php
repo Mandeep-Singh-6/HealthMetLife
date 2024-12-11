@@ -362,7 +362,7 @@ elseif (isset($_GET['plan_id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
-    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin">
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin/">
     <link rel="stylesheet" href="../style.css">
         <!-- include libraries(jQuery, bootstrap) -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">

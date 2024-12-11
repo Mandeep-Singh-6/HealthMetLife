@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /wd2/Final%20Project/HealthMetLife/
+    RewriteBase /wd2/Final%20Project/HealthMetLife/admin/
 
     RewriteRule ^login/?$ login.php
     
@@ -9,4 +9,4 @@
     RewriteRule ^show/([0-9]+)/([a-zA-Z0-9-]+)/?$ showPlan.php?plan_id=$1&p=$2 [L]
 
     RewriteRule ^([0-9]+)/([a-zA-Z0-9-]+)/?$ index.php?page_id=$1&p=$2 [L]
-</IfModule>
+</IfModule> 

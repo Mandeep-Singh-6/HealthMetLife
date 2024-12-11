@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role'])){
-    header("Location: login.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/login");
 }
 
 if (isset($_GET['comment_id'])){

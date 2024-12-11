@@ -34,7 +34,7 @@ if($_POST && !empty($_POST["name"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Plan Category</title>
-    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin">
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin/">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

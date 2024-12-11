@@ -35,7 +35,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
         if($statement->execute()){
             header("Location: Index.php");
             // Write code to start session and login user.
-            // Either send username and password directly to login.php or a simple redirect.
+            // Either send username and password directly to wd2/Final Project/HealthMetLife/login or a simple redirect.
         }
     }
 }
@@ -85,7 +85,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
         </fieldset>
     </form>
     <div class="centerText">
-            <a href="login.php" class="aButton">Login Instead</a>
+            <a href="http://localhost:31337/wd2/Final Project/HealthMetLife/login" class="aButton">Login Instead</a>
         </div>
 </body>
 </html>

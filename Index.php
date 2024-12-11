@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role'])){
-    header("Location: login.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/login");
 }
 $page_id = 0;
 if($_GET){
@@ -13,7 +13,7 @@ if($_GET){
 else{
     // Defaulting to the home page.
     // Still need to implement a functionality to prevent its deletion.
-    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/home");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/1/home");
     exit();
 }
 
@@ -35,13 +35,13 @@ if($page_id){
 
     
     if(!isset($_GET['p']) && isset($result['slug'])){
-        header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/" . $result['slug']);
+        header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/" . $result['page_id'] . '/' . $result['slug']);
         exit();
     }
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/home");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/1/home");
     exit();
 }
 ?>

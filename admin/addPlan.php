@@ -215,7 +215,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add General Page</title>
-    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin">
+    <base href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/admin/">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role'])){
-    header("Location: login.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/login");
 }
 
 // Creating a function to convert title into slug.
@@ -30,7 +30,7 @@ $planCategoryResults = $statement->fetchAll();
 
 // Getting the page number.
 if(!$_GET){
-    header("Location: plans.php?page_num=1");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/plans/1");
 }
 else{
     $page_num = filter_input(INPUT_GET, 'page_num', FILTER_VALIDATE_INT);
@@ -40,7 +40,7 @@ else{
         // Negative page_num.
     if(!$page_num || $page_num <= 0 || $page_num > $_SESSION['subPages']){
         // Showing results as first page if invalid page number given.
-        header("Location: plans.php?page_num=1");
+        header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/plans/1");
     }
     // print_r("Page num:" . $page_num);
 }
@@ -49,7 +49,7 @@ else{
 if($_POST){
     $_SESSION['post'] = $_POST;
     // If new post is done, reloading the page with page_num 1.
-    header("Location: Plans.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/plans/1");
 }
 
 // Determining if user entered a name to search or not.
@@ -292,7 +292,7 @@ if(!empty($results)){
                             <h1><?= $result['title']?></h1>
                             <h2><?= $result['plan_category_name']  ?></h2>
                             <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id'] . "&p=" . convert_to_slug($result['title'])?>">Learn More...</a></h3>
+                            <h3>Click here to - <a href="<?= "http://localhost:31337/wd2/Final Project/HealthMetLife/show/" . $result['plan_id'] . "/" . convert_to_slug($result['title'])?>">Learn More...</a></h3>
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">
@@ -304,13 +304,13 @@ if(!empty($results)){
             <?php if($noOfSubPages > 1): ?>    
                 <ul id = "paginationUl">
                     <?php if($page_num != 1): ?>
-                        <li><a href="<?= "Plans.php?page_num=". ($page_num - 1)?>">Previous</a></li>
+                        <li><a href="<?= "http://localhost:31337/wd2/Final Project/HealthMetLife/plans/". ($page_num - 1)?>">Previous</a></li>
                     <?php endif?>
                     <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
+                        <li><a href="<?= "http://localhost:31337/wd2/Final Project/HealthMetLife/plans/" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
                     <?php endfor ?>
                     <?php if($page_num != $noOfSubPages): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . ($page_num + 1)?>">Next</a></li>
+                        <li><a href="<?= "http://localhost:31337/wd2/Final Project/HealthMetLife/plans/" . ($page_num + 1)?>">Next</a></li>
                     <?php endif ?>
                 </ul>
             <?php endif ?>

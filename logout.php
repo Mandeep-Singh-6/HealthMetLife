@@ -10,5 +10,5 @@
         $params = session_get_cookie_params(); 
         setcookie(session_name(), '', time() - 42000); // $params["path"], $params["domain"], $params["secure"], $params["httponly"] );
     }
-    header("Location: login.php");
+    header("Location: http://localhost:31337/wd2/Final Project/HealthMetLife/login");
 ?>
