@@ -24,7 +24,7 @@
             <?php endforeach ?>
             <li><a href="Plans.php">Plans</a></li>
             <li><a href = "admin.php">Admin</a></li>
-            <li><a href = "../logout.php">Logout</a></li>
+            <li><a href = "../user/logout.php">Logout</a></li>
         </ul>
     </nav>
 </div>

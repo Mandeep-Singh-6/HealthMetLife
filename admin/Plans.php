@@ -1,8 +1,8 @@
 <?php 
-require('../connect.php');
+require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
+    header("Location: ../user/login.php");
 }
 
 // Getting all the plan categories.

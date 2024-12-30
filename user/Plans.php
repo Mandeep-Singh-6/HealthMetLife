@@ -248,7 +248,7 @@ if(!empty($results)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plans</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,7 +285,7 @@ if(!empty($results)){
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">
-                            <img src="<?= "admin/" . $result['small_path'] ?>" alt="An image depicting a workout plan"> 
+                            <img src="<?= "../admin/" . $result['small_path'] ?>" alt="An image depicting a workout plan"> 
                         </div>
                         <?php endif ?>
                     </div>

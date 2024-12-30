@@ -113,7 +113,7 @@ if($_POST){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,7 +125,7 @@ if($_POST){
         <?php if($result !==  false): ?>
             <div class = "showPlanDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
                 <?php if(isset($result['medium_path'])):?>
-                    <img src="<?= "admin/" . $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
+                    <img src="<?= "../admin/" . $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
                 <?php endif ?>
                 <h1><?= $result['title']?></h1>
                 <h2><?= $result['plan_category_name']  ?></h2>

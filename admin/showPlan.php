@@ -1,8 +1,8 @@
 <?php 
-require('../connect.php');
+require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
+    header("Location: ../user/login.php");
 }
 
 // Set the default timezone to Central Time (America/Winnipeg) 
@@ -134,7 +134,7 @@ if($_POST){
             <div class = "commentContainer">
                 <?php foreach ($commentResults as $commentResult): ?>
                     <div class = "commentDiv">
-                        <img class="replyImg" src="../reply.png" alt="reply symbol">
+                        <img class="replyImg" src="../user/reply.png" alt="reply symbol">
                         <h4><?= $commentResult['username'] ?></h4>
                         <?php if($_SESSION['user_id'] == $commentResult['user_id']): ?>
                             <h5>
@@ -161,9 +161,9 @@ if($_POST){
                 </fieldset>
                 <fieldset class="commentSet">
                         <label for="captcha">Please fill this Captcha:</label>
-                        <img id="captchaImg" src="../captcha.php" alt="Captcha">
+                        <img id="captchaImg" src="../user/captcha.php" alt="Captcha">
                         <input type="text" name="captcha" id="captcha">
-                        <button type="submit" id="sendButton"><img id="sendImg" src="../send.png" alt="Send button"></button>
+                        <button type="submit" id="sendButton"><img id="sendImg" src="../user/send.png" alt="Send button"></button>
                 </fieldset>
             </form>
         <?php else: ?>
