@@ -1,9 +1,6 @@
 <?php 
-require('../user/connect.php');
+require('user/connect.php');
 session_start();
-if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
-}
 
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.
@@ -28,7 +25,7 @@ else{
         // Larger page_num entered manually than allowed.
         // No page_num supplied.
         // Negative page_num.
-    if(!$page_num || $page_num < 0 || $page_num > $_SESSION['subPages']){
+    if(!$page_num || $page_num <= 0 || $page_num > $_SESSION['subPages']){
         // Showing results as first page if invalid page number given.
         $page_num = 1;
     }
@@ -131,82 +128,6 @@ if((!$_POST && !isset($_SESSION['post'])) || $plan_category_id === "all"){
         $statement = $db->prepare($query);
         
         //Binding values to the query.
-        $statement->bindValue(":name", $searchName, PDO::PARAM_STR);
-        $statement->bindValue(':limit', $plansPerPage, PDO::PARAM_INT);
-        $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
-
-    
-        // Executing the query.
-        $statement->execute();
-        
-        // Fetching the returned row.
-        $results = $statement->fetchAll();
-    }
-}
-// Remove this elseif for user.
-elseif($plan_category_id === "NULL"){
-    if(!isset($name)){
-    // Creating a query to select the specified records from the plans table based on plan_category_id.
-    $query = "SELECT (
-                            SELECT COUNT(*)
-                            FROM plans p
-                            WHERE p.plan_category_id = NULL 
-                         ) AS 'totalPages',
-              p.plan_id, p.title, p.price, p.description, p.colour, 
-              p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
-              pc.plan_category_name 
-              FROM plans p 
-              JOIN plan_categories pc 
-              ON pc.plan_category_id = p.plan_category_id
-              LEFT JOIN images i
-              ON p.plan_id = i.plan_id 
-              WHERE p.plan_category_id = NULL 
-              ORDER BY p.plan_category_id ASC, p.price DESC
-              LIMIT :limit
-              OFFSET :offset";
-        
-    // Preparing the query.
-    $statement = $db->prepare($query);
-
-    // Binding values.
-    $statement->bindValue(':limit', $plansPerPage, PDO::PARAM_INT);
-    $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
-
-    // Executing the query.
-    $statement->execute();
-    
-    // Fetching the returned row.
-    $results = $statement->fetchAll();
-    }
-    else{
-        // Attaching wildcard.
-        $searchName = "%" . $name . "%";
-
-        // Creating a query to select the specified records from the plans table based on plan_category_id.
-        $query = "SELECT (
-                            SELECT COUNT(*)
-                            FROM plans p
-                            WHERE p.plan_category_id = NULL 
-                                AND p.title LIKE :name  
-                         ) AS 'totalPages',
-                  p.plan_id, p.title, p.price, p.description, p.colour, 
-                  p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
-                  pc.plan_category_name 
-                  FROM plans p 
-                  JOIN plan_categories pc 
-                  ON pc.plan_category_id = p.plan_category_id
-                  LEFT JOIN images i
-                  ON p.plan_id = i.plan_id 
-                  WHERE p.plan_category_id = NULL 
-                    AND p.title LIKE :name 
-                  ORDER BY p.plan_category_id ASC, p.price DESC
-                  LIMIT :limit
-                  OFFSET :offset";
-            
-        // Preparing the query.
-        $statement = $db->prepare($query);
-        
-        //Binding values.
         $statement->bindValue(":name", $searchName, PDO::PARAM_STR);
         $statement->bindValue(':limit', $plansPerPage, PDO::PARAM_INT);
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -324,7 +245,7 @@ if(!empty($results)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plans</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -340,7 +261,6 @@ if(!empty($results)){
         <label for="plan_category_id">Category:</label>
             <select name="plan_category_id" id="plan_category_id">
                 <option value="all" <?php if (isset($plan_category_id) && $plan_category_id === "all") echo 'selected';?>>All</option>
-                <option value="NULL" <?php if (isset($plan_category_id) && $plan_category_id === "NULL") echo 'selected';?>>No Category</option>
                 <?php foreach($planCategoryResults as $planCategoryResult): ?>
                 <option value="<?= $planCategoryResult['plan_category_id'] ?>" <?php if (isset($plan_category_id) && $plan_category_id == $planCategoryResult['plan_category_id']) echo 'selected';?>><?= $planCategoryResult['plan_category_name'] ?></option>
                 <?php endforeach ?>
@@ -362,7 +282,7 @@ if(!empty($results)){
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">
-                            <img src="<?= $result['small_path'] ?>" alt="An image depicting a workout plan"> 
+                            <img src="<?= "admin/" . $result['small_path'] ?>" alt="An image depicting a workout plan"> 
                         </div>
                         <?php endif ?>
                     </div>

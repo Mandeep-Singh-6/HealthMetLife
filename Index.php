@@ -1,9 +1,6 @@
 <?php 
-require('connect.php');
+require('user/connect.php');
 session_start();
-if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 2){
-    header("Location: ../login.php");
-}
 
 $page_id = 0;
 if($_GET){
@@ -45,7 +42,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +52,7 @@ else{
     <?php require('header.php') ?>
     <div id="wrapper">
         <?php if($page_id === 1): ?>
-        <h1>Welcome <?= (isset($_SESSION['username'])) ? "back, " . $_SESSION['username']: "Fitness Enthusiast" ?>!</h1>
+        <h1>Welcome!</h1>
         <?php else: ?>
         <h1><?= $result['title'] ?></h1>
         <?php endif ?>

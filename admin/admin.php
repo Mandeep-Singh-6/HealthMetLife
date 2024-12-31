@@ -2,7 +2,7 @@
 require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../user/login.php");
+    header("Location: ../login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
 <body>
 <?php include('adminNav.php') ?>
             <h1>This is the admin Page.</h1>
-            <p>The place where you can feel like a God.</p>
+            <p>You are a God here.</p>
         </main>
     </div>
 </body>

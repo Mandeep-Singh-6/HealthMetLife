@@ -2,7 +2,7 @@
 require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../user/login.php");
+    header("Location: ../login.php");
 }
 
 // Set the default timezone to Central Time (America/Winnipeg) 
@@ -45,9 +45,10 @@ else{
 }
 
 // Checking for comments to display.
-$query = "SELECT u.username, u.user_id, c.content, c.updated_at, c.comment_id
+$query = "SELECT u.username AS 'Uname', u.user_id, c.content, 
+                 c.updated_at, c.comment_id, c.username AS 'Cname'
           FROM users u
-          JOIN comments c
+          RIGHT OUTER JOIN comments c
           ON u.user_id = c.user_id
           WHERE c.plan_id = :plan_id
           ORDER BY updated_at DESC";
@@ -65,41 +66,34 @@ $statement->execute();
 $commentResults = $statement->fetchAll();
 
 if($_POST){
-    // Getting the entered captcha.
-    $captcha = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
     // Sanitizing the user input.
     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    // Storing the user comment in a session to restore it if captcha is wrong.
-    $_SESSION['comment'] = $comment;
-    if($_SESSION['captcha'] == $captcha){
-        unset($_SESSION['comment']);
-        if(trim($comment) != ""){
-            // Creating a query to insert the comment.
-            $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
-                      VALUES(:plan_id, :user_id, :content, :created_at)";
+    
+    if(trim($comment) != ""){
+        // Creating a query to insert the comment.
+        $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
+                VALUES(:plan_id, :user_id, :content, :created_at)";
             
-            // Preparing the statement.
-            $statement = $db->prepare($query);
+        // Preparing the statement.
+        $statement = $db->prepare($query);
     
-            // Gettig the user id.
-            $user_id = $_SESSION['user_id'];
+        // Gettig the user id.
+        $user_id = $_SESSION['user_id'];
     
-            // Getting the current datetime.
-            $created_at = date("Y-m-d H:i:s");
+        // Getting the current datetime.
+        $created_at = date("Y-m-d H:i:s");
     
-            // Binding values.
-            $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
-            $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
-            $statement->bindValue(":content", $comment, PDO::PARAM_STR);
-            $statement->bindValue(":created_at", $created_at);
+        // Binding values.
+        $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+        $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $statement->bindValue(":content", $comment, PDO::PARAM_STR);
+        $statement->bindValue(":created_at", $created_at);
     
-            // Executing the query.
-            $statement->execute();
+        // Executing the query.
+        $statement->execute();
     
-            // Redirecting to break the PRG pattern.
-            header("Location: showPlan.php?plan_id=" . $plan_id);
-        }
+        // Redirecting to break the PRG pattern.
+        header("Location: showPlan.php?plan_id=" . $plan_id);
     }
     else{
         header("Location: showPlan.php?plan_id=" . $plan_id);
@@ -135,7 +129,7 @@ if($_POST){
                 <?php foreach ($commentResults as $commentResult): ?>
                     <div class = "commentDiv">
                         <img class="replyImg" src="../user/reply.png" alt="reply symbol">
-                        <h4><?= $commentResult['username'] ?></h4>
+                        <h4><?= ($commentResult["Uname"] === NULL) ? $commentResult["Cname"] : $commentResult["Uname"] ?></h4>
                         <?php if($_SESSION['user_id'] == $commentResult['user_id']): ?>
                             <h5>
                                 <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
@@ -157,13 +151,8 @@ if($_POST){
             <form method = "post" class = "centerForm">
                 <fieldset class="commentSet">
                         <label for="comment">Comment? Type here:</label>
-                        <textarea name="comment" id="comment"><?= (!empty($_SESSION['comment']) ? $_SESSION['comment'] : "") ?></textarea>
-                </fieldset>
-                <fieldset class="commentSet">
-                        <label for="captcha">Please fill this Captcha:</label>
-                        <img id="captchaImg" src="../user/captcha.php" alt="Captcha">
-                        <input type="text" name="captcha" id="captcha">
-                        <button type="submit" id="sendButton"><img id="sendImg" src="../user/send.png" alt="Send button"></button>
+                        <textarea name="comment" id="comment"></textarea>
+                        <button type="submit" id="sendButtonNC"><img id="sendImg" src="../user/send.png" alt="Send button"></button>
                 </fieldset>
             </form>
         <?php else: ?>

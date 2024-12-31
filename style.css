@@ -427,19 +427,34 @@ button#sendButton{
     cursor: pointer;
 }
 
+button#sendButtonNC{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-color: green;
+    border: none;
+    position: absolute;
+    bottom: 5px;
+    right: -10%;
+    cursor: pointer;
+}
+
+
 img#sendImg{
     height: 60%;
     width: 80%;
     transition: transform 500ms ease;
 }
 
-button#sendButton:hover img#sendImg{
+button#sendButton:hover img#sendImg,
+button#sendButtonNC:hover img#sendImg{
     height: 30%;
     transform: translate(3px, -3px);
     
 }
 
-button#sendButton:active img#sendImg{
+button#sendButton:active img#sendImg,
+button#sendButtonNC:active img#sendImg{
     height: 30%;
     transform: translate(15px, -15px);
 }

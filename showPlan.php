@@ -1,9 +1,6 @@
 <?php 
-require('connect.php');
+require('user/connect.php');
 session_start();
-if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 2){
-    header("Location: ../login.php");
-}
 
 // Set the default timezone to Central Time (America/Winnipeg) 
 date_default_timezone_set('America/Winnipeg');
@@ -66,34 +63,54 @@ $statement->execute();
 $commentResults = $statement->fetchAll();
 
 if($_POST){
+
+    // Getting the entered captcha.
+    $captcha = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    
+    // Sanitizing the user input.
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
     // Sanitizing the user input.
     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    // Storing the user comment in a session to restore it if captcha is wrong.
+    $_SESSION['comment'] = $comment;
+    $_SESSION['username'] = $username;
 
-    if(trim($comment) != ""){
-        // Creating a query to insert the comment.
-        $query = "INSERT INTO comments(plan_id, user_id, content, created_at)
-                    VALUES(:plan_id, :user_id, :content, :created_at)";
+    if($_SESSION['captcha'] == $captcha){
+        
+        if(trim($comment) != "" && trim($username) != ""){
+            // Creating a query to insert the comment.
+            $query = "INSERT INTO comments(plan_id, username, content, created_at)
+                      VALUES(:plan_id, :username, :content, :created_at)";
             
-        // Preparing the statement.
-        $statement = $db->prepare($query);
-    
-        // Gettig the user id.
-        $user_id = $_SESSION['user_id'];
-    
-        // Getting the current datetime.
-        $created_at = date("Y-m-d H:i:s");
-    
-        // Binding values.
-        $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
-        $statement->bindValue(":user_id", $user_id, PDO::PARAM_INT);
-        $statement->bindValue(":content", $comment, PDO::PARAM_STR);
-        $statement->bindValue(":created_at", $created_at);
-    
-        // Executing the query.
-        $statement->execute();
-    
-        // Redirecting to break the PRG pattern.
-        header("Location: showPlan.php?plan_id=" . $plan_id);
+            // Preparing the statement.
+            $statement = $db->prepare($query);
+            
+            // Gettig the username.
+            $username = $_SESSION['username'];
+            
+            // Getting the current datetime.
+            $created_at = date("Y-m-d H:i:s");
+            
+            // Binding values.
+            $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+            $statement->bindValue(":username", $username, PDO::PARAM_STR);
+            $statement->bindValue(":content", $comment, PDO::PARAM_STR);
+            $statement->bindValue(":created_at", $created_at);
+            
+            // Executing the query.
+            $statement->execute();
+            
+            // Unsetting the username and comment.
+            unset($_SESSION['username']);
+            unset($_SESSION['comment']);
+            
+            // Redirecting to break the PRG pattern.
+            header("Location: showPlan.php?plan_id=" . $plan_id);
+        }
+        else{
+            header("Location: showPlan.php?plan_id=" . $plan_id);
+        }
     }
     else{
         header("Location: showPlan.php?plan_id=" . $plan_id);
@@ -106,7 +123,7 @@ if($_POST){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,10 +132,10 @@ if($_POST){
 <body>
     <?php require('header.php') ?>
     <div id="wrapper">
-        <?php if($result !==  false): ?>
+        <?php if($result !== false): ?>
             <div class = "showPlanDiv" style="background-color:<?= $result['bgcolour'] ?>; color:<?= $result['colour'] ?>;">            
                 <?php if(isset($result['medium_path'])):?>
-                    <img src="<?= "../admin/" . $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
+                    <img src="<?= "admin/" . $result['medium_path'] ?>" alt="An image depicting a workout plan"> 
                 <?php endif ?>
                 <h1><?= $result['title']?></h1>
                 <h2><?= $result['plan_category_name']  ?></h2>
@@ -128,15 +145,8 @@ if($_POST){
             <div class = "commentContainer">
                 <?php foreach ($commentResults as $commentResult): ?>
                     <div class = "commentDiv">
-                        <img class="replyImg" src="reply.png" alt="reply symbol">
+                        <img class="replyImg" src="user/reply.png" alt="reply symbol">
                         <h4><?= ($commentResult["Uname"] === NULL) ? $commentResult["Cname"] : $commentResult["Uname"] ?></h4>
-                        <?php if($_SESSION['user_id'] == $commentResult['user_id']): ?>
-                            <h5>
-                                <?= "Updated at : " . $commentResult['updated_at'] . " - "?>
-                                <a href="<?= "editComment.php?comment_id=" . $commentResult['comment_id']?>">Edit</a>
-                                <a href="<?= "deleteComment.php?comment_id=" . $commentResult['comment_id']?>" onclick = "return confirm('Do you really want to delete?')">Delete</a>
-                            </h5>
-                        <?php endif ?>
                         <p>
                             <?= $commentResult['content'] ?>
                         </p>
@@ -145,9 +155,18 @@ if($_POST){
             </div>
             <form method = "post" class = "centerForm">
                 <fieldset class="commentSet">
-                        <label for="comment">Comment? Type here:</label>
-                        <textarea name="comment" id="comment"></textarea>
-                        <button type="submit" id="sendButtonNC"><img id="sendImg" src="send.png" alt="Send button"></button>
+                    <label for="comment">Comment? Type here:</label>
+                    <textarea name="comment" id="comment"><?= (!empty($_SESSION['comment']) ? $_SESSION['comment'] : "") ?></textarea>
+                </fieldset>
+                <fieldset class="commentSet">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" value="<?php echo (!empty($_SESSION['username'])) ? $_SESSION['username'] : "" ?>">
+                </fieldset>
+                <fieldset class="commentSet">
+                    <label for="captcha">Please fill this Captcha:</label>
+                    <img id="captchaImg" src="captcha.php" alt="Captcha">
+                        <input type="text" name="captcha" id="captcha">
+                        <button type="submit" id="sendButton"><img id="sendImg" src="user/send.png" alt="Send button"></button>
                 </fieldset>
             </form>
         <?php else: ?>

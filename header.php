@@ -23,7 +23,7 @@
                 <li><a href = "<?="Index.php?page_id=" . $headeResult["page_id"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
             <li><a href="Plans.php">Plans</a></li>
-            <li><a href="../logout.php">Logout</a></li>
+            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 </div>
