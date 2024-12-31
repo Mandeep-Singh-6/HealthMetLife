@@ -5,6 +5,10 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+function generateSlug($word){
+    return strtolower(str_replace(" ", "-", $word));
+}
+
 $error="";
 
 if($_POST){
@@ -23,19 +27,27 @@ if($_POST){
             if(!empty($_POST["content"]) && !empty($_POST["title"] && !empty($_POST["page_id"]))){
             
                     // Creating a query to update the data.
-                    $query = "UPDATE genericpages SET title = :title, content = :content WHERE page_id = :page_id LIMIT 1";
+                    $query = "UPDATE genericpages 
+                              SET title     = :title, 
+                                  content   = :content,
+                                  slug      = :slug
+                              WHERE page_id = :page_id LIMIT 1";
                 
                     // Preparing the query.
                     $statement = $db->prepare( $query );
+
+                    // Generating slug.
+                    $slug = generateSlug($title);
                 
                     // Binding values to the query.
                     $statement->bindValue(":title", $title, PDO::PARAM_STR);
                     $statement->bindValue(":content", $content, PDO::PARAM_STR);
                     $statement->bindValue(":page_id", $page_id, PDO::PARAM_INT);
+                    $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
                 
                     // Executing the statement. Redirecting to index.php if succeeded.
                     if($statement->execute()){
-                        header("Location: Index.php?page_id={$page_id}");
+                        header("Location: index.php?page_id={$page_id}&p={$slug}");
                     }
             }
             else{
@@ -90,7 +102,7 @@ elseif (isset($_GET['page_id'])){
     }
     // If page_id is non-numeric, redirecting user to index.php.
     else{
-        header("Location: Index.php");
+        header("Location: index.php");
     }
 
 }

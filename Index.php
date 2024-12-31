@@ -2,29 +2,31 @@
 require('user/connect.php');
 session_start();
 
-$page_id = 0;
+
 if($_GET){
     //Sanitizing input from the get superglobal.
-    global $page_id;
     $page_id = filter_input(INPUT_GET,"page_id", FILTER_VALIDATE_INT);
+    $slug = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 else{
-    // Defaulting to the home page.
-    // Still need to implement a functionality to prevent its deletion.
-    global $page_id;
-    $page_id = 1;
+    header("Location: index.php?page_id=1&p=home");
+    exit();
 }
 
 if($page_id){
     // Creating a query to select the specified record from the genericpages table based on page_id.
-    $query = "SELECT * FROM genericpages WHERE page_id = :page_id LIMIT 1";
+    $query = "SELECT * FROM genericpages 
+              WHERE page_id = :page_id 
+                AND slug = :slug
+              LIMIT 1";
     
     // Preparing the query.
     $statement = $db->prepare($query);
     
     //Binding values to the query.
     $statement->bindValue(":page_id", $page_id, PDO::PARAM_INT);
-    
+    $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
+
     // Executing the query.
     $statement->execute();
     
@@ -33,7 +35,7 @@ if($page_id){
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: Index.php");
+    header("Location: index.php?page_id=1&p=home");
 }
 ?>
 <!DOCTYPE html>
@@ -51,12 +53,16 @@ else{
 <body>
     <?php require('header.php') ?>
     <div id="wrapper">
-        <?php if($page_id === 1): ?>
-        <h1>Welcome!</h1>
+        <?php if(!empty($result)):?>
+            <?php if($page_id === 1): ?>
+            <h1>Welcome fitness enthusiast!</h1>
+            <?php else: ?>
+            <h1><?= $result['title'] ?></h1>
+            <?php endif ?>
+            <div><?= $result['content'] ?></div>
         <?php else: ?>
-        <h1><?= $result['title'] ?></h1>
+            <p class="error">Sorry, this page doesn't exist.</p>
         <?php endif ?>
-        <div><?= $result['content'] ?></div>
     </div>
 </body>
 </html>

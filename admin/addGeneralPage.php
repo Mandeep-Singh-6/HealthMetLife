@@ -5,6 +5,10 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+function generateSlug($word){
+    return strtolower(str_replace(" ", "-", $word));
+}
+
 
 if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
 
@@ -16,23 +20,27 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     // Validating if all input is correct, else redirect user to index.php.
     if($title && $content){
         // Creating an insert query to insert data into the table.
-        $query = "INSERT INTO genericpages (title, content, created_at) VALUES (:title, :content, :created_at)";
+        $query = "INSERT INTO genericpages (title, content, created_at, slug) 
+                  VALUES (:title, :content, :created_at, :slug)";
 
         // Loads the query into the SQL server's cache and returns a PDOStatement object.
         $statement = $db->prepare($query);
 
         // Getting the current datetime.
-
         $created_at = date("Y-m-d H:i:s");
+
+        // Generating the slug.
+        $slug = generateSlug($title);
 
         // Binding values to the loaded query.
         $statement->bindValue(":title", $title, PDO::PARAM_STR);
         $statement->bindValue(":content", $content, PDO::PARAM_STR);
         $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+        $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: Index.php");
+            header("Location: index.php");
         }
     }
 }
