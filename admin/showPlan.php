@@ -41,7 +41,7 @@ if($plan_id){
 }
 // If plan_id is non-numeric, redirecting user to Plans.php.
 else{
-    header("Location: Plans.php");
+    header("Location: plans.php?page_num=1");
 }
 
 // Checking for comments to display.

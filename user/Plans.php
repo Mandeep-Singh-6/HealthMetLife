@@ -20,7 +20,8 @@ $planCategoryResults = $statement->fetchAll();
 
 // Getting the page number.
 if(!$_GET){
-    $page_num = 1;
+    header("Location: plans.php?page_num=1");
+    exit();
 }
 else{
     $page_num = filter_input(INPUT_GET, 'page_num', FILTER_VALIDATE_INT);
@@ -30,7 +31,7 @@ else{
         // Negative page_num.
     if(!$page_num || $page_num <= 0 || $page_num > $_SESSION['subPages']){
         // Showing results as first page if invalid page number given.
-        $page_num = 1;
+        header("Location: plans.php?page_num=1");
     }
     // print_r("Page num:" . $page_num);
 }
@@ -39,7 +40,7 @@ else{
 if($_POST){
     $_SESSION['post'] = $_POST;
     // If new post is done, reloading the page with page_num 1.
-    header("Location: Plans.php");
+    header("Location: plans.php?page_num=1");
 }
 
 // Determining if user entered a name to search or not.

@@ -17,7 +17,8 @@ $planCategoryResults = $statement->fetchAll();
 
 // Getting the page number.
 if(!$_GET){
-    $page_num = 1;
+    header("Location: plans.php?page_num=1");
+    exit();
 }
 else{
     $page_num = filter_input(INPUT_GET, 'page_num', FILTER_VALIDATE_INT);
@@ -27,7 +28,7 @@ else{
         // Negative page_num.
     if(!$page_num || $page_num <= 0 || $page_num > $_SESSION['subPages']){
         // Showing results as first page if invalid page number given.
-        $page_num = 1;
+        header("Location: plans.php?page_num=1");
     }
     // print_r("Page num:" . $page_num);
 }
@@ -36,7 +37,7 @@ else{
 if($_POST){
     $_SESSION['post'] = $_POST;
     // If new post is done, reloading the page with page_num 1.
-    header("Location: Plans.php");
+    header("Location: plans.php?page_num=1");
 }
 
 // Determining if user entered a name to search or not.
@@ -290,13 +291,13 @@ if(!empty($results)){
             <?php if($noOfSubPages > 1): ?>    
                 <ul id = "paginationUl">
                     <?php if($page_num != 1): ?>
-                        <li><a href="<?= "Plans.php?page_num=". ($page_num - 1)?>">Previous</a></li>
+                        <li><a href="<?= "plans.php?page_num=". ($page_num - 1)?>">Previous</a></li>
                     <?php endif?>
                     <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
+                        <li><a href="<?= "plans.php?page_num=" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
                     <?php endfor ?>
                     <?php if($page_num != $noOfSubPages): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . ($page_num + 1)?>">Next</a></li>
+                        <li><a href="<?= "plans.php?page_num=" . ($page_num + 1)?>">Next</a></li>
                     <?php endif ?>
                 </ul>
             <?php endif ?>

@@ -5,6 +5,9 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+function generateSlug($word){
+    return strtolower(str_replace(" ", "-", $word));
+}
 
 // Getting all the plan categories.
 // Creating a query to select the specified record from the plan categories table.
@@ -164,26 +167,35 @@ if($_POST){
 
                         // Updating the plan record.
                         // Creating a query to update the data.
-                        $query = "UPDATE plans SET title = :title, description = :description, 
-                                  price = :price, colour = :colour, bgcolour = :bgcolour, 
-                                  plan_category_id = :plan_category_id 
+                        $query = "UPDATE plans 
+                                  SET title = :title, 
+                                      description = :description, 
+                                      price = :price, 
+                                      colour = :colour, 
+                                      bgcolour = :bgcolour, 
+                                      plan_category_id = :plan_category_id,
+                                      slug = :slug
                                   WHERE plan_id = :plan_id LIMIT 1";
                     
                         // Preparing the query.
                         $statement = $db->prepare( $query );
+
+                        // Generating slug.
+                        $slug = generateSlug($title);
                     
                         // Binding values to the query.
                         $statement->bindValue(":title", $title, PDO::PARAM_STR);
                         $statement->bindValue(":description", $description, PDO::PARAM_STR);
                         $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
                         $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
+                        $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
                         $statement->bindValue(":price", $price);
                         $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                         $statement->bindValue(":plan_category_id", $plan_category_id);
                     
                         // Executing the statement. Redirecting to Plans.php if succeeded.
                         if($statement->execute()){
-                            header("Location: Plans.php");
+                            header("Location: plans.php?page_num=1");
                         }
                     }
                     else{
@@ -240,26 +252,35 @@ if($_POST){
 
                     // Updating just the plan record if no image uploaded.
                     // Creating a query to update the data.
-                    $query = "UPDATE plans SET title = :title, description = :description, 
-                              price = :price, colour = :colour, bgcolour = :bgcolour, 
-                              plan_category_id = :plan_category_id 
+                    $query = "UPDATE plans 
+                              SET title = :title, 
+                                  description = :description, 
+                                  price = :price, 
+                                  colour = :colour, 
+                                  bgcolour = :bgcolour, 
+                                  plan_category_id = :plan_category_id,
+                                  slug = :slug
                               WHERE plan_id = :plan_id LIMIT 1";
                     
                     // Preparing the query.
                     $statement = $db->prepare( $query );
+
+                    // Generating slug.
+                    $slug = generateSlug($title);
                     
                     // Binding values to the query.
                     $statement->bindValue(":title", $title, PDO::PARAM_STR);
                     $statement->bindValue(":description", $description, PDO::PARAM_STR);
                     $statement->bindValue(":colour", $colour, PDO::PARAM_STR);
                     $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
+                    $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
                     $statement->bindValue(":price", $price);
                     $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                     $statement->bindValue(":plan_category_id", $plan_category_id);
                     
                     // Executing the statement. Redirecting to Plans.php if succeeded.
                     if($statement->execute()){
-                        header("Location: Plans.php");
+                        header("Location: plans.php?page_num=1");
                     }
                 }
             }

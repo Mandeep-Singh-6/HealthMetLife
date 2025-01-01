@@ -5,6 +5,11 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     header("Location: ../login.php");
 }
 
+function generateSlug($word){
+    return strtolower(str_replace(" ", "-", $word));
+}
+
+
 // Set the default timezone to Central Time (America/Winnipeg) 
 date_default_timezone_set('America/Winnipeg');
 
@@ -104,8 +109,10 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
                 $statement = $db->prepare($query);
 
                 // Getting the current datetime.
-                
                 $created_at = date("Y-m-d H:i:s");
+
+                // Generating slug.
+                $slug = generateSlug($title);
                 
                 // Binding values to the loaded query.
                 $statement->bindValue(":title", $title, PDO::PARAM_STR);
@@ -113,6 +120,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
                 $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
                 $statement->bindValue(":description", $description, PDO::PARAM_STR);
                 $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+                $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
                 $statement->bindValue(":price", $price);
                 $statement->bindValue(":plan_category_id", $plan_category_id);
 
@@ -122,7 +130,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
 
                 // Adding the image record in the images table associated with the correct page.
 
-                // Getting the plan_id of newly executed plan.
+                // Getting the plan_id of newly added plan.
                 // According to our business rules two plans in the same category cannot have the same name.
                 $query = "SELECT plan_id FROM plans WHERE title = :title AND plan_category_id = :plan_category_id";
             
@@ -189,8 +197,10 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             $statement = $db->prepare($query);
                 
             // Getting the current datetime.
-                
             $created_at = date("Y-m-d H:i:s");
+
+            // Generating slug.
+            $slug = generateSlug($title);
                 
             // Binding values to the loaded query.
             $statement->bindValue(":title", $title, PDO::PARAM_STR);
@@ -198,13 +208,14 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             $statement->bindValue(":bgcolour", $bgcolour, PDO::PARAM_STR);
             $statement->bindValue(":description", $description, PDO::PARAM_STR);
             $statement->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+            $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
             $statement->bindValue(":price", $price);
             $statement->bindValue(":plan_category_id", $plan_category_id);
 
             // Executing the query.
             $statement->execute();
         }
-        header("Location: Plans.php");
+        header("Location: plans.php?page_num=1");
         
     }
 }
