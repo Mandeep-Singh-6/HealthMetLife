@@ -78,7 +78,7 @@ if((!$_POST && !isset($_SESSION['post'])) || $plan_category_id === "all"){
                             SELECT COUNT(*)
                             FROM plans p
                          ) AS 'totalPages',
-                  p.plan_id, p.title, p.price, p.description, p.colour, 
+                  p.plan_id, p.title, p.price, p.description, p.colour, p.slug,
                   p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
                   pc.plan_category_name
                   FROM plans p 
@@ -112,7 +112,7 @@ if((!$_POST && !isset($_SESSION['post'])) || $plan_category_id === "all"){
                             FROM plans p
                             WHERE p.title LIKE :name
                          ) AS 'totalPages',
-                  p.plan_id, p.title, p.price, p.description, p.colour, 
+                  p.plan_id, p.title, p.price, p.description, p.colour, p.slug,
                   p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
                   pc.plan_category_name 
                   FROM plans p 
@@ -153,7 +153,7 @@ else{
                                 FROM plans p
                                 WHERE p.plan_category_id = :plan_category_id 
                              ) AS 'totalPages',
-                          p.plan_id, p.title, p.price, p.description, p.colour, 
+                          p.plan_id, p.title, p.price, p.description, p.colour, p.slug,
                           p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
                           pc.plan_category_name 
                           FROM plans p 
@@ -193,7 +193,7 @@ else{
                                 WHERE p.plan_category_id = :plan_category_id 
                                     AND p.title LIKE :name
                              ) AS 'totalPages',
-                          p.plan_id, p.title, p.price, p.description, p.colour, 
+                          p.plan_id, p.title, p.price, p.description, p.colour, p.slug,
                           p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
                           pc.plan_category_name 
                           FROM plans p 
@@ -279,7 +279,7 @@ if(!empty($results)){
                             <h1><?= $result['title']?></h1>
                             <h2><?= $result['plan_category_name']  ?></h2>
                             <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id']?>">Learn More...</a></h3>
+                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id'] . "&p=" . $result["slug"]?>">Learn More...</a></h3>
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">

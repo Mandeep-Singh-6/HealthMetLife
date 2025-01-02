@@ -5,16 +5,15 @@ session_start();
 // Set the default timezone to Central Time (America/Winnipeg) 
 date_default_timezone_set('America/Winnipeg');
 
-$plan_id = 0;
 if($_GET){
     //Sanitizing input from the get superglobal.
-    global $plan_id;
     $plan_id = filter_input(INPUT_GET,"plan_id", FILTER_VALIDATE_INT);
+    $slug = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 
 if($plan_id){
     // Creating a query to select the specified record from the plans table based on plan_id.
-    $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, 
+    $query = "SELECT p.plan_id, p.title, p.price, p.description, p.colour, p.slug,
               p.bgcolour, p.plan_category_id, i.image_id, i.medium_path, i.small_path,
               pc.plan_category_name
               FROM plans p 
@@ -22,13 +21,16 @@ if($plan_id){
               ON pc.plan_category_id = p.plan_category_id
               LEFT JOIN images i
               ON p.plan_id = i.plan_id 
-              WHERE p.plan_id = :plan_id LIMIT 1";
+              WHERE p.plan_id = :plan_id 
+                AND p.slug = :slug
+              LIMIT 1";
     
     // Preparing the query.
     $statement = $db->prepare($query);
     
     //Binding values to the query.
     $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
+    $statement->bindValue(":slug", $slug, PDO::PARAM_STR);
     
     // Executing the query.
     $statement->execute();
