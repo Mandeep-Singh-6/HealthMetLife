@@ -11,7 +11,7 @@ if($_GET){
     $slug = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 else{
-    header("Location: index.php?page_id=1&p=home");
+    header("Location: 1/home");
     exit();
 }
 
@@ -37,7 +37,7 @@ if($page_id){
 }
 // If page_id is non-numeric, redirecting user to index.php.
 else{
-    header("Location: index.php?page_id=1&p=home");
+    header("Location: 1/home");
 }
 ?>
 <!DOCTYPE html>
@@ -45,8 +45,9 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/admin/">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

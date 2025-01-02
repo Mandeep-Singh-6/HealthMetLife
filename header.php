@@ -16,11 +16,11 @@
 
 ?>
 <div id = "header">
-    <h1 class = "centerText"><a href="index.php?page_id=1&p=home">HealthMetLife</a></h1>
+    <h1 class = "centerText"><a href="1/home">HealthMetLife</a></h1>
     <nav>
         <ul>
             <?php foreach($headeResults as $headeResult): ?>
-                <li><a href = "<?="index.php?page_id=" . $headeResult["page_id"] . "&p=" . $headeResult["slug"]?>"><?= $headeResult['title'] ?></a></li>
+                <li><a href = "<?=$headeResult["page_id"] . "/" . $headeResult["slug"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
             <li><a href="plans.php?page_num=1">Plans</a></li>
             <li><a href="login.php">Login</a></li>

@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /wd2/Final%20Project/HealthMetLife%20-%20Improved/
+  
+  RewriteRule ^([0-9]+)/([a-zA-Z-]+)/?$ index.php?page_id=$1&p=$2 [L]
+  RewriteRule ^([a-zA-z]+)/([0-9]+)/([a-zA-Z-]+)/?$ $1/index.php?page_id=$2&p=$3 [L]
+</IfModule>

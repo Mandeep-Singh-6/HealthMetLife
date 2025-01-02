@@ -47,7 +47,7 @@ if($_POST){
                 
                     // Executing the statement. Redirecting to index.php if succeeded.
                     if($statement->execute()){
-                        header("Location: index.php?page_id={$page_id}&p={$slug}");
+                        header("Location: {$page_id}/{$slug}");
                     }
             }
             else{
@@ -68,7 +68,7 @@ if($_POST){
 
             //Executing the query and redirecting to index.php if succeeded.
             if($statement->execute()){
-                header("Location: Index.php");
+                header("Location: 1/home");
             }
         }
         exit;
@@ -102,7 +102,7 @@ elseif (isset($_GET['page_id'])){
     }
     // If page_id is non-numeric, redirecting user to index.php.
     else{
-        header("Location: index.php");
+        header("Location: 1/home");
     }
 
 }
@@ -112,8 +112,9 @@ elseif (isset($_GET['page_id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/admin/">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

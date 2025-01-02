@@ -16,7 +16,7 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
         global $error;
         $error = "The passwords don't match please try again.";
     }
-    // Validating if all input is correct, else redirect user to index.php.
+    // Validating if all input is correct, else redirect user to login.php.
     elseif($username && $password && $email && $confirmPassword){
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         // Creating an insert query to insert data into the table.
@@ -46,8 +46,9 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/">
     <title>Register a new user</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -10,5 +10,5 @@
         $params = session_get_cookie_params(); 
         setcookie(session_name(), '', time() - 42000); // $params["path"], $params["domain"], $params["secure"], $params["httponly"] );
     }
-    header("Location: index.php");
+    header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/index.php");
 ?>
