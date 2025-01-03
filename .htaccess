@@ -2,6 +2,11 @@
   RewriteEngine On
   RewriteBase /wd2/Final%20Project/HealthMetLife%20-%20Improved/
   
+  RewriteRule ^([0-9]+)/plans/?$ plans.php?page_num=$1 [L] 
+  RewriteRule ^([a-zA-z]+)/([0-9]+)/plans/?$ $1/plans.php?page_num=$2 [L] 
+  RewriteRule ^plans/([0-9]+)/([a-zA-Z-]+)/?$ showPlan.php?plan_id=$1&p=$2 [L] 
+  RewriteRule ^([a-zA-Z]+)/plans/([0-9]+)/([a-zA-Z-]+)/?$ $1/showPlan.php?plan_id=$2&p=$3 [L] 
   RewriteRule ^([0-9]+)/([a-zA-Z-]+)/?$ index.php?page_id=$1&p=$2 [L]
   RewriteRule ^([a-zA-z]+)/([0-9]+)/([a-zA-Z-]+)/?$ $1/index.php?page_id=$2&p=$3 [L]
+
 </IfModule>

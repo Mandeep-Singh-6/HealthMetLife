@@ -31,10 +31,10 @@ if($_POST){
             $_SESSION['user_id'] = $result['user_id'];
 
             if($result['role_id'] === 1){
-                header("Location: admin/index.php");
+                header("Location: admin/1/home");
             }
             elseif($result['role_id'] === 2){
-                header("Location: user/index.php");
+                header("Location: user/1/home");
             }
         }
         else{

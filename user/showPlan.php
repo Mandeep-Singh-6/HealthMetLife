@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 2){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 // Set the default timezone to Central Time (America/Winnipeg) 
@@ -41,9 +41,9 @@ if($plan_id){
     // Fetching the returned row.
     $result = $statement->fetch();
 }
-// If plan_id is non-numeric, redirecting user to Plans.php.
+// If plan_id is non-numeric, redirecting user to plans.php.
 else{
-    header("Location: plans.php?page_num=1");
+    header("Location: 1/plans");
 }
 
 // Checking for comments to display.
@@ -95,10 +95,10 @@ if($_POST){
         $statement->execute();
     
         // Redirecting to break the PRG pattern.
-        header("Location: showPlan.php?plan_id=" . $plan_id);
+        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $plan_id . "/" . $slug);
     }
     else{
-        header("Location: showPlan.php?plan_id=" . $plan_id);
+        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $plan_id . "/" . $slug);
     }
 }
 ?>
@@ -146,7 +146,7 @@ if($_POST){
                     </div>
                 <?php endforeach ?>
             </div>
-            <form method = "post" class = "centerForm">
+            <form method = "post" class = "centerForm" action="<?php "plans/" . $plan_id . "/" . $slug ?>">
                 <fieldset class="commentSet">
                         <label for="comment">Comment? Type here:</label>
                         <textarea name="comment" id="comment"></textarea>

@@ -2,7 +2,7 @@
 require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 function generateSlug($word){
@@ -164,7 +164,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
 
                 // Executing the query.
                 $statement->execute();    
-                header("Location: Plans.php");
+                header("Location: 1/plans");
         }
         else{
             $error = "The uploaded file is not an image.";
@@ -215,7 +215,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             // Executing the query.
             $statement->execute();
         }
-        header("Location: plans.php?page_num=1");
+        header("Location: 1/plans");
         
     }
 }

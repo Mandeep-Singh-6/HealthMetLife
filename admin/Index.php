@@ -2,7 +2,7 @@
 require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 if($_GET){
@@ -38,6 +38,7 @@ if($page_id){
 // If page_id is non-numeric, redirecting user to index.php.
 else{
     header("Location: 1/home");
+    exit();
 }
 ?>
 <!DOCTYPE html>

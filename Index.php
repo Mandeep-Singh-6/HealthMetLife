@@ -36,6 +36,7 @@ if($page_id){
 // If page_id is non-numeric, redirecting user to the home page.
 else{
     header("Location: 1/home");
+    exit();
 }
 ?>
 <!DOCTYPE html>

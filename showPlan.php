@@ -40,7 +40,7 @@ if($plan_id){
 }
 // If plan_id is non-numeric, redirecting user to Plans.php.
 else{
-    header("Location: plans.php?page_num=1");
+    header("Location: 1/plans");
 }
 
 // Checking for comments to display.
@@ -108,14 +108,14 @@ if($_POST){
             unset($_SESSION['comment']);
             
             // Redirecting to break the PRG pattern.
-            header("Location: showPlan.php?plan_id=" . $plan_id);
+            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
         }
         else{
-            header("Location: showPlan.php?plan_id=" . $plan_id);
+            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
         }
     }
     else{
-        header("Location: showPlan.php?plan_id=" . $plan_id);
+        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
     }
 }
 ?>
@@ -156,7 +156,7 @@ if($_POST){
                     </div>
                 <?php endforeach ?>
             </div>
-            <form method = "post" class = "centerForm">
+            <form method = "post" class = "centerForm" action="<?= "plans/" . $plan_id . "/" . $slug ?>">
                 <fieldset class="commentSet">
                     <label for="comment">Comment? Type here:</label>
                     <textarea name="comment" id="comment"><?= (!empty($_SESSION['comment']) ? $_SESSION['comment'] : "") ?></textarea>

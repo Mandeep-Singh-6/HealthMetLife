@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 2){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 // Getting all the plan categories.
@@ -20,7 +20,7 @@ $planCategoryResults = $statement->fetchAll();
 
 // Getting the page number.
 if(!$_GET){
-    header("Location: plans.php?page_num=1");
+    header("Location: 1/plans");
     exit();
 }
 else{
@@ -29,9 +29,9 @@ else{
         // Larger page_num entered manually than allowed.
         // No page_num supplied.
         // Negative page_num.
-    if(!$page_num || $page_num <= 0 || $page_num > $_SESSION['subPages']){
+    if(!$page_num || $page_num <= 0 || ( $page_num !== 1 && isset($_SESSION['subPages']) && $page_num > $_SESSION['subPages'] )){
         // Showing results as first page if invalid page number given.
-        header("Location: plans.php?page_num=1");
+        header("Location: 1/plans");
     }
     // print_r("Page num:" . $page_num);
 }
@@ -39,8 +39,6 @@ else{
 // Storing the post data in a session variable if new POST is done. Or updating it.
 if($_POST){
     $_SESSION['post'] = $_POST;
-    // If new post is done, reloading the page with page_num 1.
-    header("Location: plans.php?page_num=1");
 }
 
 // Determining if user entered a name to search or not.
@@ -262,7 +260,7 @@ if(!empty($results)){
         <h1 class = "centerText">Our Offerings:</h1>
 
         <!-- Form to sort plans by categories. -->
-        <form method="post" class = "sortForm marginedForm">
+        <form method="post" class = "sortForm marginedForm" action="1/plans">
         <label for="plan_category_id">Category:</label>
             <select name="plan_category_id" id="plan_category_id">
                 <option value="all" <?php if (isset($plan_category_id) && $plan_category_id === "all") echo 'selected';?>>All</option>
@@ -283,7 +281,7 @@ if(!empty($results)){
                             <h1><?= $result['title']?></h1>
                             <h2><?= $result['plan_category_name']  ?></h2>
                             <h2><?= "Price - $" . $result['price'] . " Annually" ?></h2>
-                            <h3>Click here to - <a href="<?= "showPlan.php?plan_id=" . $result['plan_id'] . "&p=" . $result["slug"]?>">Learn More...</a></h3>
+                            <h3>Click here to - <a href="<?= "plans/" . $result['plan_id'] . "/" . $result["slug"]?>">Learn More...</a></h3>
                         </div>
                         <?php if(isset($result['small_path'])):?>
                         <div class = "planImageWrapper">
@@ -295,13 +293,13 @@ if(!empty($results)){
             <?php if($noOfSubPages > 1): ?>    
                 <ul id = "paginationUl">
                     <?php if($page_num != 1): ?>
-                        <li><a href="<?= "Plans.php?page_num=". ($page_num - 1)?>">Previous</a></li>
+                        <li><a href="<?= ($page_num - 1) . "/plans" ?>">Previous</a></li>
                     <?php endif?>
                     <?php for($subPage = 1; $subPage <= $noOfSubPages; $subPage++): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . $subPage ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
+                        <li><a href="<?= $subPage . "/plans" ?>" <?php echo ($page_num == $subPage) ? 'class="currentPage"': '';?>><?= $subPage ?></a></li>
                     <?php endfor ?>
                     <?php if($page_num != $noOfSubPages): ?>
-                        <li><a href="<?= "Plans.php?page_num=" . ($page_num + 1)?>">Next</a></li>
+                        <li><a href="<?= ($page_num + 1) . "/plans" ?>">Next</a></li>
                     <?php endif ?>
                 </ul>
             <?php endif ?>

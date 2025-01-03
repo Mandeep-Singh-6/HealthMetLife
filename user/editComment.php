@@ -2,7 +2,7 @@
 require('connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 2){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 if (isset($_GET['comment_id'])){
@@ -10,7 +10,11 @@ if (isset($_GET['comment_id'])){
     $comment_id = filter_input(INPUT_GET,'comment_id', FILTER_VALIDATE_INT);
     if($comment_id){
         // Creating a query to select the specified record from the blogs table based on comment_id.
-        $query = "SELECT * FROM comments WHERE comment_id = :comment_id LIMIT 1";
+        $query = "SELECT c.*, p.slug
+                  FROM comments c
+                  JOIN plans p
+                  ON p.plan_id = c.plan_id 
+                  WHERE comment_id = :comment_id LIMIT 1";
     
         // Preparing the query.
         $statement = $db->prepare($query);
@@ -26,12 +30,12 @@ if (isset($_GET['comment_id'])){
     }
     // If comment_id is non-numeric, redirecting user to showPlan.php.
     else{
-        header("Location: Plans.php");
+        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/1/plans");
     }
 
     // Redirecting a user back if the comment doesn't belong to them.
     if($result['user_id'] != $_SESSION['user_id'] || $result == false){
-        header("Location: showPlan.php?plan_id=" . $result['plan_id']);
+        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
     }
 }
 if($_POST){
@@ -53,7 +57,7 @@ if($_POST){
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: showPlan.php?plan_id=" . $result['plan_id']);
+            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
         }
     }
     else{

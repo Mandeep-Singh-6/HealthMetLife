@@ -2,7 +2,7 @@
 require('../user/connect.php');
 session_start();
 if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }
 
 function generateSlug($word){
@@ -144,7 +144,7 @@ if($_POST){
 
                         $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
 
-                        // Executing the statement. Redirecting to Plans.php if succeeded.
+                        // Executing the statement. Redirecting to plans.php if succeeded.
                         if($statement->execute()){
                             // If the deletion succeeded, inserting a new record.
                             // We won't get an error for deleting a record that doesn't exit.
@@ -193,9 +193,9 @@ if($_POST){
                         $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                         $statement->bindValue(":plan_category_id", $plan_category_id);
                     
-                        // Executing the statement. Redirecting to Plans.php if succeeded.
+                        // Executing the statement. Redirecting to plans.php if succeeded.
                         if($statement->execute()){
-                            header("Location: plans.php?page_num=1");
+                            header("Location: 1/plans");
                         }
                     }
                     else{
@@ -278,9 +278,9 @@ if($_POST){
                     $statement->bindValue(":plan_id", $plan_id, PDO::PARAM_INT);
                     $statement->bindValue(":plan_category_id", $plan_category_id);
                     
-                    // Executing the statement. Redirecting to Plans.php if succeeded.
+                    // Executing the statement. Redirecting to plans.php if succeeded.
                     if($statement->execute()){
-                        header("Location: plans.php?page_num=1");
+                        header("Location: 1/plans");
                     }
                 }
             }
@@ -339,7 +339,7 @@ if($_POST){
 
             //Executing the query.
             if($statement->execute()){
-                header("Location: Plans.php");
+                header("Location: 1/plans");
             }
         }
     }

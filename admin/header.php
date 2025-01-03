@@ -22,7 +22,7 @@
             <?php foreach($headeResults as $headeResult): ?>
                 <li><a href = "<?=$headeResult["page_id"] . "/" . $headeResult["slug"]?>"><?= $headeResult['title'] ?></a></li>
             <?php endforeach ?>
-            <li><a href="plans.php?page_num=1">Plans</a></li>
+            <li><a href="1/plans">Plans</a></li>
             <li><a href = "admin.php">Admin</a></li>
             <li><a href = "../logout.php">Logout</a></li>
         </ul>
