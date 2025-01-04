@@ -261,16 +261,18 @@ if(!empty($results)){
 
         <!-- Form to sort plans by categories. -->
         <form method="post" class = "sortForm marginedForm" action="1/plans">
-        <label for="plan_category_id">Category:</label>
-            <select name="plan_category_id" id="plan_category_id">
-                <option value="all" <?php if (isset($plan_category_id) && $plan_category_id === "all") echo 'selected';?>>All</option>
-                <?php foreach($planCategoryResults as $planCategoryResult): ?>
-                <option value="<?= $planCategoryResult['plan_category_id'] ?>" <?php if (isset($plan_category_id) && $plan_category_id == $planCategoryResult['plan_category_id']) echo 'selected';?>><?= $planCategoryResult['plan_category_name'] ?></option>
-                <?php endforeach ?>
-            </select>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value = "<?= (isset($name)) ? $name : "" ?>">
-        <button type="submit">Search</button>
+            <fieldset>
+                <label for="plan_category_id">Category:</label>
+                    <select name="plan_category_id" id="plan_category_id">
+                        <option value="all" <?php if (isset($plan_category_id) && $plan_category_id === "all") echo 'selected';?>>All</option>
+                        <?php foreach($planCategoryResults as $planCategoryResult): ?>
+                        <option value="<?= $planCategoryResult['plan_category_id'] ?>" <?php if (isset($plan_category_id) && $plan_category_id == $planCategoryResult['plan_category_id']) echo 'selected';?>><?= $planCategoryResult['plan_category_name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value = "<?= (isset($name)) ? $name : "" ?>">
+                <button type="submit">Search</button>
+            </fieldset>
         </form>
 
     <!-- To amount for a scenario where no records are returned. -->

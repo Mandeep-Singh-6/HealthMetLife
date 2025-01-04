@@ -84,11 +84,11 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
                 <div class="formSeparator">
                     <button type = "submit">Create</button>
                 </div>
+                <div class="centerText formSeparator">
+                    <a href="login.php" class="aButton">Login</a>
+                </div>
             </fieldset>
         </form>
-        <div class="centerText">
-            <a href="login.php" class="aButton">Login Instead</a>
-        </div>
     </div>
 </body>
 </html>

@@ -252,7 +252,7 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             <?php if($error):?>
                 <p class="error"><?= $error ?></p>
             <?php endif ?>
-            <h1>Create a New Plan</h1>
+            <h2>Create a New Plan</h2>
 
             <form method = "post" class = "pageForm" enctype="multipart/form-data">
                 <fieldset>

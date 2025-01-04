@@ -112,7 +112,7 @@ elseif (isset($_GET['plan_category_id'])){
                 <p class = "error"><?= $error ?></p>
             <?php else: ?>
                 <?php if(isset($result)):?> 
-                <h1>Edit Plan Category</h1>
+                <h2>Edit Plan Category</h2>
 
                 <form method = "post" class = "pageForm">
                     <fieldset>

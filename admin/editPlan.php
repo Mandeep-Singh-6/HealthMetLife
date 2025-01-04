@@ -407,7 +407,7 @@ elseif (isset($_GET['plan_id'])){
                 <p class = "error"><?= $error ?></p>
             <?php else: ?>
                 <?php if($result):?> 
-                <h1>Edit a Plan</h1>
+                <h2>Edit a Plan</h2>
 
                 <form method = "post" class = "pageForm" enctype="multipart/form-data">
                     <fieldset>

@@ -78,7 +78,7 @@ body{
     padding-top: 80px;
     position: relative;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 div#header h1{
@@ -204,6 +204,7 @@ fieldset.commentSet{
 
 form.pageForm fieldset{
     border: none;
+    padding-left: 0px;
 }
 
 form.pageForm fieldset label{
@@ -214,8 +215,39 @@ form.pageForm fieldset label{
 }
 
 form.pageForm fieldset button{
-    margin-left: 5%;
-    margin-top: 3%;
+    border-radius: 5px;
+    background-color: #ebebeb;
+}
+
+form.pageForm fieldset button:hover{
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+form.pageForm fieldset button.active{
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+form.pageForm fieldset button.active:hover{
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+form.pageForm fieldset div.formSeparator > button{
+    display: block;
+    margin: 10px auto;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 19px;
+    width: 70px;
+    height: 33px;
+    transition: 200ms ease;
+}
+
+form.pageForm fieldset div.formSeparator > button:active{
+    transform: scale(0.9);
 }
 
 form.pageForm fieldset input:not([type = 'color']){
@@ -242,11 +274,35 @@ form.pageForm fieldset textarea{
 }
 
 div.formSeparator{
-    width: 450px;
+    width: 486px;
 }
 
 .sortForm{
     margin-top: 20px;
+}
+
+.sortForm fieldset{
+    border: none;
+}
+
+.sortForm fieldset button{
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 17px;
+    width: 65px;
+    height: 33px;
+    transition: 200ms ease;
+}
+
+.sortForm fieldset button:active{
+    transform: scale(0.9);
+}
+
+.sortForm select, .sortForm input{
+    border: 1px solid black;
+    height: 29px;
+    border-radius: 14px;
 }
 
 div.planDiv{
@@ -335,12 +391,22 @@ table tbody tr:hover{
 }
 
 .aButton{
+    display: block;
+    padding: 7px 15px;
+    margin: 5px auto;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 130px;
+    height: 17.5px;
+    line-height: 17.5px;
     text-decoration: none;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 2px;
-    background-color: rgb(239, 238, 238);
-    color: black;
+    transition: 200ms ease;
+}
+
+.aButton:focus{
+    transform: scale(0.9);
 }
 
 /* To apply to text in pages like home, about, etc. */
@@ -515,4 +581,17 @@ img#captchaImg{
 
 div.planTextWrapper h1{
     margin-right: 5px;
+}
+
+.panel-default>.panel-heading{
+    background-color: #fff;
+}
+
+.note-editor.note-airframe .note-statusbar, .note-editor.note-frame .note-statusbar {
+    background-color: #fff;
+}
+
+.panel{
+    border-radius: 0px;
+    margin-bottom: 0px;
 }

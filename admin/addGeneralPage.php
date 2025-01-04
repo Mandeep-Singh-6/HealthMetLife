@@ -72,7 +72,7 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     <div id="wrapper">
         <?php require('adminNav.php') ?>
         <main>
-            <h1>Create a General Page</h1>
+            <h2>Create a General Page</h2>
 
             <form method = "post" class = "pageForm">
                 <fieldset>

@@ -84,7 +84,7 @@ if($_POST){
     <div id="wrapper">
         <?php require('adminNav.php') ?>
         <main>
-            <h1>Edit a comment</h1>
+            <h2>Edit a comment</h2>
 
             <form method = "post" class = "pageForm">
                 <fieldset>

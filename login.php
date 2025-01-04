@@ -82,11 +82,11 @@ if($_POST){
                     <div class="formSeparator">
                         <button type = "submit">Login</button>
                     </div>
+                    <div class="centerText formSeparator">
+                        <a href="register.php" class="aButton">Register New User</a>
+                    </div>
                 </fieldset>
             </form>
-            <div class="centerText">
-                <a href="register.php" class="aButton">Register New User</a>
-            </div>
     </div>
 </body>
 </html>

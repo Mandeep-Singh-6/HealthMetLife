@@ -137,7 +137,7 @@ elseif (isset($_GET['page_id'])){
                 <p class = "error"><?= $error ?></p>
             <?php else: ?>
                 <?php if(isset($result)):?> 
-                <h1>Edit a General Page</h1>
+                <h2>Edit a General Page</h2>
 
                 <form method = "post" class = "pageForm">
                     <fieldset>

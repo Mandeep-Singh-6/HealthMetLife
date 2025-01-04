@@ -23,7 +23,7 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     <div id="wrapper">
         <?php require('adminNav.php') ?>
         <main>
-            <h1>This is the admin Page.</h1>
+            <h2>This is the admin Page.</h2>
             <p>You are a God here.</p>
         </main>
     </div>

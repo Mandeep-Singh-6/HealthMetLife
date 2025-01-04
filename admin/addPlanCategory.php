@@ -47,7 +47,7 @@ if($_POST && !empty($_POST["name"])){
     <div id="wrapper">
         <?php require('adminNav.php') ?>
         <main>
-            <h1>Create a New Plan Category</h1>
+            <h2>Create a New Plan Category</h2>
 
             <form method = "post" class = "pageForm">
                 <fieldset>

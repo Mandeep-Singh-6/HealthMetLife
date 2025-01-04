@@ -95,17 +95,19 @@ $planCategoryResults = $statement->fetchAll();
         <?php require('adminNav.php') ?>
         <main>
             <form method="post" class = "sortForm">
-            <label for="criteria">Sort By:</label> 
-            <select id="criteria" name="criteria"> 
-                <option value="title" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'title') echo 'selected';?>>Title</option> 
-                <option value="created_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'created_at') echo 'selected';?>>Created At</option> 
-                <option value="updated_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'updated_at') echo 'selected';?>>Updated At</option> 
-            </select> 
-            <select name="direction" id="direction">
-            <option value="ASC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'ASC') echo 'selected';?>>Ascending</option>
-            <option value="DESC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'DESC') echo 'selected';?>>Descending</option>
-            </select>
-            <button type="submit">Sort</button>
+                <fieldset>
+                    <label for="criteria">Sort By:</label> 
+                        <select id="criteria" name="criteria"> 
+                            <option value="title" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'title') echo 'selected';?>>Title</option> 
+                            <option value="created_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'created_at') echo 'selected';?>>Created At</option> 
+                            <option value="updated_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'updated_at') echo 'selected';?>>Updated At</option> 
+                        </select> 
+                        <select name="direction" id="direction">
+                        <option value="ASC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'ASC') echo 'selected';?>>Ascending</option>
+                        <option value="DESC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'DESC') echo 'selected';?>>Descending</option>
+                        </select>
+                        <button type="submit">Sort</button>
+                </fieldset>
             </form>
             <h1>General Pages:</h1>
             <table>
@@ -152,12 +154,14 @@ $planCategoryResults = $statement->fetchAll();
                 </table>
             <!-- A separate sort form for plan categories. -->
             <form method="post" class = "sortForm">
-            <label for="direction2">Sort By:</label> 
-            <select name="direction2" id="direction2">
-            <option value="ASC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'ASC') echo 'selected';?>>Oldest</option>
-            <option value="DESC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'DESC') echo 'selected';?>>Latest</option>
-            </select>
-            <button type="submit">Sort</button>
+                <fieldset>
+                    <label for="direction2">Sort By:</label> 
+                    <select name="direction2" id="direction2">
+                        <option value="ASC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'ASC') echo 'selected';?>>Oldest</option>
+                        <option value="DESC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'DESC') echo 'selected';?>>Latest</option>
+                    </select>
+                    <button type="submit">Sort</button>
+                </fieldset>
             </form>
 
             <h1>Plan Categories:</h1>

@@ -118,7 +118,7 @@ elseif (isset($_GET['user_id'])){
                 <p class = "error"><?= $error ?></p>
             <?php else: ?>
                 <?php if(isset($result)):?> 
-                <h1>Edit User</h1>
+                <h2>Edit User</h2>
 
                 <form method = "post" class = "pageForm">
                     <fieldset>
