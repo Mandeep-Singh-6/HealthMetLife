@@ -130,7 +130,7 @@ elseif (isset($_GET['user_id'])){
                 </div>
                 <div class="formSeparator">
                     <label for="password">Password</label>
-                    <input type="password" id = "password" name = "password" value = "<?= $result['password'] ?>">
+                    <input type="password" id = "password" name = "password">
                 </div>
                 <div class="formSeparator">
                 <button type = "submit" name = "action" value = "Update" >Update</button>

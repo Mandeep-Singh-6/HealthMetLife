@@ -243,7 +243,7 @@ div.formSeparator{
 
 div.planDiv{
     display: flex;
-    width: 45%;
+    width: 47%;
     text-align: left;
     padding: 1% 4%;
     margin: 0 auto;
@@ -502,4 +502,8 @@ div.commentDiv a{
 img#captchaImg{
     clear: both;
     display: block;
+}
+
+div.planTextWrapper h1{
+    margin-right: 5px;
 }

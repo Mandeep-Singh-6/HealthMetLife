@@ -103,7 +103,8 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
             // Validating if all input is correct.
             if($title && $description && $price && $colour && $bgcolour){
                 
-                $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
+                $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id, slug) 
+                VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id, :slug)";
                 
                 // Loads the query into the SQL server's cache and returns a PDOStatement object.
                 $statement = $db->prepare($query);
@@ -191,7 +192,8 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
         // Validating if all input is correct, else redirect user to index.php.
         if($title && $description && $price && $colour && $bgcolour){
                 
-            $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id) VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id)";
+            $query = "INSERT INTO plans (title, description, created_at, price, colour, bgcolour, plan_category_id, slug) 
+                      VALUES (:title, :description, :created_at, :price, :colour, :bgcolour, :plan_category_id, :slug)";
                 
             // Loads the query into the SQL server's cache and returns a PDOStatement object.
             $statement = $db->prepare($query);
