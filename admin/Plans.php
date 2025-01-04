@@ -60,7 +60,7 @@ elseif(isset($_SESSION['post']['plan_category_id'])){
 }
 
 // The number of plans per page.
-$plansPerPage = 2;
+$plansPerPage = 3;
 
 
 // Calculating the offset.
