@@ -43,21 +43,24 @@ if($_POST && !empty($_POST["name"])){
     <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
 </head>
 <body>
-<?php include('adminNav.php') ?>
-    <h1>Create a New Plan Category</h1>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <h1>Create a New Plan Category</h1>
 
-    <form method = "post" class = "pageForm">
-        <fieldset>
-            <div class="formSeparator">
-                <label for="name">Name</label>
-                <input type="text" id = "name" name = "name" autofocus>
-            </div>
-            <div class="formSeparator">
-                <button type = "submit">Create</button>
-            </div>
-        </fieldset>
-    </form>
-    </main>
+            <form method = "post" class = "pageForm">
+                <fieldset>
+                    <div class="formSeparator">
+                        <label for="name">Name</label>
+                        <input type="text" id = "name" name = "name" autofocus>
+                    </div>
+                    <div class="formSeparator">
+                        <button type = "submit">Create</button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
     </div>
 </body>
 </html>

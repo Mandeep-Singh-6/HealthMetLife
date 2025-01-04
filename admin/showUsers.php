@@ -31,34 +31,37 @@ if(!isset($_SESSION['login_role']) || $_SESSION['login_role'] !== 1){
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include('adminNav.php') ?>
-    <?php if (isset($userResults)): ?>
-        <table id="users">
-            <caption>Users</caption>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($userResults as $userResult):?>
-                    <tr>
-                        <td><?=$userResult['username']?></td>
-                        <td><?=$userResult['email']?></td>
-                        <td><a href="<?= "editUser.php?user_id=" . $userResult['user_id']?>">edit</a></td>
-                    </tr>
-                <?php endforeach?>
-            </tbody>
-        </table>
-        <div class="centerText">
-            <a href="register.php" class="aButton">Create new User</a>
-        </div>
-    <?php else: ?>
-        <h1 class="error">Sorry, there are no users to view.</h1>
-    <?php endif ?>
-    </main>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <?php if (isset($userResults)): ?>
+                <table>
+                    <caption>Users</caption>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($userResults as $userResult):?>
+                            <tr>
+                                <td><?=$userResult['username']?></td>
+                                <td><?=$userResult['email']?></td>
+                                <td><a href="<?= "editUser.php?user_id=" . $userResult['user_id']?>">edit</a></td>
+                            </tr>
+                        <?php endforeach?>
+                    </tbody>
+                </table>
+                <?php else: ?>
+                    <h1 class="error">Sorry, there are no users to view.</h1>
+                    <?php endif ?>
+            </main>
+            <div class="centerText">
+                <a href="register.php" class="aButton">Create new User</a>
+            </div>
     </div>
 </body>
 </html>

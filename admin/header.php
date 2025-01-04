@@ -16,7 +16,7 @@
 
 ?>
 <div id = "header">
-<h1 class = "centerText"><a href="1/home">HealthMetLife</a></h1>
+    <h1 class = "centerText"><a href="1/home">HealthMetLife</a></h1>
     <nav>
         <ul>
             <?php foreach($headeResults as $headeResult): ?>

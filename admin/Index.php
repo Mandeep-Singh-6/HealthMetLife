@@ -57,16 +57,18 @@ else{
 <body>
     <?php require('header.php') ?>
     <div id="wrapper">
-        <?php if(!empty($result)):?>
+        <div id="textWrapper">
+            <?php if(!empty($result)):?>
             <?php if($page_id === 1): ?>
-            <h1>Welcome <?= (isset($_SESSION['username'])) ? "back, " . $_SESSION['username'] : ""?>!</h1>
+                <h1>Welcome <?= (isset($_SESSION['username'])) ? "back, " . $_SESSION['username'] : ""?>!</h1>
+                <?php else: ?>
+                <h1><?= $result['title'] ?></h1>
+                <?php endif ?>
+                <div><?= $result['content'] ?></div>
             <?php else: ?>
-            <h1><?= $result['title'] ?></h1>
+                <p class="error">Sorry, this page doesn't exist.</p>
             <?php endif ?>
-            <div><?= $result['content'] ?></div>
-        <?php else: ?>
-            <p class="error">Sorry, this page doesn't exist.</p>
-        <?php endif ?>
+        </div>
     </div>
 </body>
 </html>

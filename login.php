@@ -63,27 +63,30 @@ if($_POST){
 </head>
 <body>
     <?php require('header.php') ?>
-    <?php if($error):?>
-        <h1 class="error"><?= $error ?></h1>
-    <?php endif ?>
-    <h1 class = "centerText">Login</h1>
-        <form method = "post" class = "pageForm centerForm">
-            <fieldset>
-                <div class="formSeparator">
-                    <label for="email">Email</label>
-                    <input type="email" id = "email" name = "email" autofocus>
-                </div>
-                <div class="formSeparator">
-                    <label for="password">Password</label>
-                    <input type="password" id = "password" name = "password">
-                </div>
-                <div class="formSeparator">
-                    <button type = "submit">Login</button>
-                </div>
-            </fieldset>
-        </form>
-        <div class="centerText">
-            <a href="register.php" class="aButton">Register New User</a>
-        </div>
+    <div id="wrapper">
+
+        <?php if($error):?>
+            <h1 class="error"><?= $error ?></h1>
+        <?php endif ?>
+        <h1 class = "centerText">Login</h1>
+            <form method = "post" class = "pageForm centerForm">
+                <fieldset>
+                    <div class="formSeparator">
+                        <label for="email">Email</label>
+                        <input type="email" id = "email" name = "email" autofocus>
+                    </div>
+                    <div class="formSeparator">
+                        <label for="password">Password</label>
+                        <input type="password" id = "password" name = "password">
+                    </div>
+                    <div class="formSeparator">
+                        <button type = "submit">Login</button>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="centerText">
+                <a href="register.php" class="aButton">Register New User</a>
+            </div>
+    </div>
 </body>
 </html>

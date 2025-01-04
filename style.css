@@ -77,6 +77,8 @@ body{
     font-style: normal;
     padding-top: 80px;
     position: relative;
+    margin: 0;
+    font-size: 14px;
 }
 
 div#header h1{
@@ -300,9 +302,8 @@ div.showPlanDiv img{
     margin-bottom: 20px;
 }
 
-table#users{
-    width: 95%;
-    margin: 0px auto;
+table{
+    width: 70%;
     border: 1px solid black;
     margin-bottom: 10px;
 }
@@ -311,25 +312,25 @@ table#users{
 they have a different rendering model than block elements.
 We can achieve the desired results by apply it on the table
 caption. */
-table#users caption{
+table caption{
     margin-top: 30px;
     font-size: 1.3em;
     font-weight: 400;
 }
 
-table#users th{
+table th{
     font-weight: 350;
 }
 
-table#users td, table#users th{
+table td, table th{
     border: 1px solid black;
 }
 
-table#users tbody tr:nth-child(even){
+table tbody tr:nth-child(even){
     background-color: rgb(232, 232, 232);
 }
 
-table#users tbody tr:hover{
+table tbody tr:hover{
     background-color: rgb(181, 179, 179);
 }
 
@@ -344,14 +345,16 @@ table#users tbody tr:hover{
 
 /* To apply to text in pages like home, about, etc. */
 div#wrapper{
-    padding-left: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 5%;
 }
 
 div#wrapper aside.navAside{
     background-color: rgb(188, 188, 188);
     /* Changing the margin-bottom of the navbar wasn't feasable. */
     margin-top: 50px;
-    margin-left: -20px;
+    left: 0%;
     position: fixed;
     border: 1px solid rgb(188, 188, 188);
 }

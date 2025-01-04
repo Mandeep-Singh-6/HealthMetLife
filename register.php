@@ -57,35 +57,38 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
 <body>
 
     <?php require('header.php') ?>
-    <?php if($error):?>
-        <h1 class="error"><?= $error ?></h1>
-    <?php endif ?>
-    <h1 class = "centerText">Register a new user</h1>
-    <form method = "post" class = "pageForm centerForm">
-        <fieldset>
-            <div class="formSeparator">
-                <label for="username">Username</label>
-                <input type="text" id = "username" name = "username" autofocus>
-            </div>
-            <div class="formSeparator">
-                <label for="email">Email</label>
-                <input type="email" id = "email" name = "email" autofocus>
-            </div>
-            <div class="formSeparator">
-                <label for="password">Password</label>
-                <input type="password" id = "password" name = "password" autofocus>
-            </div>
-            <div class="formSeparator">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id = "confirmPassword" name = "confirmPassword" autofocus>
-            </div>
-            <div class="formSeparator">
-                <button type = "submit">Create</button>
-            </div>
-        </fieldset>
-    </form>
-    <div class="centerText">
+    <div id="wrapper">
+
+        <?php if($error):?>
+            <h1 class="error"><?= $error ?></h1>
+        <?php endif ?>
+        <h1 class = "centerText">Register a new user</h1>
+        <form method = "post" class = "pageForm centerForm">
+            <fieldset>
+                <div class="formSeparator">
+                    <label for="username">Username</label>
+                    <input type="text" id = "username" name = "username" autofocus>
+                </div>
+                <div class="formSeparator">
+                    <label for="email">Email</label>
+                    <input type="email" id = "email" name = "email" autofocus>
+                </div>
+                <div class="formSeparator">
+                    <label for="password">Password</label>
+                    <input type="password" id = "password" name = "password" autofocus>
+                </div>
+                <div class="formSeparator">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id = "confirmPassword" name = "confirmPassword" autofocus>
+                </div>
+                <div class="formSeparator">
+                    <button type = "submit">Create</button>
+                </div>
+            </fieldset>
+        </form>
+        <div class="centerText">
             <a href="login.php" class="aButton">Login Instead</a>
         </div>
+    </div>
 </body>
 </html>

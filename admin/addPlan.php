@@ -245,53 +245,56 @@ if(!$upload_error && $_POST && !empty($_POST["description"]) && !empty($_POST["t
     <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
 </head>
 <body>
-<?php include('adminNav.php') ?>
-    <?php if($error):?>
-        <p class="error"><?= $error ?></p>
-    <?php endif ?>
-    <h1>Create a New Plan</h1>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <?php if($error):?>
+                <p class="error"><?= $error ?></p>
+            <?php endif ?>
+            <h1>Create a New Plan</h1>
 
-    <form method = "post" class = "pageForm" enctype="multipart/form-data">
-        <fieldset>
-            <div class="formSeparator">
-                <label for="title">Title</label>
-                <input type="text" id = "title" name = "title">
-            </div>
-            <div class="formSeparator">
-                <label for="price">Price</label>
-                <input type="number" id = "price" name = "price" step = ".01" >
-            </div>
-            <div class="formSeparator">
-                <label for="bgcolour">Background</label>
-                <input type="color" id = "bgcolour" name = "bgcolour" value = "#000000">
-            </div>
-            <div class="formSeparator">
-                <label for="colour">Text Colour</label>
-                <input type="color" id = "colour" name = "colour" value = "#FFFFFF">
-            </div>
-            <div class="formSeparator">
-                <label for="image">Upload Image here:</label>
-                <input type="file" id="image" name="image">
-            </div>
-            <div class="formSeparator">
-                <label for="plan_category_id">Category:</label>
-                <select name="plan_category_id" id="plan_category_id">
-                    <option value="NULL">None</option>
-                    <?php foreach($planCategoryResults as $planCategoryResult): ?>
-                    <option value="<?= $planCategoryResult['plan_category_id'] ?>"><?= $planCategoryResult['plan_category_name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="formSeparator">
-                <label for="summernote">Description</label>
-                <textarea id = "summernote" name = "description"></textarea>
-            </div>
-            <div class="formSeparator">
-                <button type = "submit">Create</button>
-            </div>
-        </fieldset>
-    </form>
-    </main>
+            <form method = "post" class = "pageForm" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="formSeparator">
+                        <label for="title">Title</label>
+                        <input type="text" id = "title" name = "title">
+                    </div>
+                    <div class="formSeparator">
+                        <label for="price">Price</label>
+                        <input type="number" id = "price" name = "price" step = ".01" >
+                    </div>
+                    <div class="formSeparator">
+                        <label for="bgcolour">Background</label>
+                        <input type="color" id = "bgcolour" name = "bgcolour" value = "#000000">
+                    </div>
+                    <div class="formSeparator">
+                        <label for="colour">Text Colour</label>
+                        <input type="color" id = "colour" name = "colour" value = "#FFFFFF">
+                    </div>
+                    <div class="formSeparator">
+                        <label for="image">Upload Image here:</label>
+                        <input type="file" id="image" name="image">
+                    </div>
+                    <div class="formSeparator">
+                        <label for="plan_category_id">Category:</label>
+                        <select name="plan_category_id" id="plan_category_id">
+                            <option value="NULL">None</option>
+                            <?php foreach($planCategoryResults as $planCategoryResult): ?>
+                            <option value="<?= $planCategoryResult['plan_category_id'] ?>"><?= $planCategoryResult['plan_category_name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="formSeparator">
+                        <label for="summernote">Description</label>
+                        <textarea id = "summernote" name = "description"></textarea>
+                    </div>
+                    <div class="formSeparator">
+                        <button type = "submit">Create</button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
     </div>
     <script>
         $(document).ready(function() {

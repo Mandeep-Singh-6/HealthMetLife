@@ -110,39 +110,42 @@ elseif (isset($_GET['user_id'])){
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include('adminNav.php') ?>
-    <?php if($error): ?>
-        <p class = "error"><?= $error ?></p>
-    <?php else: ?>
-        <?php if(isset($result)):?> 
-        <h1>Edit User</h1>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <?php if($error): ?>
+                <p class = "error"><?= $error ?></p>
+            <?php else: ?>
+                <?php if(isset($result)):?> 
+                <h1>Edit User</h1>
 
-        <form method = "post" class = "pageForm">
-            <fieldset>
-                <input type="hidden" name = "user_id" value = "<?= $result['user_id'] ?>">
-                <div class="formSeparator">
-                    <label for="username">Username</label>
-                    <input type="text" id = "username" name = "username" value = "<?= $result['username'] ?>" autofocus>
-                </div>
-                <div class="formSeparator">
-                    <label for="email">Email</label>
-                    <input type="email" id = "email" name = "email" value = "<?= $result['email'] ?>">
-                </div>
-                <div class="formSeparator">
-                    <label for="password">Password</label>
-                    <input type="password" id = "password" name = "password">
-                </div>
-                <div class="formSeparator">
-                <button type = "submit" name = "action" value = "Update" >Update</button>
-                <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
-                </div>
-            </fieldset>
-        </form>
-        <?php else: ?>
-            <p class = "error">We couldn't find any record with the specified id.</p>
-        <?php endif ?>
-    <?php endif ?>
-    </main>
+                <form method = "post" class = "pageForm">
+                    <fieldset>
+                        <input type="hidden" name = "user_id" value = "<?= $result['user_id'] ?>">
+                        <div class="formSeparator">
+                            <label for="username">Username</label>
+                            <input type="text" id = "username" name = "username" value = "<?= $result['username'] ?>" autofocus>
+                        </div>
+                        <div class="formSeparator">
+                            <label for="email">Email</label>
+                            <input type="email" id = "email" name = "email" value = "<?= $result['email'] ?>">
+                        </div>
+                        <div class="formSeparator">
+                            <label for="password">Password</label>
+                            <input type="password" id = "password" name = "password">
+                        </div>
+                        <div class="formSeparator">
+                        <button type = "submit" name = "action" value = "Update" >Update</button>
+                        <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
+                        </div>
+                    </fieldset>
+                </form>
+                <?php else: ?>
+                    <p class = "error">We couldn't find any record with the specified id.</p>
+                <?php endif ?>
+            <?php endif ?>
+        </main>
     </div>
 </body>
 </html>

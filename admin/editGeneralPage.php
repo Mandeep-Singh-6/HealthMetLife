@@ -129,35 +129,38 @@ elseif (isset($_GET['page_id'])){
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include('adminNav.php') ?>
-    <?php if($error): ?>
-        <p class = "error"><?= $error ?></p>
-    <?php else: ?>
-        <?php if(isset($result)):?> 
-        <h1>Edit a General Page</h1>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <?php if($error): ?>
+                <p class = "error"><?= $error ?></p>
+            <?php else: ?>
+                <?php if(isset($result)):?> 
+                <h1>Edit a General Page</h1>
 
-        <form method = "post" class = "pageForm">
-            <fieldset>
-            <input type="hidden" name = "page_id" value = "<?= $result['page_id'] ?>">
-                <div class="formSeparator">
-                    <label for="title">Title</label>
-                    <input type="text" id = "title" name = "title" value = "<?= $result['title'] ?>">
-                </div>
-                <div class="formSeparator">
-                    <label for="summernote">Content</label>
-                    <textarea id = "summernote" name = "content"><?= $result['content'] ?></textarea>
-                </div>
-                <div class="formSeparator">
-                    <button type = "submit" name = "action" value = "Update" >Update</button>
-                    <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
-                </div>
-            </fieldset>
-        </form>
-        <?php else: ?>
-            <p class = "error">We couldn't find any record with the specified id.</p>
-        <?php endif ?>
-    <?php endif ?>
-    </main>
+                <form method = "post" class = "pageForm">
+                    <fieldset>
+                    <input type="hidden" name = "page_id" value = "<?= $result['page_id'] ?>">
+                        <div class="formSeparator">
+                            <label for="title">Title</label>
+                            <input type="text" id = "title" name = "title" value = "<?= $result['title'] ?>">
+                        </div>
+                        <div class="formSeparator">
+                            <label for="summernote">Content</label>
+                            <textarea id = "summernote" name = "content"><?= $result['content'] ?></textarea>
+                        </div>
+                        <div class="formSeparator">
+                            <button type = "submit" name = "action" value = "Update" >Update</button>
+                            <button type = "submit" name = "action" value = "Delete" onclick = "return confirm('Do you really want to delete?')">Delete</button>
+                        </div>
+                    </fieldset>
+                </form>
+                <?php else: ?>
+                    <p class = "error">We couldn't find any record with the specified id.</p>
+                <?php endif ?>
+            <?php endif ?>
+        </main>
     </div>
     <script>
         $(document).ready(function() {

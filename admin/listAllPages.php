@@ -90,51 +90,94 @@ $planCategoryResults = $statement->fetchAll();
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include('adminNav.php') ?>
-    <form method="post" class = "sortForm">
-    <label for="criteria">Sort By:</label> 
-    <select id="criteria" name="criteria"> 
-        <option value="title" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'title') echo 'selected';?>>Title</option> 
-        <option value="created_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'created_at') echo 'selected';?>>Created At</option> 
-        <option value="updated_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'updated_at') echo 'selected';?>>Updated At</option> 
-    </select> 
-    <select name="direction" id="direction">
-    <option value="ASC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'ASC') echo 'selected';?>>Ascending</option>
-    <option value="DESC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'DESC') echo 'selected';?>>Descending</option>
-    </select>
-    <button type="submit">Sort</button>
-    </form>
-    <h1>General Pages:</h1>
-    <ul>
-        <?php foreach($genericResults as $genericResult): ?>
-        <li><a href = "<?= "editGeneralPage.php?page_id=" . $genericResult['page_id'] ?>"><?= $genericResult['title'] ?></a></li>
-        <?php endforeach ?>
-    </ul>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <form method="post" class = "sortForm">
+            <label for="criteria">Sort By:</label> 
+            <select id="criteria" name="criteria"> 
+                <option value="title" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'title') echo 'selected';?>>Title</option> 
+                <option value="created_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'created_at') echo 'selected';?>>Created At</option> 
+                <option value="updated_at" <?php if (isset($_POST['criteria']) && $_POST['criteria'] == 'updated_at') echo 'selected';?>>Updated At</option> 
+            </select> 
+            <select name="direction" id="direction">
+            <option value="ASC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'ASC') echo 'selected';?>>Ascending</option>
+            <option value="DESC" <?php if (isset($_POST['direction']) && $_POST['direction'] == 'DESC') echo 'selected';?>>Descending</option>
+            </select>
+            <button type="submit">Sort</button>
+            </form>
+            <h1>General Pages:</h1>
+            <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($genericResults as $genericResult): ?>
+                            <tr>
+                                <td><?=$genericResult['title']?></td>
+                                <td><?=$genericResult['created_at']?></td>
+                                <td><?=$genericResult['updated_at']?></td>
+                                <td><a href="<?= "editGeneralPage.php?page_id=" . $genericResult['page_id'] ?>">edit</a></td>
+                            </tr>
+                        <?php endforeach?>
+                    </tbody>
+                </table>
 
-    <h1>Plans:</h1>
-    <ul>
-        <?php foreach($planResults as $planResult): ?>
-            <li><a href = "<?= "editPlan.php?plan_id=" . $planResult['plan_id'] ?>"><?= $planResult['title'] ?></a></li>
-        <?php endforeach ?>
-    </ul>
+            <h1>Plans:</h1>
+            <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($planResults as $planResult): ?>
+                            <tr>
+                                <td><?=$planResult['title']?></td>
+                                <td><?=$planResult['created_at']?></td>
+                                <td><?=$planResult['updated_at']?></td>
+                                <td><a href="<?= "editPlan.php?plan_id=" . $planResult['plan_id'] ?>">edit</a></td>
+                            </tr>
+                        <?php endforeach?>
+                    </tbody>
+                </table>
+            <!-- A separate sort form for plan categories. -->
+            <form method="post" class = "sortForm">
+            <label for="direction2">Sort By:</label> 
+            <select name="direction2" id="direction2">
+            <option value="ASC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'ASC') echo 'selected';?>>Oldest</option>
+            <option value="DESC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'DESC') echo 'selected';?>>Latest</option>
+            </select>
+            <button type="submit">Sort</button>
+            </form>
 
-    <!-- A separate sort form for plan categories. -->
-    <form method="post" class = "sortForm">
-    <label for="direction2">Sort By:</label> 
-    <select name="direction2" id="direction2">
-    <option value="ASC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'ASC') echo 'selected';?>>Ascending</option>
-    <option value="DESC" <?php if (isset($_POST['direction2']) && $_POST['direction2'] == 'DESC') echo 'selected';?>>Descending</option>
-    </select>
-    <button type="submit">Sort</button>
-    </form>
-
-    <h1>Plan Categories:</h1>
-    <ul>
-        <?php foreach($planCategoryResults as $planCategoryResult): ?>
-            <li><a href = "<?= "editPlanCategory.php?plan_category_id=" . $planCategoryResult["plan_category_id"]?>"><?= $planCategoryResult['plan_category_name'] ?></a></li>
-        <?php endforeach ?>
-    </ul>
-    </main>
+            <h1>Plan Categories:</h1>
+            <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($planCategoryResults as $planCategoryResult): ?>
+                            <tr>
+                                <td><?=$planCategoryResult['plan_category_name']?></td>
+                                <td><a href="<?= "editPlanCategory.php?plan_category_id=" . $planCategoryResult["plan_category_id"]?>">edit</a></td>
+                            </tr>
+                        <?php endforeach?>
+                    </tbody>
+                </table>
+        </main>
     </div>
 </body>
 </html>

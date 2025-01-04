@@ -68,25 +68,28 @@ if($_POST && !empty($_POST["content"]) && !empty($_POST["title"])){
     <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
 </head>
 <body>
-    <?php include('adminNav.php') ?>
-    <h1>Create a General Page</h1>
+    <?php require('header.php') ?>
+    <div id="wrapper">
+        <?php require('adminNav.php') ?>
+        <main>
+            <h1>Create a General Page</h1>
 
-    <form method = "post" class = "pageForm">
-        <fieldset>
-            <div class="formSeparator">
-                <label for="title">Title</label>
-                <input type="text" id = "title" name = "title">
-            </div>
-            <div class="formSeparator">
-                <label for="summernote">Content</label>
-                <textarea id = "summernote" name = "content"></textarea>
-            </div>
-            <div class="formSeparator">
-                <button type = "submit">Create</button>
-            </div>
-        </fieldset>
-    </form>
-    </main>
+            <form method = "post" class = "pageForm">
+                <fieldset>
+                    <div class="formSeparator">
+                        <label for="title">Title</label>
+                        <input type="text" id = "title" name = "title">
+                    </div>
+                    <div class="formSeparator">
+                        <label for="summernote">Content</label>
+                        <textarea id = "summernote" name = "content"></textarea>
+                    </div>
+                    <div class="formSeparator">
+                        <button type = "submit">Create</button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
     </div>
     <script>
         $(document).ready(function() {
