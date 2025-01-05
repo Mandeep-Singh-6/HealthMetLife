@@ -82,8 +82,11 @@ if($_POST && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty(
                     <input type="password" id = "confirmPassword" name = "confirmPassword" autofocus>
                 </div>
                 <div class="formSeparator">
-                    <button type = "submit">Create</button>
+                    <button type = "submit">Register</button>
                 </div>
+                <div class="centerText formSeparator">
+                        <p>- or -</p>
+                    </div>
                 <div class="centerText formSeparator">
                     <a href="login.php" class="aButton">Login</a>
                 </div>

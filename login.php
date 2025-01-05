@@ -83,6 +83,9 @@ if($_POST){
                         <button type = "submit">Login</button>
                     </div>
                     <div class="centerText formSeparator">
+                        <p>- or -</p>
+                    </div>
+                    <div class="centerText formSeparator">
                         <a href="register.php" class="aButton">Register New User</a>
                     </div>
                 </fieldset>

@@ -307,7 +307,7 @@ div.formSeparator{
 
 div.planDiv{
     display: flex;
-    width: 47%;
+    width: 650px;
     text-align: left;
     padding: 1% 4%;
     margin: 0 auto;
@@ -338,7 +338,7 @@ div.planDiv a{
 }
 
 div.showPlanDiv{
-    width: 45%;
+    width: 690px;
     min-height: 300px;
     text-align: left;
     padding: 1% 4%;
@@ -354,7 +354,6 @@ div.showPlanDiv img{
 }
 
 .marginedForm{
-    margin-left: 50px;
     margin-bottom: 20px;
 }
 
@@ -413,7 +412,8 @@ table tbody tr:hover{
 div#wrapper{
     margin-top: 10px;
     padding-top: 10px;
-    padding-left: 5%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 div#wrapper aside.navAside{
@@ -497,7 +497,7 @@ button#sendButton{
     background-color: green;
     border: none;
     position: absolute;
-    bottom: 5px;
+    bottom: -2px;
     right: -25%;
     cursor: pointer;
 }
@@ -535,7 +535,7 @@ button#sendButtonNC:active img#sendImg{
 }
 
 div.commentContainer{
-    width: 40%;
+    width: 45%;
     margin: 0 auto;
     padding: 0% 3%;
     max-height: 350px;
@@ -594,4 +594,202 @@ div.planTextWrapper h1{
 .panel{
     border-radius: 0px;
     margin-bottom: 0px;
+}
+
+@media(max-width: 800px){
+    div.planDiv{
+        width: 600px;
+    }
+
+    div.showPlanDiv{
+        width: 600px;
+    }
+
+    div.showPlanDiv img{
+        width: 330px;
+    }
+
+    div#wrapper{
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    div.formSeparator{
+        width: 400px;
+    }
+
+    form.pageForm fieldset input:not([type="color"]){
+        width: 400px;
+    }
+}
+
+@media(max-width: 715px){
+    body{
+        font-size: 14px;
+    }
+
+    div.planDiv{
+        width: 530px;
+    }
+
+    div.planDiv:hover{
+        transform: scale(1.035,1.035);
+        box-shadow: 0px 0px 10px gray;
+    }
+
+    div.planImageWrapper img{
+        width: 270px;
+    }
+
+    button#sendButton{
+        height: 45px;
+        width: 45px;
+    }
+    
+    button#sendButtonNC{
+        height: 45px;
+        width: 45px;
+    }
+    
+}
+
+@media(max-width: 680px){
+    body{
+        font-size: 13px;
+    }
+
+    div.planDiv{
+        width: 480px;
+    }
+
+    div.planDiv:hover{
+        transform: scale(1.025,1.025);
+        box-shadow: 0px 0px 10px gray;
+    }
+
+    div.planImageWrapper img{
+        width: 250px;
+    }
+
+    textarea#comment{
+        height: 130px;
+        width: 300px;
+    }
+
+    div.showPlanDiv{
+        width: 500px;
+    }
+
+    div.showPlanDiv img{
+        width: 280px;
+    }
+
+    div.commentContainer{
+        width: 60%;
+    }
+
+    button#sendButton{
+        height: 40px;
+        width: 40px;
+    }
+    
+    button#sendButtonNC{
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media(max-width: 580px){
+    body{
+        font-size: 12px;
+    }
+
+    div.planDiv{
+        width: 410px;
+    }
+
+    div.planDiv:hover{
+        transform: scale(1.015,1.015);
+        box-shadow: 0px 0px 10px gray;
+    }
+
+    div.planImageWrapper img{
+        width: 200px;
+    }
+
+    div.commentContainer{
+        width: 65%;
+    }
+
+    div.showPlanDiv{
+        width: 430px;
+    }
+
+    div.showPlanDiv img{
+        width: 240px;
+    }
+
+    div.formSeparator{
+        width: 300px;
+    }
+
+    form.pageForm fieldset input:not([type="color"]){
+        width: 300px;
+    }
+}
+
+@media(max-width: 495px){
+    body{
+        font-size: 11px;
+        padding-top: 230px;
+    }
+
+    div#header ul{
+        display: block;
+        padding-left: 0px;
+    }
+
+    div#header ul li{
+        width: 100%;
+        border-bottom: 1px solid rgb(220, 220, 220);
+    }
+
+    div.planDiv{
+        width: 380px;
+    }
+
+    div.planDiv:hover{
+        transform: scale(1.005,1.005);
+        box-shadow: 0px 0px 10px gray;
+    }
+
+    div.planImageWrapper img{
+        width: 180px;
+    }
+
+    div.commentContainer{
+        width: 70%;
+    }
+
+    textarea#comment{
+        height: 130px;
+        width: 250px;
+    }
+
+    div.showPlanDiv{
+        width: 380px;
+    }
+
+    div.showPlanDiv img{
+        width: 210px;
+    }
+
+    .sortForm fieldset button{
+        width: 60px;
+        height: 30px;
+    }
+
+    .sortForm input{
+        width: 140px;
+    }
 }
