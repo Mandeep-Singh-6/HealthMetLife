@@ -38,12 +38,12 @@ if (isset($_GET['comment_id'])){
         $statement->bindValue(":comment_id", $comment_id, PDO::PARAM_INT);
 
         if($statement->execute()){
-            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/admin/plans/" . $result['plan_id'] . "/" . $result['slug']);
+            header("Location: /wd2/Final%20Project/HealthMetLife/admin/plans/" . $result['plan_id'] . "/" . $result['slug']);
         }
     }
     // If comment_id is non-numeric, redirecting user to Plans.php.
     else{
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/admin/1/plans");
+        header("Location: /wd2/Final%20Project/HealthMetLife/admin/1/plans");
     }
 }
 ?>

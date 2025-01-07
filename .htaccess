@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /wd2/Final%20Project/HealthMetLife%20-%20Improved/
+  RewriteBase /wd2/Final%20Project/HealthMetLife/
   
   RewriteRule ^([0-9]+)/plans/?$ plans.php?page_num=$1 [L] 
   RewriteRule ^([a-zA-z]+)/([0-9]+)/plans/?$ $1/plans.php?page_num=$2 [L] 

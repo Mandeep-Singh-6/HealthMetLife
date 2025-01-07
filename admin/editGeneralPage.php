@@ -112,9 +112,9 @@ elseif (isset($_GET['page_id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/admin/">
+    <base href="/wd2/Final%20Project/HealthMetLife/admin/">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/style.css">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

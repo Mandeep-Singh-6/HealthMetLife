@@ -108,14 +108,14 @@ if($_POST){
             unset($_SESSION['comment']);
             
             // Redirecting to break the PRG pattern.
-            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
+            header("Location: /wd2/Final%20Project/HealthMetLife/plans/" . $plan_id . "/" . $slug);
         }
         else{
-            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
+            header("Location: /wd2/Final%20Project/HealthMetLife/plans/" . $plan_id . "/" . $slug);
         }
     }
     else{
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/plans/" . $plan_id . "/" . $slug);
+        header("Location: /wd2/Final%20Project/HealthMetLife/plans/" . $plan_id . "/" . $slug);
     }
 }
 ?>
@@ -124,9 +124,9 @@ if($_POST){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/">
+    <base href="/wd2/Final%20Project/HealthMetLife/">
     <title>HealthMetLife</title>
-    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
