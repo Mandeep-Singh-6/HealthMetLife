@@ -30,12 +30,12 @@ if (isset($_GET['comment_id'])){
     }
     // If comment_id is non-numeric, redirecting user to plans.php.
     else{
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/1/plans");
+        header("Location: /wd2/Final%20Project/HealthMetLife/user/1/plans");
     }
     // Redirecting a user back if the comment doesn't belong to them.
     // or no comment found.
     if($result['user_id'] != $_SESSION['user_id'] || $result == false){
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
+        header("Location: /wd2/Final%20Project/HealthMetLife/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
     }
     else{
         $query = "DELETE from comments
@@ -46,7 +46,7 @@ if (isset($_GET['comment_id'])){
         $statement->bindValue(":comment_id", $comment_id, PDO::PARAM_INT);
 
         if($statement->execute()){
-            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
+            header("Location: /wd2/Final%20Project/HealthMetLife/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
         }
         
     }

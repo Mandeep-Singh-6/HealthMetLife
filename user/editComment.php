@@ -30,12 +30,12 @@ if (isset($_GET['comment_id'])){
     }
     // If comment_id is non-numeric, redirecting user to showPlan.php.
     else{
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/1/plans");
+        header("Location: /wd2/Final%20Project/HealthMetLife/user/1/plans");
     }
 
     // Redirecting a user back if the comment doesn't belong to them.
     if($result['user_id'] != $_SESSION['user_id'] || $result == false){
-        header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
+        header("Location: /wd2/Final%20Project/HealthMetLife/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
     }
 }
 if($_POST){
@@ -57,7 +57,7 @@ if($_POST){
 
         // Executing the query.
         if($statement->execute()){
-            header("Location: /wd2/Final%20Project/HealthMetLife%20-%20Improved/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
+            header("Location: /wd2/Final%20Project/HealthMetLife/user/plans/" . $result['plan_id'] . "/" . $result['slug']);
         }
     }
     else{
@@ -70,9 +70,9 @@ if($_POST){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/wd2/Final%20Project/HealthMetLife%20-%20Improved/user/">
+    <base href="/wd2/Final%20Project/HealthMetLife/user/">
     <title>Add General Page</title>
-    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife%20-%20Improved/style.css">
+    <link rel="stylesheet" href="http://localhost:31337/wd2/Final%20Project/HealthMetLife/style.css">
     <!-- Importing google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
