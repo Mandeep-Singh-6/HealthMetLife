@@ -1,4 +1,7 @@
 <?php 
+
+// Need to replace urls in spots like base tag, header: Location in user and admin folders.
+// If something breaks, see if it obeys base or not.
 require('user/connect.php');
 session_start();
 
